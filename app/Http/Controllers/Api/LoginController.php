@@ -22,7 +22,7 @@ class LoginController extends Controller
 
         }
 
-        return response()->json("Não Logado");
+        return response()->json("Não Logado", 403);
 
     }
 
