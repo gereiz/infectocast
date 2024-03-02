@@ -18,11 +18,11 @@ class LoginController extends Controller
 
             session(['token' => $token]);
             
-            return session('token');
+            return response()->json(session('token'));
 
         }
 
-        return "Não Logado";
+        return response()->json("Não Logado");
 
     }
 
