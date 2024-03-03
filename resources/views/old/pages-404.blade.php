@@ -10,9 +10,9 @@
         <div class="mb-0 border-none shadow-none lg:w-[500px] card bg-white/70 dark:bg-zink-500/70">
             <div class="!px-10 !py-12 card-body">
                 <a href="index">
-                    <img src="{{ URL::asset('build/images/logo-light.png') }}" alt=""
+                    <img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt=""
                         class="hidden h-6 mx-auto dark:block">
-                    <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt=""
+                    <img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt=""
                         class="block h-6 mx-auto dark:hidden">
                 </a>
 

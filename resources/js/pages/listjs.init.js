@@ -114,9 +114,9 @@ xhttp.onload = function () {
         refreshCallbacks();
     });
     customerList.remove("id", '<a href="javascript:void(0);" class="fw-medium link-primary id">#VZ2101</a>');
-}
-xhttp.open("GET", "build/json/table-customer-list.json");
-xhttp.send();
+// }
+// xhttp.open("GET", "build/json/table-customer-list.json");
+// xhttp.send();
 
 isCount = new DOMParser().parseFromString(
     customerList.items.slice(-1)[0]._values.id,

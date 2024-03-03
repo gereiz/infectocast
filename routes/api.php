@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryApiController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\TesteController;
 use Illuminate\Http\Request;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
 
     route::post('login', [LoginController::class, 'login']);
+
+    route::get('listCategories',[CategoryApiController::class, 'getCategories']);
 
     Route::middleware('auth:sanctum')->group(function () {
         

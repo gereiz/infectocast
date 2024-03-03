@@ -9,8 +9,8 @@
         <div class="!px-10 !py-12 card-body">
             <div id="countDownText">
                 <a href="index">
-                    <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" class="hidden h-6 mx-auto dark:block">
-                    <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 mx-auto dark:hidden">
+                    <img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt="" class="hidden h-6 mx-auto dark:block">
+                    <img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt="" class="block h-6 mx-auto dark:hidden">
                 </a>
     
                 <div class="mt-8 text-center">

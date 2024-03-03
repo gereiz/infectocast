@@ -13,7 +13,7 @@
                             <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" class="h-6 mx-auto">
                         </span>
                         <span class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden">
-                            <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt=""
+                            <img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt=""
                                 class="h-6 mx-auto">
                         </span>
                     </a>
@@ -23,7 +23,7 @@
                             <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" class="h-6 mx-auto">
                         </span>
                         <span class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
-                            <img src="{{ URL::asset('build/images/logo-light.png') }}" alt=""
+                            <img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt=""
                                 class="h-6 mx-auto">
                         </span>
                     </a>
@@ -40,13 +40,14 @@
                     class="relative hidden ltr:ml-3 rtl:mr-3 lg:block group-data-[layout=horizontal]:hidden group-data-[layout=horizontal]:lg:block">
                     <input type="text"
                         class="py-2 pr-4 text-sm text-topbar-item bg-topbar border border-topbar-border rounded pl-8 placeholder:text-slate-400 form-control focus-visible:outline-0 min-w-[300px] focus:border-blue-400 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-border-dark group-data-[topbar=dark]:placeholder:text-slate-500 group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-border-brand group-data-[topbar=brand]:placeholder:text-blue-300 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:border-zink-500 group-data-[topbar=dark]:dark:text-zink-100"
-                        placeholder="Search for ..." autocomplete="off">
+                        placeholder="Pesqusar por ..." autocomplete="off">
                     <i data-lucide="search"
                         class="inline-block size-4 absolute left-2.5 top-2.5 text-topbar-item fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:fill-zink-600"></i>
                 </div>
 
                 <div class="flex gap-3 ms-auto">
-                    <div class="relative flex items-center dropdown h-header">
+                    {{-- Idiomas --}}
+                    {{-- <div class="relative flex items-center dropdown h-header">
                         <button type="button"
                             class="inline-flex justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-200 ease-linear bg-topbar rounded-md dropdown-toggle btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=dark]:dark:text-zink-500 group-data-[topbar=dark]:dark:hover:text-zink-50"
                             id="flagsDropdown" data-bs-toggle="dropdown">
@@ -171,7 +172,7 @@
                                     Arabic</h6>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="relative flex items-center h-header">
                         <button type="button"
@@ -182,7 +183,7 @@
                         </button>
                     </div>
 
-                    <div class="relative flex items-center h-header">
+                    {{-- <div class="relative flex items-center h-header">
                         <button type="button" data-drawer-target="cartSidePenal"
                             class="inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-200 ease-linear bg-topbar rounded-md btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:text-topbar-item-dark">
                             <i data-lucide="shopping-cart"
@@ -190,7 +191,7 @@
                             <span
                                 class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-400 border-white rounded-full -top-1 -right-1">3</span>
                         </button>
-                    </div>
+                    </div> --}}
 
                     <div class="relative flex items-center dropdown h-header">
                         <button type="button"
@@ -339,13 +340,13 @@
                         </div>
                     </div>
 
-                    <div class="relative items-center hidden h-header md:flex">
+                    {{-- <div class="relative items-center hidden h-header md:flex">
                         <button data-drawer-target="customizerButton" type="button"
                             class="inline-flex justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-200 ease-linear bg-topbar group-data-[topbar=dark]:text-topbar-item-dark rounded-md btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200">
                             <i data-lucide="settings"
                                 class="inline-block w-5 h-5 stroke-1 fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand"></i>
                         </button>
-                    </div>
+                    </div> --}}
                     @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                         <div class="relative flex items-center dropdown md:flex">
                             <button type="button"

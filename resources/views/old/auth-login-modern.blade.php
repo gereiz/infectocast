@@ -239,7 +239,7 @@
             </div>
             <div class="relative z-10 flex items-center justify-center min-h-screen px-10 grow py-14">
                 <div>
-                    <a href="#!"><img src="{{ URL::asset('build/images/logo-light.png') }}" alt=""
+                    <a href="#!"><img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt=""
                             class="block mx-auto mb-14 h-7"></a>
                     <img src="{{ URL::asset('build/images/auth-modern.png') }}" alt=""
                         class="block object-cover mx-auto shadow-lg md:max-w-md rounded-xl shadow-custom-800">

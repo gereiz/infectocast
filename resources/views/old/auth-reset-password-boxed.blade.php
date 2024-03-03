@@ -48,8 +48,8 @@
                         <div class="flex items-center justify-between gap-3">
                             <div class="grow">
                                 <a href="index">
-                                    <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" class="hidden h-6 dark:block">
-                                    <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden">
+                                    <img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt="" class="hidden h-6 dark:block">
+                                    <img src="{{ URL::asset('build/images/logo_infectocast.png') }}" alt="" class="block h-6 dark:hidden">
                                 </a>
                             </div>
                             <div class="shrink-0">

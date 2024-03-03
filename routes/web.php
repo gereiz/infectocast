@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\TailwickController;
 use App\Http\Controllers\User\UserController;
@@ -31,5 +32,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     
     // User
     route::get('users', [UserController::class, 'index']);
+
+
+    // Category
+    route::get('categories', [CategoryController::class, 'index']);
+    route::post('addCategory', [CategoryController::class, 'addCategory']);
     
 });
