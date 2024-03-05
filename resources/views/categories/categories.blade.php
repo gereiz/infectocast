@@ -80,7 +80,7 @@
                                     {{$cat->title}}
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <img src="{{$cat->icon}}" alt="{{$cat->icon}}" class="w-8">
+                                    <img src="{{asset('storage/imgcat/'.$cat->icon)}}" alt="{{$cat->icon}}" class="w-8">
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">
                                     {{$cat->color}}
