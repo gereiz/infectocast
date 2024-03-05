@@ -18,7 +18,7 @@ class LoginController extends Controller
 
             session(['token' => $token]);
             
-            return response()->json(session('token'));
+            return response()->json([auth()->user(), session('token')]);
 
         }
 
@@ -28,7 +28,7 @@ class LoginController extends Controller
 
 
     
-    public function logout() {
+    // public function logout() {
 
-    }
+    // }
 }
