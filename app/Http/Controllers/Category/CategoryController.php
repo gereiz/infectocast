@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function addCategory(Request $request) {
         if($request->hasFile('icone')) {
             $file = $request->file('icone');
-            $filename = env('APP_URL').'/'.date('YmdHi').$file->getClientOriginalName();
+            $filename = date('YmdHi').$file->getClientOriginalName();
             $file->move(storage_path('app/public/imgcat'), $filename);
         }
 
@@ -51,7 +51,7 @@ class CategoryController extends Controller
         // Check if a new file is uploaded
         if($request->hasFile('icone')) {
             $file = $request->file('icone');
-            $filename = env('APP_URL').'/'.date('YmdHi').$file->getClientOriginalName();
+            $filename = date('YmdHi').$file->getClientOriginalName();
             $file->move(storage_path('app/public/imgcat'), $filename);
 
             // Update the icon
