@@ -18,7 +18,7 @@ class LoginController extends Controller
 
             session(['token' => $token]);
             
-            return response()->json(['token' => session('token')]);
+            return response()->json(['token' => session('token'), 'user' => auth()->user()]);
 
         }
 
