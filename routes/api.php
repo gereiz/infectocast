@@ -30,7 +30,9 @@ Route::prefix('v1')->group(function () {
     route::get('listCategories',[CategoryApiController::class, 'getCategories']);
 
     Route::middleware('auth:sanctum')->group(function () {
-        
+
+        // Users
+        route::get('getUser', [LoginController::class, 'getUser']);
         route::get('teste', [TesteController::class, 'teste']);
 
     });
