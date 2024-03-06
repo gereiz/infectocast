@@ -19,7 +19,7 @@ class LoginController extends Controller
 
             session(['token' => $token]);
             
-            return response()->json(session('token'));
+            return response()->json(['token' => session('token')]);
 
         }
 
