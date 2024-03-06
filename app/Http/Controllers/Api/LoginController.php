@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,10 +18,7 @@ class LoginController extends Controller
 
             session(['token' => $token]);
             
-            return response()->json(['token' => session('token'),
-                                     'userId' => auth()->user()->id,
-                                    'userName' => auth()->user()->name,
-                                    'userEmail' => auth()->user()->email]);
+            return response()->json(['token' => session('token')]);
 
         }
 
@@ -32,9 +28,7 @@ class LoginController extends Controller
 
     // Este metodo retorna o usuario pelo id do auth()->user()
     public function getUser() {
-        $user = User::find(auth()->user()->id);
-        
-        return response()->json($user);
+        return response()->json(auth()->user());
     }
     
     // public function logout() {
