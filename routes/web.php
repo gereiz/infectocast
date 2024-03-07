@@ -36,7 +36,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     // Category
     route::get('categories', [CategoryController::class, 'index']);
-    route::post('addCategory', [CategoryController::class, 'addCategory']);
-    route::post('editCategory', [CategoryController::class, 'editCategory']);
+    route::post('addOrEditCategory', [CategoryController::class, 'addOrEditCategory']);
     route::post('deleteCategory', [CategoryController::class, 'deleteCategory']);
 });

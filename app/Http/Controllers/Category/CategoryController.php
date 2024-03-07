@@ -15,10 +15,21 @@ class CategoryController extends Controller
         $categories = Category::all();
 
         return view('categories.categories', compact('categories'));
-
     }
 
+    // Adiciona uma nova categoria, ou atualiza uma existente caso o id seja passado
+    public function addOrEditCategory(Request $request) {
+        // Verifica se o id foi passado
+        if ($request->has('id_field')) {
+            return $this->editCategory($request);
+        } else {
+            return $this->addCategory($request);
+        }
+    }
+
+
     public function addCategory(Request $request) {
+        // dd($request->all());
         if($request->hasFile('icone')) {
             $file = $request->file('icone');
             $filename = date('YmdHi').$file->getClientOriginalName();
@@ -38,7 +49,8 @@ class CategoryController extends Controller
 
     public function editCategory(Request $request)
      {
-        $id = $request->id;
+        // dd($request->all());
+        $id = $request->id_field;
 
         // Find the category by id
         $category = Category::find($id);
@@ -72,7 +84,7 @@ class CategoryController extends Controller
 
     public function deleteCategory(Request $request) {
         // Get the id from the request
-        $id = $request->id;
+        $id = $request->id_field;
 
         // Find the category by id
         $category = Category::find($id);
