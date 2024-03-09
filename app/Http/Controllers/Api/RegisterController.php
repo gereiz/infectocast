@@ -33,7 +33,15 @@ class RegisterController extends Controller
         if(User::where('email', $request->email)->exists()) {
             return response()->json('Usuário já cadastrado!', 403);
         }
-        
+
+        // converte o campo birthday para o formato de data xx/xx/xxxx para xxx-xx-xx
+        $birthday_date = date('Y-m-d', strtotime(str_replace('/', '-', $request->birthday)));
+
+        // remove a mascara do campo cpf
+       $cpf = str_replace(['.', '-'], '', $request->cpf);
+
+        // remove a mascara do campo phone
+        $phone = str_replace(['(', ')', '-', ' '], '', $request->phone);
 
 
         User::create([
@@ -42,8 +50,8 @@ class RegisterController extends Controller
             'password' => bcrypt($request->password),
             'country_id' => $request->country_id,
             'phone' => $request->phone,
-            'cpf' => $request->cpf,
-            'birthday' => $request->birthday,
+            'cpf' => $cpf,
+            'birthday' => $birthday_date,
             'gender' => $request->gender,
             'college' => $request->college,
             'id_professional' => $request->id_professional,
