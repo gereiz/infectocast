@@ -6,7 +6,7 @@
     <!-- Sweet Alert css-->
     <link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css">
     
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/@simonwep/pickr/themes/classic.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ URL::asset('build/libs/@simonwep/pickr/themes/classic.min.css') }}"> --}}
 @endpush
 @section('content')
 <!-- page title -->
@@ -144,7 +144,7 @@
                                 class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
                                 <div class="w-screen md:w-[30rem] bg-white shadow rounded-md dark:bg-zink-600">
                                     <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
-                                        <h5 class="text-16" id="exampleModalLabel">Add Categoria</h5>
+                                        <h5 class="text-16" id="exampleModalLabel">Editar Categoria</h5>
                                         <button data-modal-close="{{'showModal/'.$cat->id}}"
                                             class="transition-all duration-200 ease-linear text-slate-400 hover:text-slate-500"><i data-lucide="x"
                                                 class="size-5"></i></button>
@@ -176,27 +176,19 @@
                                                         placeholder="Enter your name">
                                                 </div>
                                                     
-                                            <div class="mb-3">
-                                                <label for="phone-field" class="inline-block mb-2 text-base font-medium">Cor <span
-                                                    class="text-red-500">*</span></label>
-                                                    <div id="cor-icone" name="cor-icone" class="classic-colorpicker"></div>
                                             </div>
-                                            
                                             <div class="flex justify-end gap-2">
                                                 <button type="button" data-modal-close="{{'showModal/'.$cat->id}}"
                                                     class="text-white btn bg-slate-500 border-slate-500 hover:text-white hover:bg-slate-600 hover:border-slate-600 focus:text-white focus:bg-slate-600 focus:border-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:border-slate-600 active:ring active:ring-slate-100 dark:ring-slate-400/10"
                                                     data-modal-close="{{'showModal/'.$cat->id}}">Cancelar</button>
                                                 <button type="submit" data-modal-close="{{'showModal/'.$cat->id}}"
                                                     class="text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10"
-                                                    id="add-btn">Add Categoria</button>
+                                                    id="add-btn">Editar Categoria</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-
-                            
-
                         @endforeach
                     </tbody>
                 </table>
@@ -262,18 +254,12 @@
                                 class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500"
                                 placeholder="Enter your name">
                         </div>
-                            
-                    <div class="mb-3">
-                        <label for="phone-field" class="inline-block mb-2 text-base font-medium">Cor <span
-                            class="text-red-500">*</span></label>
-                            <div id="cor-icone" name="cor-icone" class="classic-colorpicker"></div>
                     </div>
-                    
                     <div class="flex justify-end gap-2">
-                        <button type="button" data-modal-close="{{'showModal/'.$cat->id}}"
+                        <button type="button" data-modal-close="showModal"
                             class="text-white btn bg-slate-500 border-slate-500 hover:text-white hover:bg-slate-600 hover:border-slate-600 focus:text-white focus:bg-slate-600 focus:border-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:border-slate-600 active:ring active:ring-slate-100 dark:ring-slate-400/10"
-                            data-modal-close="{{'showModal/'.$cat->id}}">Cancelar</button>
-                        <button type="submit" data-modal-close="{{'showModal/'.$cat->id}}"
+                            data-modal-close="showModal">Cancelar</button>
+                        <button type="submit" data-modal-close="showModal"
                             class="text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10"
                             id="add-btn">Add Categoria</button>
                     </div>
@@ -286,9 +272,6 @@
 @endsection
 
 @push('scripts')
-    {{-- <script src="{{ URL::asset('build/libs/dropzone/dropzone-min.js') }}"></script>
-    <script src="{{ URL::asset('build/js/pages/form-file-upload.init.js') }}"></script> --}}
-
     <!-- list js-->
     <script src="{{ URL::asset('build/libs/list.js/list.min.js') }}"></script>
     <script src="{{ URL::asset('build/libs/list.pagination.js/list.pagination.min.js') }}"></script>
@@ -298,15 +281,6 @@
 
     <!-- listjs init -->
     <script src="{{ URL::asset('build/js/pages/listjs.init.js') }}"></script>
-
-    <!-- Modern colorpicker bundle -->
-    <script src="{{ URL::asset('build/libs/@simonwep/pickr/pickr.min.js') }}"></script>
-
-    <!-- colorpickr init js -->
-
-    <script src="{{ URL::asset('build/js/pages/form-colorpicker.init.js') }}"></script>
-
-
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
 @endpush

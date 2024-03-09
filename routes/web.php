@@ -17,13 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('index/{locale}', [TailwickController::class, 'lang']);
 
-// Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-//     Route::get("/", [RouteController::class, 'index'])->name('dashboard');
-//     Route::get("pageTwo", [RouteController::class, 'pageTwo'])->name('page.two');
-//     Route::get("{any}", [RouteController::class, 'routes']);
-// });
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {

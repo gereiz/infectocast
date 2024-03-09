@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryApiController;
 use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Api\TesteController;
+use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,22 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return response()->json('Logado');
-// });
+// Register
+
 
 
 Route::prefix('v1')->group(function () {
-
+    route::post('register', [RegisterController::class, 'register']);
     route::post('login', [LoginController::class, 'login']);
 
-    route::get('listCategories',[CategoryApiController::class, 'getCategories']);
+    
 
     Route::middleware('auth:sanctum')->group(function () {
 
+
         // Users
         route::get('getUser', [LoginController::class, 'getUser']);
-        route::get('teste', [TesteController::class, 'teste']);
+
+
+        // Category
+        route::get('listCategories',[CategoryApiController::class, 'getCategories']);
+
 
     });
     
