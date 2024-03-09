@@ -31,7 +31,7 @@ class RegisterController extends Controller
 
         // retorna a mensagem de usuário já cadastrado
         if(User::where('email', $request->email)->exists()) {
-            return response()->json('Usuário já cadastrado!');
+            return response()->json('Usuário já cadastrado!', 403);
         }
         
 
