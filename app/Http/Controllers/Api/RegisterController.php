@@ -49,7 +49,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'country_id' => $request->country_id,
-            'phone' => $request->phone,
+            'phone' => $phone,
             'cpf' => $cpf,
             'birthday' => $birthday_date,
             'gender' => $request->gender,
