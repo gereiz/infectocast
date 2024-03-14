@@ -398,8 +398,8 @@
                 </div>
                 <img src="{{ URL::asset('build/images/delete.png') }}" alt="" class="block h-12 mx-auto">
                 <div class="mt-5 text-center">
-                    <h5 class="mb-1">Are you sure?</h5>
-                    <p class="text-slate-500 dark:text-zink-200">Are you certain you want to delete this record?</p>
+                    <h5 class="mb-1">Você tem certeza?</h5>
+                    <p class="text-slate-500 dark:text-zink-200">Deseja  realmente excluir esse registro?</p>
                     <div class="flex justify-center gap-2 mt-6">
                         <button type="button" data-modal-close="deleteModal"
                             class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10">Cancel</button>

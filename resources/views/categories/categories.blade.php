@@ -123,14 +123,13 @@
                                             </div>
                                             <img src="{{ URL::asset('build/images/delete.png') }}" alt="" class="block h-12 mx-auto">
                                             <div class="mt-5 text-center">
-                                                <h5 class="mb-1">Are you sure?</h5>
-                                                <p class="text-slate-500 dark:text-zink-200">Are you certain you want to delete this record?</p>
+                                                <h5 class="mb-1">Você tem certeza?</h5>
+                                                <p class="text-slate-500 dark:text-zink-200">Deseja  realmente excluir esse registro?</p>
                                                 <div class="flex justify-center gap-2 mt-6">
                                                     <button type="button" data-modal-close={{'deleteModal/'.$cat->id}}
-                                                        class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10">Cancel</button>
+                                                        class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10">Cancelar</button>
                                                     <button type="submit" id="remove-notes"
-                                                        class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20">Yes,
-                                                        Delete It!</button>
+                                                        class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20">Sim, Deletar!</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -162,7 +161,7 @@
                                             <div class="mb-3">
                                                 <label for="customername-field" class="inline-block mb-2 text-base font-medium">Título
                                                     <span class="text-red-500">*</span></label>
-                                                <input type="text" id="titulo" name="titulo"
+                                                <input type="text" id="titulo" name="titulo" value="{{ old('titulo') ?? $cat->title}}"
                                                     class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                                     placeholder="Digite o ítulo" required>
                                             </div>
@@ -224,7 +223,7 @@
         <div class="w-screen md:w-[30rem] bg-white shadow rounded-md dark:bg-zink-600">
             <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
                 <h5 class="text-16" id="exampleModalLabel">Add Categoria</h5>
-                <button data-modal-close="{{'showModal/'.$cat->id}}"
+                <button data-modal-close="showModal"
                     class="transition-all duration-200 ease-linear text-slate-400 hover:text-slate-500"><i data-lucide="x"
                         class="size-5"></i></button>
             </div>

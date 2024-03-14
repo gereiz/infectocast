@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Category\SubCategoryController;
+use App\Http\Controllers\Category\TopicController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\TailwickController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +36,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     route::get('categories', [CategoryController::class, 'index']);
     route::post('addOrEditCategory', [CategoryController::class, 'addOrEditCategory']);
     route::post('deleteCategory', [CategoryController::class, 'deleteCategory']);
+
+    // SubCategory
+    route::get('subcategories', [SubCategoryController::class, 'index']);
+    route::post('addOrEditSubCategory', [SubCategoryController::class, 'addOrEditSubCategory']);
+    route::post('deleteSubCategory', [SubCategoryController::class, 'deleteSubCategory']);
+
+    // Topic
+    route::get('topics', [TopicController::class, 'index']);
+    route::post('addOrEditTopic', [TopicController::class, 'addOrEditTopic']);
+    route::post('deleteTopic', [TopicController::class, 'deleteTopic']);
 });
