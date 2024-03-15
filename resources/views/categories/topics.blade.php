@@ -248,7 +248,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="subcategoria" class="inline-block mb-2 text-base font-medium">
-                            Categoria <span class="text-red-500">*</span>
+                            Subcategoria <span class="text-red-500">*</span>
                         </label>
                         <div>
                             <select id="subcategoria" name="subcategoria"

@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
-            $table->bigInteger('icon');
-            $table->bigInteger('color');
+            $table->unsignedBigInteger('author');
+            $table->foreign('author')->references('id')->on('users');
+            $table->string('title');
+            $table->date('date');
+            $table->longText('content');
+            $table->smallInteger('status');
+            $table->smallInteger('order');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
         });
 
         Schema::enableForeignKeyConstraints();
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('blog_posts');
     }
 };

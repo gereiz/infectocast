@@ -251,7 +251,7 @@
                         <div>
                             <input type="file" id="icone" name="icone"
                                 class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500"
-                                placeholder="Enter your name">
+                                placeholder="Imagem">
                         </div>
                     </div>
                     <div class="flex justify-end gap-2">

@@ -7,6 +7,7 @@ use App\Http\Controllers\RouteController;
 use App\Http\Controllers\TailwickController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Blog\BlogController;
 
 
 
@@ -46,4 +47,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     route::get('topics', [TopicController::class, 'index']);
     route::post('addOrEditTopic', [TopicController::class, 'addOrEditTopic']);
     route::post('deleteTopic', [TopicController::class, 'deleteTopic']);
+
+    // blog
+    route::get('blog', [BlogController::class, 'index']);
+
 });
