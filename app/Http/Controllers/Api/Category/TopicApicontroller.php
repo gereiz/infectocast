@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 
-class TopicApicontroller extends Controller
+class TopicApiController extends Controller
 {
     // retorna todos os topicos pelo id da subcategoria
     public function getTopics(Request $request) {
