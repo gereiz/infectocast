@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\Category\CategoryApiController;
 use App\Http\Controllers\Api\Category\SubcategoryApiController;
-use App\Http\Controllers\Api\Category\TopicApiController;
 use App\Http\Controllers\Api\Category\TopicsApiController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
@@ -41,8 +40,7 @@ Route::prefix('v1')->group(function () {
         // Categories
         route::get('listCategories',[CategoryApiController::class, 'getCategories']);
         route::post('listSubCategories',[SubCategoryApiController::class, 'getSubCategories']);
-        route::post('listTopics',[TopicApiController::class, 'getTopics']);
-        route::post('listTopics2',[TopicsApiController::class, 'getTopics']);
+        route::post('listTopics',[TopicsApiController::class, 'getTopics']);
         
         
     });
