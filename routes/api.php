@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Category\CategoryApiController;
 use App\Http\Controllers\Api\Category\SubcategoryApiController;
 use App\Http\Controllers\Api\Category\TopicsApiController;
+use App\Http\Controllers\Api\Blog\BlogController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,9 @@ Route::prefix('v1')->group(function () {
         route::get('listCategories',[CategoryApiController::class, 'getCategories']);
         route::post('listSubCategories',[SubCategoryApiController::class, 'getSubCategories']);
         route::post('listTopics',[TopicsApiController::class, 'getTopics']);
+
+        // Blog
+        route::get('listPosts',[BlogController::class, 'getPosts']);
         
         
     });
