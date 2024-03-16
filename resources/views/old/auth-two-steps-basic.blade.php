@@ -90,14 +90,14 @@
                             <div>
                                 <label for="digit1-input" class="hidden">Digit 1</label>
                                 <input type="text"
-                                    class="text-lg text-center form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                    class="text-lg text-center input-text"
                                     required placeholder="0" onkeyup="moveToNext(1, event)" maxlength="1"
                                     id="digit1-input">
                             </div>
                             <div>
                                 <label for="digit2-input" class="hidden">Digit 2</label>
                                 <input type="text"
-                                    class="text-lg text-center form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                    class="text-lg text-center input-text"
                                     required placeholder="0" onkeyup="moveToNext(2, event)" maxlength="1"
                                     id="digit2-input">
                             </div>
@@ -105,7 +105,7 @@
                             <div>
                                 <label for="digit3-input" class="hidden">Digit 3</label>
                                 <input type="text"
-                                    class="text-lg text-center form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                    class="text-lg text-center input-text"
                                     required placeholder="0" onkeyup="moveToNext(3, event)" maxlength="1"
                                     id="digit3-input">
                             </div>
@@ -113,7 +113,7 @@
                             <div>
                                 <label for="digit4-input" class="hidden">Digit 4</label>
                                 <input type="text"
-                                    class="text-lg text-center form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                    class="text-lg text-center input-text"
                                     required placeholder="0" onkeyup="moveToNext(4, event)" maxlength="1"
                                     id="digit4-input">
                             </div>

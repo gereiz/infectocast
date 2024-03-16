@@ -150,7 +150,7 @@ function new_link() {
         ` <tbody class="before:block before:h-3 item-list">
             <tr class="item">
                 <td class="border border-slate-200 dark:border-zink-500">
-                    <input type="text" id="itemName`+ count + `" class="px-3.5 py-2.5 border-none form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Item Name" required>
+                    <input type="text" id="itemName`+ count + `" class="px-3.5 py-2.5 border-none input-text" placeholder="Item Name" required>
                 </td>
                 <td class="w-40 border border-slate-200 dark:border-zink-500">
                     <div class="flex justify-center text-center input-step">
@@ -160,24 +160,24 @@ function new_link() {
                     </div>
                 </td>
                 <td class="w-40 border border-slate-200 dark:border-zink-500">
-                    <input type="number" id="itemName`+ count + `" class="px-3.5 py-2.5 border-none form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200 item-price" placeholder="$00.00" required>
+                    <input type="number" id="itemName`+ count + `" class="px-3.5 py-2.5 border-none input-text item-price" placeholder="$00.00" required>
                 </td>
                 <td class="w-40 border border-slate-200 dark:border-zink-500">
-                    <input type="text" id="itemName`+ count + `" class="px-3.5 py-2.5 border-none form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="0%" required>
+                    <input type="text" id="itemName`+ count + `" class="px-3.5 py-2.5 border-none input-text" placeholder="0%" required>
                 </td>
                 <td class="w-40 border border-slate-200 dark:border-zink-500">
-                    <input type="text" id="itemName`+ count + `" class="px-3.5 py-2.5 border-none form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="0%" required>
+                    <input type="text" id="itemName`+ count + `" class="px-3.5 py-2.5 border-none input-text" placeholder="0%" required>
                 </td>
                 <td class="border border-slate-200 dark:border-zink-500" rowspan="2">
                     <div class="mb-1">
-                        <input type="text" id="ItemTotal" class="px-3.5 py-2.5 border-none form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200 item-line-price" placeholder="$00.00" readonly>
+                        <input type="text" id="ItemTotal" class="px-3.5 py-2.5 border-none input-text item-line-price" placeholder="$00.00" readonly>
                     </div>
-                    <input type="text" id="itemDiscountsInput" class="px-3.5 pb-2.5 pt-0 border-none form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200 cart-discount" placeholder="-$00.00" readonly>
+                    <input type="text" id="itemDiscountsInput" class="px-3.5 pb-2.5 pt-0 border-none input-text cart-discount" placeholder="-$00.00" readonly>
                 </td>
             </tr>
             <tr>
                 <td class="border border-slate-200 dark:border-zink-500">
-                    <input type="text" id="itemdescription`+ count + `" class="px-3.5 py-2.5 border-none form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter Description (Optional)" required>
+                    <input type="text" id="itemdescription`+ count + `" class="px-3.5 py-2.5 border-none input-text" placeholder="Enter Description (Optional)" required>
                 </td>
                 <td class="border border-slate-200 dark:border-zink-500 px-3.5 py-1.5 text-center">
                     <button type="button" class="px-2 py-1.5 text-xs text-red-500 bg-red-100 btn hover:text-white hover:bg-red-600 focus:text-white focus:bg-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:ring active:ring-red-100 dark:bg-red-500/20 dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white dark:focus:bg-red-500 dark:focus:text-white dark:active:bg-red-500 dark:active:text-white dark:ring-red-400/20 product-removal"><i data-lucide="trash-2" class="inline-block w-3 h-3 mr-1 align-middle"></i> <span class="align-middle">Delete</span></button>

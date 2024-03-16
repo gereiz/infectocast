@@ -29,7 +29,6 @@ class CategoryController extends Controller
 
 
     public function addCategory(Request $request) {
-        // dd($request->all());
         if($request->hasFile('icone')) {
             $file = $request->file('icone');
             $filename = date('YmdHi').$file->getClientOriginalName();

@@ -14,7 +14,7 @@
                 <div>
                     <div class="relative xl:w-3/6">
                         <input type="text"
-                            class="ltr:pl-8 rtl:pr-8 search form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            class="ltr:pl-8 rtl:pr-8 search input-text"
                             placeholder="Pesquisar Usuário ..." autocomplete="off">
                         <i data-lucide="search"
                             class="inline-block size-4 absolute ltr:left-2.5 rtl:right-2.5 top-2.5 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-600"></i>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="ltr:md:text-end rtl:md:text-start">
                     <button type="button" data-modal-target="showModal"
-                        class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 add-btn"
+                        class="btn-add"
                         data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i
                             class="align-bottom ri-add-line me-1"></i> Add Usuário</button>
                     <button type="button"
@@ -307,7 +307,7 @@
                     <div class="mb-3" id="modal-id" style="display: none;">
                         <label for="id-field" class="inline-block mb-2 text-base font-medium">ID</label>
                         <input type="text" id="id-field"
-                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            class="input-text"
                             placeholder="ID" readonly="">
                     </div>
 
@@ -315,7 +315,7 @@
                         <label for="customername-field" class="inline-block mb-2 text-base font-medium">Nome
                             <span class="text-red-500">*</span></label>
                         <input type="text" id="customername-field"
-                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            class="input-text"
                             placeholder="Enter your name" required>
                     </div>
 
@@ -323,7 +323,7 @@
                         <label for="email-field" class="inline-block mb-2 text-base font-medium">Email <span
                                 class="text-red-500">*</span></label>
                         <input type="email" id="email-field"
-                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            class="input-text"
                             placeholder="Enter email" required>
                     </div>
 
@@ -332,14 +332,14 @@
                             <label for="phone-field" class="inline-block mb-2 text-base font-medium">Código do País <span
                                 class="text-red-500">*</span></label>
                             <input type="number" id="country-id"
-                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                class="input-text"
                                 placeholder="Enter Country Code." required>
                         </div>
                         <div>
                             <label for="phone-field" class="inline-block mb-2 text-base font-medium">Telefone <span
                                 class="text-red-500">*</span></label>
                             <input type="number" id="phone-field"
-                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                class="input-text"
                                 placeholder="Enter Phone no." required>
                         </div>
                     </div>
@@ -349,14 +349,14 @@
                             <label for="date-field" class="inline-block mb-2 text-base font-medium">Data de Nasc. <span
                                 class="text-red-500">*</span></label>
                             <input type="date" id="date-field"
-                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                class="input-text"
                                 placeholder="Select Date" required>
                         </div>
                         <div>
                             <label for="phone-field" class="inline-block mb-2 text-base font-medium">CPF <span
                                 class="text-red-500">*</span></label>
                             <input type="text" id="cpf"
-                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                class="input-text"
                                 placeholder="Enter Phone no." required>
                         </div>
                     </div>
@@ -365,7 +365,7 @@
                         <label for="status-field" class="inline-block mb-2 text-base font-medium">Status <span
                                 class="text-red-500">*</span></label>
                         <select
-                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            class="input-text"
                             data-trigger name="status-field" id="status-field">
                             <option value="">Status</option>
                             <option value="Active">Active</option>
@@ -375,10 +375,10 @@
 
                     <div class="flex justify-end gap-2">
                         <button type="button" data-modal-close="showModal"
-                            class="text-white btn bg-slate-500 border-slate-500 hover:text-white hover:bg-slate-600 hover:border-slate-600 focus:text-white focus:bg-slate-600 focus:border-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:border-slate-600 active:ring active:ring-slate-100 dark:ring-slate-400/10"
+                            class="btn-cancel
                             data-modal-close="showModal">Close</button>
                         <button type="submit" data-modal-close="showModal"
-                            class="text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10"
+                            class="btn-submit"
                             id="add-btn">Add Usuário</button>
                     </div>
                 </form>

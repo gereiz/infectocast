@@ -4,15 +4,75 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Blog; 
+use App\Models\Blog;
 
 class BlogController extends Controller
 {
     // return o index do blog
     public function index()
     {
-        $posts = Blog::all();
+        $posts = Blog::with('authorPost')->get();
 
         return view('blog.index', compact('posts'));
+    }
+
+    // retorna a view de adicionar post
+    public function addPost($id=null)
+    {
+        if($id && $id != null){
+            $post = Blog::find($id);
+            return view('blog.add_post', compact('post'));
+        } else {
+            return view('blog.add_post');
+        }
+    }
+
+    // adiciona ou edita um post
+    public function addEditPost(Request $request)
+    {
+        $userId = auth()->user()->id;
+        $post = Blog::find($request->id_post);
+
+        if($request->hasFile('image_post')) {
+            $file = $request->file('image_post');
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move(storage_path('app/public/imgpost'), $filename);
+        }
+
+        if($post){
+            $post->title = $request->title_post;
+            $post->image = $filename;
+            $post->content = $request->content_post;
+            $post->date = date('Y-m-d');
+            $post->author = $userId;
+            $post->status = 1;
+            $post->save();
+
+            return redirect('blog')->with('status', 'Post Editado!', 'post');
+            
+        }else{
+            $post = new Blog();
+            $post->title = $request->title_post;
+            $post->image = $filename;
+            $post->content = $request->content_post;
+            $post->date = date('Y-m-d');
+            $post->author = $userId;
+            $post->status = 1;
+            $post->save();
+
+            return back()->with('status', 'Post Criado!');  
+        }
+
+        // return redirect()->route('blog.index');
+       
+    }
+
+    // deleta um post
+    public function deletePost(Request $request)
+    {
+        $post = Blog::find($request->id_post);
+        $post->delete();
+
+        return redirect('blog')->with('status', 'Post Deletado!');
     }
 }

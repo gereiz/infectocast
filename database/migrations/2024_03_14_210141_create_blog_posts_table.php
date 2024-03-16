@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('author');
             $table->foreign('author')->references('id')->on('users');
             $table->string('title');
+            $table->string('image');
             $table->date('date');
             $table->longText('content');
             $table->smallInteger('status');

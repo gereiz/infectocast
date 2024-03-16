@@ -13,17 +13,17 @@
                 <div>
                     <div class="relative xl:w-3/6">
                         <input type="text"
-                            class="ltr:pl-8 rtl:pr-8 search form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            class="ltr:pl-8 rtl:pr-8 search input-text"
                             placeholder="Pesquisar Categoria ..." autocomplete="off">
                         <i data-lucide="search"
                             class="inline-block size-4 absolute ltr:left-2.5 rtl:right-2.5 top-2.5 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-600"></i>
                     </div>
                 </div>
                 <div class="ltr:md:text-end rtl:md:text-start">
-                    <button type="button" data-modal-target="showModal"
-                        class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 add-btn"
-                        data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i
-                            class="align-bottom ri-add-line me-1"></i> Add Post</button>
+                    <a type="button" href="{{url('addPost')}}" class="btn-add">
+                        <i class="align-bottom ri-add-line me-1"></i>
+                        Add Post
+                    </a>
                     {{-- <button type="button"
                         class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20"
                         onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button> --}}
@@ -43,6 +43,10 @@
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="titulo">
                                 Título
+                            </th>
+                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
+                                data-sort="titulo">
+                                Capa
                             </th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="categoria">
@@ -72,38 +76,79 @@
                                 </th>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
                                     style="display:none;"><a href="javascript:void(0);"
-                                        class="fw-medium link-primary id">{{$topic->id}}</a></td>
+                                        class="fw-medium link-primary id">{{$post->id}}</a></td>
 
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
-                                    {{$post->title}}
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
+                                        {{$post->title}}
+                                    </td>
+                                    <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
+                                        <img src="{{URL::asset('storage/imgpost/'.$post->image)}}" alt="{{$post->image}}" class="w-8 hover:scale-[2.5] transition-all duration-1000">
+                                    </td>
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
+                                    <p>{{formataDataHora($post->date)}}</p>
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <p>{{$post->title}}</p>
+                                    <p>{{$post->authorPost->name}}</p>
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <p>{{$post->date}}</p>
-                                </td>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <p>{{$post->author}}</p>
+                                    <p>@if ($post->status == 1)
+                                        Publicado @else Rascunho
+                                        @endif
+                                    </p>
                                 </td>
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
-                                    <div class="flex gap-2">
+                                    <div class="flex gap-2">    
                                         <div class="edit">
-                                            <button data-modal-target="{{'showModal/'.$topic->id}}"
+                                            <a href="{{url('addPost/'.$post->id)}}"
                                                 class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">
                                                 Editar
-                                            </button>
+                                            </a>
                                         </div>
                                         <div class="remove">
-                                            <button data-modal-target="{{'deleteModal/'.$topic->id}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
+                                            <button data-modal-target="{{'deleteModal/'.$post->id}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
                                                 Excluir
                                             </button>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                               
+                            
+                            {{-- Modal Delete --}}
+                            <div id={{'deleteModal/'.$post->id}} modal-center
+                                class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
+                                <div class="w-screen md:w-[25rem] bg-white shadow rounded-md dark:bg-zink-600">
+                                    <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto px-6 py-8">
+                                        <form method="POST" action="{{urL('deletePost')}}">
+                                            @csrf
+                                            <div class="mb-3" id="modal-id" style="display: none;">
+                                                <label for="id_post" class="inline-block mb-2 text-base font-medium">ID</label>
+                                                <input type="text" id="id_post" name="id_post" value="{{$post->id}}"
+                                                    class="input-text"
+                                                    placeholder="ID" readonly="">
+                                            </div>
+                                            <div class="float-right">
+                                                <button data-modal-close={{'deleteModal/'.$post->id}} id="close-removeNotesModal"
+                                                    class="transition-all duration-200 ease-linear text-slate-500 hover:text-red-500"><i
+                                                        data-lucide="x" class="size-5"></i></button>
+                                            </div>
+                                            <img src="{{ URL::asset('build/images/delete.png') }}" alt="" class="block h-12 mx-auto">
+                                            <div class="mt-5 text-center">
+                                                <h5 class="mb-1">Você tem certeza?</h5>
+                                                <p class="text-slate-500 dark:text-zink-200">Deseja  realmente excluir esse registro?</p>
+                                                <div class="flex justify-center gap-2 mt-6">
+                                                    <button type="button" data-modal-close={{'deleteModal/'.$post->id}}
+                                                        class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10">Cancelar</button>
+                                                    <button type="submit" id="remove-notes"
+                                                        class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20">Sim, Deletar!</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+        
                         @endforeach
                     </tbody>
                 </table>
@@ -132,85 +177,6 @@
         </div>
     </div>
 
-      {{-- Modal Add --}}
-      <div id="showModal" modal-center
-      class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
-        <div class="w-screen md:w-[50%] bg-white shadow rounded-md dark:bg-zink-600">
-            <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
-                <h5 class="text-16" id="exampleModalLabel">Add Post</h5>
-                <button data-modal-close="showModal"
-                    class="transition-all duration-200 ease-linear text-slate-400 hover:text-slate-500"><i data-lucide="x"
-                        class="size-5"></i></button>
-            </div>
-            <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto p-4">
-                <form class="tablelist-form" method="POST" action="{{urL('addOrEditTopic')}}" enctype="multipart/form-data">
-                    @csrf
-
-                    <div class="mb-3" id="modal-id" style="display: none;">
-                        <label for="id_field" class="inline-block mb-2 text-base font-medium">ID</label>
-                        <input type="text" id="id_field"
-                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                            placeholder="ID" readonly="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="customername-field" class="inline-block mb-2 text-base font-medium">Título
-                            <span class="text-red-500">*</span></label>
-                        <input type="text" id="titulo" name="titulo"
-                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                            placeholder="Digite o Título" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="capa_post" class="inline-block mb-2 text-base font-medium">
-                            Imagem <span class="text-red-500">*</span>
-                        </label>
-                        <div>
-                            <input type="file" id="capa_post" name="capa_post"
-                                class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500"
-                                placeholder="Imagem">
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-4 text-15">Texto</h6>
-                            <div class="ckeditor-classic text-slate-800 min-h-[400px]">
-                                <h3>The three greatest things you learn from traveling</h3>
-                                <p><br data-cke-filler="true"></p>
-                                <p>Like all the great things on earth traveling teaches us by example. Here are some of the most precious
-                                    lessons I’ve learned over the years of traveling.</p>
-                                <p><br data-cke-filler="true"></p>
-                
-                                <h4>Appreciation of diversity</h4>
-                                <p>Getting used to an entirely different culture can be challenging. While it’s also nice to learn about
-                                    cultures online or from books, nothing comes close to experiencing cultural diversity in person. You
-                                    learn to appreciate each and every single one of the differences while you become more culturally fluid.
-                                </p>
-                                <p><br data-cke-filler="true"></p>
-                                <p>Life doesn't allow us to execute every single plan perfectly. This especially seems to be the case when
-                                    you travel. You plan it down to every minute with a big checklist. But when it comes to executing it,
-                                    something always comes up and you’re left with your improvising skills. You learn to adapt as you go.
-                                    Here’s how my travel checklist looks now:</p>
-                                <p><br data-cke-filler="true"></p>
-                                <ul>
-                                    <li>buy the ticket</li>
-                                    <li><i>start your adventure</i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex justify-end gap-2">
-                        <button type="button" data-modal-close="showModal"
-                            class="text-white btn bg-slate-500 border-slate-500 hover:text-white hover:bg-slate-600 hover:border-slate-600 focus:text-white focus:bg-slate-600 focus:border-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:border-slate-600 active:ring active:ring-slate-100 dark:ring-slate-400/10"
-                            data-modal-close="showModal">Cancelar</button>
-                        <button type="submit" data-modal-close="showModal"
-                            class="text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10"
-                            id="add-btn">Add Post</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     
   @endsection
 
@@ -227,10 +193,7 @@
       <!-- App js -->
       <script src="{{ URL::asset('build/js/app.js') }}"></script>
 
-      {{-- Editor --}}
-      <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
-
-      <script src="{{ URL::asset('build/js/pages/form-editor-classic.init.js') }}"></script>
+     
   @endpush
   
   

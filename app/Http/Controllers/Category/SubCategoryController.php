@@ -21,7 +21,7 @@ class SubCategoryController extends Controller
     // adiciona ou edita uma subcategoria
     public function addOrEditSubCategory(Request $request)
     {
-        $request->validate([
+        $request->validate([ 
             'titulo' => 'required',
             'categoria' => 'required'
         ]);

@@ -50,5 +50,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     // blog
     route::get('blog', [BlogController::class, 'index']);
+    route::get('addPost/{id?}', [BlogController::class, 'addPost']);
+    route::post('addEditPost', [BlogController::class, 'addEditPost']);
+    route::post('deletePost', [BlogController::class, 'deletePost']);
 
 });

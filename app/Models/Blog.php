@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Blog extends Model
 {
@@ -19,4 +20,9 @@ class Blog extends Model
         'status',
         'order'
     ];
+
+    public function authorPost()
+    {
+        return $this->belongsTo(User::class, 'author');
+    }
 }

@@ -220,7 +220,7 @@ if (document.getElementById("custom-html-alert"))
             showCancelButton: true,
             confirmButtonText: 'Save',
             customClass: {
-                confirmButton: 'text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10 ltr:mr-1 rtl:ml-1',
+                confirmButton: 'btn-submit ltr:mr-1 rtl:ml-1',
                 cancelButton: 'text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20',
             },
             buttonsStyling: false,
@@ -239,7 +239,7 @@ if (document.getElementById("sa-dialog-three-btn"))
             showCancelButton: true,
             confirmButtonText: 'Save',
             customClass: {
-                confirmButton: 'text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10 ltr:mr-1 rtl:ml-1',
+                confirmButton: 'btn-submit ltr:mr-1 rtl:ml-1',
                 cancelButton: 'text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20',
                 denyButton: "text-white btn bg-sky-500 border-sky-500 hover:text-white hover:bg-sky-600 hover:border-sky-600 focus:text-white focus:bg-sky-600 focus:border-sky-600 focus:ring focus:ring-sky-100 active:text-white active:bg-sky-600 active:border-sky-600 active:ring active:ring-sky-100 dark:ring-sky-400/20 ltr:mr-1 rtl:ml-1"
             },
@@ -293,7 +293,7 @@ if (document.getElementById("ajax-alert"))
             confirmButtonText: 'Submit',
             showLoaderOnConfirm: true,
             customClass: {
-                confirmButton: 'text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10 ltr:mr-1 rtl:ml-1',
+                confirmButton: 'btn-submit ltr:mr-1 rtl:ml-1',
                 cancelButton: 'text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20',
             },
             buttonsStyling: false,
@@ -315,7 +315,7 @@ if (document.getElementById("ajax-alert"))
                 icon: 'success',
                 title: 'Ajax request finished!',
                 customClass: {
-                    confirmButton: 'text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10 ltr:mr-1 rtl:ml-1',
+                    confirmButton: 'btn-submit ltr:mr-1 rtl:ml-1',
                 },
                 buttonsStyling: false,
                 html: 'Submitted email: ' + email
