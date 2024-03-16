@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('date');
             $table->longText('content');
             $table->smallInteger('status');
-            $table->smallInteger('order');
+            $table->smallInteger('post_order');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });

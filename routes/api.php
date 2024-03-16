@@ -1,11 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\Category\CategoryApiController;
-use App\Http\Controllers\Api\Category\SubcategoryApiController; 
+use App\Http\Controllers\Api\Category\SubcategoryApiController;
 use App\Http\Controllers\Api\Category\TopicApiController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,7 +39,7 @@ Route::prefix('v1')->group(function () {
 
         // Categories
         route::get('listCategories',[CategoryApiController::class, 'getCategories']);
-        route::post('listSubCategories',[SubcategoryApiController::class, 'getSubCategories']);
+        route::post('listSubCategories',[SubCategoryApiController::class, 'getSubCategories']);
         route::post('listTopics',[TopicApiController::class, 'getTopics']);
 
 
