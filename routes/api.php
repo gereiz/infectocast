@@ -33,7 +33,6 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
 
-
         // Users
         route::get('getUser', [LoginController::class, 'getUser']);
 
@@ -45,6 +44,7 @@ Route::prefix('v1')->group(function () {
 
         // Blog
         route::get('listPosts',[BlogController::class, 'getPosts']);
+        route::post('listPost',[BlogController::class, 'getPost']);
         
         
     });
