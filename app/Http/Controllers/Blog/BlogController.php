@@ -28,7 +28,7 @@ class BlogController extends Controller
     }
 
     // adiciona ou edita um post
-    public function addEditPost(Request $request)
+    public function addEditPost(Request $request) 
     {
         $userId = auth()->user()->id;
         $post = Blog::find($request->id_post);
@@ -41,7 +41,9 @@ class BlogController extends Controller
 
         if($post){
             $post->title = $request->title_post;
-            $post->image = $filename;
+            if($request->file('image_post')){
+                $post->image = $filename;
+            }
             $post->content = $request->content_post;
             $post->date = date('Y-m-d');
             $post->author = $userId;
