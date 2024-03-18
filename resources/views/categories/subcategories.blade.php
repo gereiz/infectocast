@@ -10,7 +10,7 @@
 @endpush
 @section('content')
 <!-- page title -->
-    <x-page-title title="Categorias" pagetitle="Categorias" />
+    <x-page-title title="Sucategorias" pagetitle="Categorias" />
 
     {{-- Lista de Catagorias --}}
     <div class="card" id="customerList">
