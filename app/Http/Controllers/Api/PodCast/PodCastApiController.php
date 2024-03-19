@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\PodCast;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PodCast;
+use App\Models\Podcast;
 
 class PodCastApiController extends Controller
 {
@@ -15,7 +15,7 @@ class PodCastApiController extends Controller
 
     // retorna um podcast específico pelo request
     public function getPodCast(Request $request) {
-        $podcast = PodCast::find($request->id_podcast);
+        $podcast = Podcast::find($request->id_podcast);
         if($podcast) {
             return response()->json($podcast, 200);
         } else {
