@@ -8,7 +8,7 @@ use App\Http\Controllers\TailwickController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Blog\BlogController;
-
+use App\Http\Controllers\PodCast\PodCastController;
 
 
 /*
@@ -21,8 +21,6 @@ use App\Http\Controllers\Blog\BlogController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
@@ -53,5 +51,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     route::get('addPost/{id?}', [BlogController::class, 'addPost']);
     route::post('addEditPost', [BlogController::class, 'addEditPost']);
     route::post('deletePost', [BlogController::class, 'deletePost']);
+
+    // Podcast
+    route::get('podcast', [PodCastController::class, 'index']);
+    route::get('addPodcast/{id?}', [PodCastController::class, 'addPodast']);
+    route::post('addEditPodcast', [PodCastController::class, 'addEditPodcast']);
+    route::post('deletePodcast', [PodCastController::class, 'deletePodcast']);
 
 });

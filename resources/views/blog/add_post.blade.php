@@ -28,7 +28,7 @@
                 class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500"
                 placeholder="Imagem">
         </div>
-    </div>
+    </div> 
 
     <div class="card">
         <div class="card-body">

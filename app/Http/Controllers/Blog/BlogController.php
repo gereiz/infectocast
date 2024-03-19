@@ -65,7 +65,6 @@ class BlogController extends Controller
             return back()->with('status', 'Post Criado!');  
         }
 
-        // return redirect()->route('blog.index');
        
     }
 

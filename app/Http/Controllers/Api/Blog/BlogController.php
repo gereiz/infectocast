@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Blog;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use App\Models\Blog;
 
 
@@ -14,7 +14,7 @@ class BlogController extends Controller
         return response()->json(Blog::all(), 200);
     }
 
-    // rtorna um post específico pelo request
+    // retorna um post específico pelo request
     public function getPost(Request $request) {
         $post = Blog::find($request->id_post);
         if($post) {
