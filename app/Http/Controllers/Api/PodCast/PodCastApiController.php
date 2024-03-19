@@ -9,12 +9,12 @@ use App\Models\Podcast;
 class PodCastApiController extends Controller
 {
     // retorna todos os podcasts cadastrados
-    public function getPodCasts() {
+    public function getPodcasts() {
         return response()->json(PodCast::all(), 200);
     }
 
     // retorna um podcast específico pelo request
-    public function getPodCast(Request $request) {
+    public function getPodcast(Request $request) {
         $podcast = Podcast::find($request->id_podcast);
         if($podcast) {
             return response()->json($podcast, 200);

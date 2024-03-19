@@ -48,8 +48,8 @@ Route::prefix('v1')->group(function () {
         route::post('listPost',[BlogController::class, 'getPost']);
         
         // Podcast
-        route::get('listPodCasts',[PodCastApiController::class, 'getPodCasts']);
-        route::post('listPodCast',[PodCastApiController::class, 'getPodCast']);
+        route::get('listPocasts',[PodCastApiController::class, 'getPodcasts']);
+        route::post('listPodcast',[PodCastApiController::class, 'getPodcast']);
         
 
     });
