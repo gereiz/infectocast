@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Category\CategoryApiController;
 use App\Http\Controllers\Api\Category\SubcategoryApiController;
 use App\Http\Controllers\Api\Category\TopicsApiController;
+use App\Http\Controllers\Api\PodCast\PodCastApiController;
 use App\Http\Controllers\Api\Blog\BlogController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
@@ -46,7 +47,11 @@ Route::prefix('v1')->group(function () {
         route::get('listPosts',[BlogController::class, 'getPosts']);
         route::post('listPost',[BlogController::class, 'getPost']);
         
+        // Podcast
+        route::get('listPodCasts',[PodCastApiController::class, 'getPodCasts']);
+        route::post('listPodCast',[PodCastApiController::class, 'getPodCast']);
         
+
     });
     
     
