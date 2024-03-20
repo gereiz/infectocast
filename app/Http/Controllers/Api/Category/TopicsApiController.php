@@ -13,4 +13,14 @@ class TopicsApiController extends Controller
         return response()->json(Topic::where('id_subcategory', $request->id_subcategory)->get(), 200);
     }
 
+    // retorna um topico específico pelo request
+    public function getTopic(Request $request) {
+        $topic = Topic::find($request->id_topic);
+        if($topic) {
+            return response()->json($topic, 200);
+        } else {
+            return response()->json(['message' => 'Tópico não encontrado'], 404);
+        }
+    }
+
 }

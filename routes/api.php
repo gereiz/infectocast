@@ -4,7 +4,7 @@ use App\Http\Controllers\Api\Category\CategoryApiController;
 use App\Http\Controllers\Api\Category\SubcategoryApiController;
 use App\Http\Controllers\Api\Category\TopicsApiController;
 use App\Http\Controllers\Api\PodCast\PodCastApiController;
-use App\Http\Controllers\Api\Blog\BlogController;
+use App\Http\Controllers\Api\Blog\BlogApiController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -42,17 +42,18 @@ Route::prefix('v1')->group(function () {
         route::get('listCategories',[CategoryApiController::class, 'getCategories']);
         route::post('listSubCategories',[SubCategoryApiController::class, 'getSubCategories']);
         route::post('listTopics',[TopicsApiController::class, 'getTopics']);
+        route::post('listTopic',[TopicsApiController::class, 'getTopic']);
 
         // Blog
-        route::get('listPosts',[BlogController::class, 'getPosts']);
-        route::post('listPost',[BlogController::class, 'getPost']);
+        route::get('listPosts',[BlogApiController::class, 'getPosts']);
+        route::post('listPost',[BlogApiController::class, 'getPost']);
         
         // Podcast
         route::get('listPodcasts',[PodCastApiController::class, 'getPodcasts']);
         route::post('listPodcast',[PodCastApiController::class, 'getPodcast']);
         
 
-    });
+    }); 
     
     
 

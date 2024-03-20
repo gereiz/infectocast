@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Blog;
 
 
-class BlogController extends Controller
+class BlogApiController extends Controller
 {
     // reotorna todos os posts do blog
     public function getPosts() {
