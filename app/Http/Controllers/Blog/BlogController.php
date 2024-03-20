@@ -8,7 +8,7 @@ use App\Models\Blog;
 
 class BlogController extends Controller
 {
-    // return o index do blog
+    // return o index do blog 
     public function index()
     {
         $posts = Blog::with('authorPost')->get();

@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     // Topic
     route::get('topics', [TopicController::class, 'index']);
+    route::get('addTopic/{id?}', [TopicController::class, 'addTopic']);
     route::post('addOrEditTopic', [TopicController::class, 'addOrEditTopic']);
     route::post('deleteTopic', [TopicController::class, 'deleteTopic']);
 
