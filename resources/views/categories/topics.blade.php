@@ -11,7 +11,7 @@
 <!-- page title -->
     <x-page-title title="Tópicos" pagetitle="Categorias" />
 
-    {{-- Lista de Tópicos --}}
+    {{-- Lista de Catagorias --}}
     <div class="card" id="customerList">
         <div class="card-body">
             <div class="grid grid-cols-1 gap-5 mb-5 xl:grid-cols-2">
@@ -25,9 +25,10 @@
                     </div>
                 </div>
                 <div class="ltr:md:text-end rtl:md:text-start">
-                    <a type="button" href="{{url('addTopic')}}" class="btn-add" id="create-btn">
-                        <i class="align-bottom ri-add-line me-1"></i> Add tópico
-                    </a>
+                    <button type="button" data-modal-target="showModal"
+                        class="btn-add"
+                        data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i
+                            class="align-bottom ri-add-line me-1"></i> Add tópico</button>
                     <button type="button"
                         class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20"
                         onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
@@ -87,10 +88,10 @@
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                     <div class="flex gap-2">
                                         <div class="edit">
-                                            <a href="{{url('addTopic/'.$topic->id)}}"
+                                            <button data-modal-target="{{'showModal/'.$topic->id}}"
                                                 class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">
                                                 Editar
-                                            </a>
+                                            </button>
                                         </div>
                                         <div class="remove">
                                             <button data-modal-target="{{'deleteModal/'.$topic->id}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
@@ -136,6 +137,59 @@
                                 </div>
                             </div>
 
+                            {{-- Modal Edit topicegory --}}
+                            <div id="{{'showModal/'.$topic->id}}" modal-center
+                                class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
+                                <div class="w-screen md:w-[30rem] bg-white shadow rounded-md dark:bg-zink-600">
+                                    <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
+                                        <h5 class="text-16" id="exampleModalLabel">Editar Subategoria</h5>
+                                        <button data-modal-close="{{'showModal/'.$topic->id}}"
+                                            class="transition-all duration-200 ease-linear text-slate-400 hover:text-slate-500"><i data-lucide="x"
+                                                class="size-5"></i></button>
+                                    </div>
+                                    <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto p-4">
+                                        <form class="tablelist-form" method="POST" action="{{urL('addOrEditTopic')}}" enctype="multipart/form-data">
+                                            @csrf
+
+                                            <div class="mb-3" id="modal-id" style="display: none;">
+                                                <label for="id_field" class="inline-block mb-2 text-base font-medium">ID</label>
+                                                <input type="text" id="id_field" name="id_field" value="{{$topic->id}}"
+                                                    class="input-text"
+                                                    placeholder="ID" readonly="">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="titulo" class="inline-block mb-2 text-base font-medium">Título
+                                                    <span class="text-red-500">*</span></label>
+                                                <input type="text" id="titulo" name="titulo" required value="{{ old('titulo') ?? $topic->title}}"
+                                                    class="input-text"
+                                                    placeholder="Digite o ítulo" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="subcategoria" class="inline-block mb-2 text-base font-medium">
+                                                    Subcategoria <span class="text-red-500">*</span>
+                                                </label>
+                                                <div>
+                                                    <select id="subcategoria" name="subcategoria" required
+                                                        class="input-text">
+                                                        <option value="0" disabled selected>Selecione a Subcategoria</option>
+                                                        @foreach ($subcategories as $subcat)
+                                                            <option value="{{$subcat->id}}">{{$subcat->title}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-end gap-2">
+                                                <button type="button" data-modal-close="{{'showModal/'.$topic->id}}"
+                                                    class="btn-cancel
+                                                    data-modal-close="{{'showModal/'.$topic->id}}">Cancelar</button>
+                                                <button type="submit" data-modal-close="{{'showModal/'.$topic->id}}"
+                                                    class="btn-submit"
+                                                    id="add-btn">Editar Subategoria</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -171,9 +225,9 @@
         <div class="w-screen md:w-[30rem] bg-white shadow rounded-md dark:bg-zink-600">
             <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
                 <h5 class="text-16" id="exampleModalLabel">Add tópico</h5>
-                <a href="{{url('addTopic')}}"
+                <button data-modal-close="showModal"
                     class="transition-all duration-200 ease-linear text-slate-400 hover:text-slate-500"><i data-lucide="x"
-                        class="size-5"></i></a>
+                        class="size-5"></i></button>
             </div>
             <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto p-4">
                 <form class="tablelist-form" method="POST" action="{{urL('addOrEditTopic')}}" enctype="multipart/form-data">
