@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
+            $table->longText('content');
             $table->unsignedBigInteger('id_subcategory');
             $table->foreign('id_subcategory')->references('id')->on('subcategories');
             $table->dateTime('created_at');
