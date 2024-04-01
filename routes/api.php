@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Blog\BlogApiController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Policy\PolicyController;
 
 
 
@@ -51,9 +52,11 @@ Route::prefix('v1')->group(function () {
         // Podcast
         route::get('listPodcasts',[PodCastApiController::class, 'getPodcasts']);
         route::post('listPodcast',[PodCastApiController::class, 'getPodcast']);
-        
+       
+        // Policy
+        route::get('activePolicy',[PolicyController::class, 'getActivePolicy']);
 
-    }); 
+    });
     
     
 

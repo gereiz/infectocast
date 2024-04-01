@@ -9,6 +9,7 @@ use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\PodCast\PodCastController;
+use App\Http\Controllers\PolicyController;
 
 
 /*
@@ -58,5 +59,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     route::get('addPodcast/{id?}', [PodCastController::class, 'addPodast']);
     route::post('addEditPodcast', [PodCastController::class, 'addEditPodcast']);
     route::post('deletePodcast', [PodCastController::class, 'deletePodcast']);
+
+    // Privacy Policy
+    route::get('privacyPolicy', [PolicyController::class, 'index']);
+    route::get('addPolicy/{id?}', [PolicyController::class, 'addPolicy']);
+    route::post('addOrEditPolicy', [PolicyController::class, 'addOrEditPolicy']);
+    route::post('deletePolicy', [PolicyController::class, 'deletePolicy']);
 
 });

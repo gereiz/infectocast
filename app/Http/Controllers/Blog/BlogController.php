@@ -28,7 +28,7 @@ class BlogController extends Controller
     }
 
     // adiciona ou edita um post
-    public function addEditPost(Request $request) 
+    public function addEditPost(Request $request)
     {
         $userId = auth()->user()->id;
         $post = Blog::find($request->id_post);
@@ -62,7 +62,7 @@ class BlogController extends Controller
             $post->status = 1;
             $post->save();
 
-            return back()->with('status', 'Post Criado!');  
+            return back()->with('status', 'Post Criado!');
         }
 
        
