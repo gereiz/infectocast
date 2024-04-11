@@ -4,13 +4,13 @@ use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Category\SubCategoryController;
 use App\Http\Controllers\Category\TopicController;
 use App\Http\Controllers\RouteController;
-use App\Http\Controllers\TailwickController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\PodCast\PodCastController;
 use App\Http\Controllers\PolicyController;
-
+use App\Http\Controllers\Plan\PlanController;
+use App\Http\Controllers\Payment\PaymentMpcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,5 +65,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     route::get('addPolicy/{id?}', [PolicyController::class, 'addPolicy']);
     route::post('addOrEditPolicy', [PolicyController::class, 'addOrEditPolicy']);
     route::post('deletePolicy', [PolicyController::class, 'deletePolicy']);
+
+    // Plan
+    route::get('plans', [PlanController::class, 'index']);
+    route::get('addPlan/{id?}', [PlanController::class, 'addPlan']);
+    route::post('addOrEditPlan', [PlanController::class, 'addOrEditPlan']);
+    route::post('deletePlan', [PlanController::class, 'deletePlan']);
+    
+    // Payment
+    route::get('payments', [PaymentMpcontroller::class, 'index']);
+    route::get('testPay', [PaymentMpcontroller::class, 'testPay']);
+    
 
 });

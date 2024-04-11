@@ -41,7 +41,7 @@
     <div class="card">
         <div class="card-body">
             <h6 class="mb-4 text-15">Texto</h6>
-            <textarea class="ckeditor-classic text-slate-800 min-h-[400px]" id="content_topic" name="content_topic">
+            <textarea class=" text-slate-800 min-h-[400px]" id="content_topic" name="content_topic">
                @if (isset($topic->content))
                    {!! $topic->content !!}
                    

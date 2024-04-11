@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "544c29bdb02a9258b972952f71cafe04",
+    "content-hash": "ca81f5cbb99183abcb130db464ecd28d",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3680,6 +3680,87 @@
             "time": "2023-11-08T05:53:05+00:00"
         },
         {
+            "name": "saloonphp/saloon",
+            "version": "v3.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/saloonphp/saloon.git",
+                "reference": "e669e8554f275c83aaa0b7d9d219b442e269f75f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/saloonphp/saloon/zipball/e669e8554f275c83aaa0b7d9d219b442e269f75f",
+                "reference": "e669e8554f275c83aaa0b7d9d219b442e269f75f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.6",
+                "guzzlehttp/promises": "^1.5 || ^2.0",
+                "guzzlehttp/psr7": "^2.0",
+                "php": "^8.1",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.1 || ^2.0"
+            },
+            "conflict": {
+                "sammyjo20/saloon": "*"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "friendsofphp/php-cs-fixer": "^3.5",
+                "illuminate/collections": "^9.39 || ^10.0",
+                "league/flysystem": "^3.0",
+                "pestphp/pest": "^2.6",
+                "phpstan/phpstan": "^1.9",
+                "saloonphp/xml-wrangler": "^1.1",
+                "spatie/ray": "^1.33",
+                "symfony/dom-crawler": "^6.0 || ^7.0",
+                "symfony/var-dumper": "^6.3 || ^7.0"
+            },
+            "suggest": {
+                "illuminate/collections": "Required for the response collect() method.",
+                "saloonphp/xml-wrangler": "Required for the response xmlReader() method.",
+                "symfony/dom-crawler": "Required for the response dom() method.",
+                "symfony/var-dumper": "Required for default debugging drivers."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Saloon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Carré",
+                    "email": "29132017+Sammyjo20@users.noreply.github.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Build beautiful API integrations and SDKs with Saloon",
+            "homepage": "https://github.com/saloonphp/saloon",
+            "keywords": [
+                "api",
+                "api-integrations",
+                "saloon",
+                "sammyjo20",
+                "sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/saloonphp/saloon/issues",
+                "source": "https://github.com/saloonphp/saloon/tree/v3.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sammyjo20",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-20T23:14:31+00:00"
+        },
+        {
             "name": "symfony/console",
             "version": "v6.4.2",
             "source": {
@@ -5990,6 +6071,65 @@
             "time": "2023-12-08T13:03:43+00:00"
         },
         {
+            "name": "tinymce/tinymce",
+            "version": "7.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tinymce/tinymce-dist.git",
+                "reference": "863759766e2397d1f639c63d006680a9e8ba6233"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/863759766e2397d1f639c63d006680a9e8ba6233",
+                "reference": "863759766e2397d1f639c63d006680a9e8ba6233",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "tinymce.js",
+                        "plugins/*/plugin.js",
+                        "themes/*/theme.js",
+                        "models/*/model.js",
+                        "icons/*/icons.js"
+                    ],
+                    "files": [
+                        "tinymce.min.js",
+                        "plugins/*/plugin.min.js",
+                        "themes/*/theme.min.js",
+                        "models/*/model.min.js",
+                        "skins/**",
+                        "icons/*/icons.min.js"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Web based JavaScript HTML WYSIWYG editor control.",
+            "homepage": "https://www.tiny.cloud/",
+            "keywords": [
+                "contenteditable",
+                "editing",
+                "html",
+                "javascript",
+                "rich editor",
+                "rich text",
+                "rich text editor",
+                "richtext",
+                "rte",
+                "text",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "support": {
+                "source": "https://github.com/tinymce/tinymce-dist/tree/7.0.1"
+            },
+            "time": "2024-04-10T07:29:34+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.0",
             "source": {
@@ -6146,6 +6286,84 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
+        },
+        {
+            "name": "wandesnet/mercadopago-laravel",
+            "version": "v1.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wandesnet/mercadopago-laravel.git",
+                "reference": "a5c9468b5f3ba59073cb9e7713db1a84557bb75c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wandesnet/mercadopago-laravel/zipball/a5c9468b5f3ba59073cb9e7713db1a84557bb75c",
+                "reference": "a5c9468b5f3ba59073cb9e7713db1a84557bb75c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^10.0|^11.0",
+                "php": "^8.1.0",
+                "ramsey/uuid": "^4.7",
+                "saloonphp/saloon": "^3.5"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^8.0|^9.0",
+                "pestphp/pest": "^2.0",
+                "phpstan/phpstan": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "WandesCardoso\\MercadoPago\\MercadoPagoServiceProvider"
+                    ],
+                    "aliases": {
+                        "MercadoPago": "WandesCardoso\\MercadoPago\\Facades\\MercadoPago"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helpers/helper.php"
+                ],
+                "psr-4": {
+                    "WandesCardoso\\MercadoPago\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wandes Cardoso",
+                    "email": "wandes2030@gmail.com"
+                }
+            ],
+            "description": "PHP SDK for integration with Mercado Pago",
+            "keywords": [
+                "Mercado Pago API",
+                "Mercado Pago PHP",
+                "Mercado Pago PHP SDK",
+                "Mercado Pago SDK",
+                "Mercado Pago SDK PHP",
+                "Mercado pago",
+                "SDK Mercado Pago",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/wandesnet/mercadopago-laravel/issues",
+                "source": "https://github.com/wandesnet/mercadopago-laravel/tree/v1.3.7"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/wandesnet",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-17T13:21:53+00:00"
         },
         {
             "name": "webmozart/assert",

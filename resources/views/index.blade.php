@@ -6,7 +6,7 @@
 
     <x-page-title title="Ecommerce" pagetitle="Dashboards" />
 
-    Teste
+    <textarea name="tinyeditor" id="tinyeditor" cols="30" rows="10"></textarea>
     
 @endsection
 @push('scripts')

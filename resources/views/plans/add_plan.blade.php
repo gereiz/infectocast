@@ -1,41 +1,54 @@
 @extends('layouts.master')
 @section('title')
-    Blog
+    Políticas
 @endsection
 @section('content')
-<x-page-title title="Novo Post" pagetitle="Blog" />
-<form class="tablelist-form" method="POST" action="{{urL('addEditPost')}}" enctype="multipart/form-data">
+<x-page-title title="Nova Plano de Pagamento" pagetitle="Planos" />
+<form class="tablelist-form" method="POST" action="{{urL('addOrEditPlan')}}" enctype="multipart/form-data">
     @csrf
 
     <div class="mb-3" id="modal-id" style="display: none;">
-        <label for="id_field" class="inline-block mb-2 text-base font-medium">ID</label>
-        <input type="text" id="id_post" name="id_post" class="input-text" @if (isset($post->id)) value="{{$post->id}}"@endif  readonly="">
+        <label for="id_plan" class="inline-block mb-2 text-base font-medium">ID</label>
+        <input type="text" id="id_plan" name="id_plan" class="input-text" @if (isset($plan->id)) value="{{$plan->id}}"@endif  readonly="">
     </div>
 
-    <div class="mb-3">
-        <label for="title_post" class="inline-block mb-2 text-base font-medium">Título
+    {{-- Nome do Plano --}}
+    <div class="mb-3 ">
+        <label for="name_plan" class="inline-block mb-2 text-base font-medium">Nome do Plano
             <span class="text-red-500">*</span></label>
-        <input type="text" id="title_post" name="title_post"class="input-text"placeholder="Digite o Título" @if (isset($post->title)) value="{{$post->title}}"@endif required>
+        <input type="text" id="name_plan" name="name_plan"class="input-text"placeholder="Digite o nome do plano" @if (isset($plan->name)) value="{{$plan->name}}"@endif required>
             
     </div>
 
+    {{--Preço do Plano --}}
+    <div class="mb-3 ">
+        <label for="price_plan" class="inline-block mb-2 text-base font-medium">Valor do Plano
+            <span class="text-red-500">*</span></label>
+        <input type="text" id="price_plan" name="price_plan"class="input-text"placeholder="Digite o valor do plano" @if (isset($plan->price)) value="{{$plan->price}}"@endif required>
+            
+    </div>
+
+    {{-- Status --}}
     <div class="mb-3">
-        <label for="image_post" class="inline-block mb-2 text-base font-medium">
-            Imagem <span class="text-red-500">*</span>
+        <label for="active_plan" class="inline-block mb-2 text-base font-medium">
+            Status <span class="text-red-500">*</span>
         </label>
         <div>
-            <input type="file" id="image_post" name="image_post"
-                class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500"
-                placeholder="Imagem">
+            <select id="active_plan" name="active_plan" required
+                class="input-text">
+                <option value="1" selected>Ativo</option>
+                <option value="0">Inativo</option>
+            </select>
         </div>
-    </div> 
+    </div>
 
+    {{-- Descrição --}}
     <div class="card">
         <div class="card-body">
             <h6 class="mb-4 text-15">Texto</h6>
-            <textarea class=" text-slate-800 min-h-[400px]" id="content_post" name="content_post">
-               @if (isset($post->content))
-                   {!! $post->content !!}
+            <textarea class=" text-slate-800 min-h-[400px]" id="description_plan" name="description_plan">
+               @if (isset($plan->description))
+                   {!! $plan->description !!}
                    
                @else
                 <h3>Exemplo de Post</h3>
@@ -65,9 +78,9 @@
     </div>
 
     <div class="flex justify-end gap-2">
-        <a href="{{url('blog')}}" class="btn-cancel" >Cancelar</a>
+        <a href="{{url('plans')}}" class="btn-cancel" >Cancelar</a>
 
-        <button type="submit" class="btn-submit">Add Post</button>
+        <button type="submit" class="btn-submit">Add Plano</button>
     </div>
 </form>
         

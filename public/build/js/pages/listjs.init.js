@@ -25,24 +25,24 @@ var perPage = 5;
 var editlist = false;
 
 //Table
-// var options = {
-//     valueNames: [
-//         "id",
-//         "customer_name",
-//         "email",
-//         "date",
-//         "phone",
-//         "status",
-//     ],
-//     page: perPage,
-//     pagination: true,
-//     plugins: [
-//         ListPagination({
-//             left: 2,
-//             right: 2
-//         })
-//     ]
-// };
+var options = {
+    // valueNames: [
+    //     "id",
+    //     "customer_name",
+    //     "email",
+    //     "date",
+    //     "phone",
+    //     "status",
+    // ],
+    page: perPage,
+    pagination: true,
+    plugins: [
+        ListPagination({
+            left: 2,
+            right: 2
+        })
+    ]
+};
 
 // Init list
 if (document.getElementById("customerList"))
@@ -135,8 +135,8 @@ if (document.getElementById("customerList"))
 //     addBtn = document.getElementById("add-btn"),
 //     editBtn = document.getElementById("edit-btn"),
 
-//     editBtns = document.getElementsByClassName("edit-item-btn");
-// refreshCallbacks();
+    editBtns = document.getElementsByClassName("edit-item-btn");
+refreshCallbacks();
 
 // //filterContact("All");
 
@@ -315,65 +315,65 @@ if (document.getElementById("customerList"))
 //     });
 // }
 
-// function refreshCallbacks() {
-//     var removeBtns = document.getElementsByClassName("remove-item-btn");
-//     if (removeBtns)
-//         Array.from(removeBtns).forEach(function (btn) {
-//             btn.addEventListener("click", function (e) {
-//                 e.target.closest("tr").children[1].innerText;
-//                 itemId = e.target.closest("tr").children[1].innerText;
-//                 var itemValues = customerList.get({
-//                     id: itemId,
-//                 });
+function refreshCallbacks() {
+    var removeBtns = document.getElementsByClassName("remove-item-btn");
+    if (removeBtns)
+        Array.from(removeBtns).forEach(function (btn) {
+            btn.addEventListener("click", function (e) {
+                e.target.closest("tr").children[1].innerText;
+                itemId = e.target.closest("tr").children[1].innerText;
+                var itemValues = customerList.get({
+                    id: itemId,
+                });
 
-//                 Array.from(itemValues).forEach(function (x) {
-//                     deleteid = new DOMParser().parseFromString(x._values.id, "text/html");
-//                     var isElem = deleteid.body.firstElementChild;
-//                     var isdeleteid = deleteid.body.firstElementChild.innerHTML;
-//                     if (isdeleteid == itemId) {
-//                         document.getElementById("delete-record").addEventListener("click", function () {
-//                             customerList.remove("id", isElem.outerHTML);
-//                         });
-//                     }
-//                 });
-//             });
-//         });
-//     if (editBtns)
-//         Array.from(editBtns).forEach(function (btn) {
-//             btn.addEventListener("click", function (e) {
-//                 e.target.closest("tr").children[1].innerText;
-//                 itemId = e.target.closest("tr").children[1].innerText;
-//                 var itemValues = customerList.get({
-//                     id: itemId,
-//                 });
+                Array.from(itemValues).forEach(function (x) {
+                    deleteid = new DOMParser().parseFromString(x._values.id, "text/html");
+                    var isElem = deleteid.body.firstElementChild;
+                    var isdeleteid = deleteid.body.firstElementChild.innerHTML;
+                    if (isdeleteid == itemId) {
+                        document.getElementById("delete-record").addEventListener("click", function () {
+                            customerList.remove("id", isElem.outerHTML);
+                        });
+                    }
+                });
+            });
+        });
+    if (editBtns)
+        Array.from(editBtns).forEach(function (btn) {
+            btn.addEventListener("click", function (e) {
+                e.target.closest("tr").children[1].innerText;
+                itemId = e.target.closest("tr").children[1].innerText;
+                var itemValues = customerList.get({
+                    id: itemId,
+                });
 
-//                 Array.from(itemValues).forEach(function (x) {
-//                     isid = new DOMParser().parseFromString(x._values.id, "text/html");
-//                     var selectedid = isid.body.firstElementChild.innerHTML;
-//                     if (selectedid == itemId) {
-//                         editlist = true;
-//                         idField.value = selectedid;
-//                         customerNameField.value = x._values.customer_name;
-//                         emailField.value = x._values.email;
-//                         dateField.value = x._values.date;
-//                         phoneField.value = x._values.phone;
+                Array.from(itemValues).forEach(function (x) {
+                    isid = new DOMParser().parseFromString(x._values.id, "text/html");
+                    var selectedid = isid.body.firstElementChild.innerHTML;
+                    if (selectedid == itemId) {
+                        editlist = true;
+                        idField.value = selectedid;
+                        customerNameField.value = x._values.customer_name;
+                        emailField.value = x._values.email;
+                        dateField.value = x._values.date;
+                        phoneField.value = x._values.phone;
 
-//                         if (statusVal) statusVal.destroy();
-//                         statusVal = new Choices(statusField);
-//                         val = new DOMParser().parseFromString(x._values.status, "text/html");
-//                         var statusSelec = val.body.firstElementChild.innerHTML;
-//                         statusVal.setChoiceByValue(statusSelec);
+                        if (statusVal) statusVal.destroy();
+                        statusVal = new Choices(statusField);
+                        val = new DOMParser().parseFromString(x._values.status, "text/html");
+                        var statusSelec = val.body.firstElementChild.innerHTML;
+                        statusVal.setChoiceByValue(statusSelec);
 
-//                         flatpickr("#date-field", {
-//                             // enableTime: true,
-//                             dateFormat: "d M, Y",
-//                             defaultDate: x._values.date,
-//                         });
-//                     }
-//                 });
-//             });
-//         });
-// }
+                        flatpickr("#date-field", {
+                            // enableTime: true,
+                            dateFormat: "d M, Y",
+                            defaultDate: x._values.date,
+                        });
+                    }
+                });
+            });
+        });
+}
 
 // function clearFields() {
 //     customerNameField.value = "";
@@ -413,4 +413,3 @@ if (document.getElementById("customerList"))
 //             showCloseButton: true
 //         });
 //     }
-}

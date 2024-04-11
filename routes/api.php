@@ -26,7 +26,6 @@ use App\Http\Controllers\Api\Policy\PolicyController;
 // Register
 
 
-
 Route::prefix('v1')->group(function () {
     route::post('register', [RegisterController::class, 'register']);
     route::post('login', [LoginController::class, 'login']);

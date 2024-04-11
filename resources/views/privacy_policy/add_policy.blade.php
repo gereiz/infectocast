@@ -37,7 +37,7 @@
     <div class="card">
         <div class="card-body">
             <h6 class="mb-4 text-15">Texto</h6>
-            <textarea class="ckeditor-classic text-slate-800 min-h-[400px]" id="content_policy" name="content_policy">
+            <textarea class="text-slate-800 min-h-[400px]" id="content_policy" name="content_policy">
                @if (isset($policy->content))
                    {!! $policy->content !!}
                    
