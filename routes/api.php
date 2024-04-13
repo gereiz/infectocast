@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Policy\PolicyController;
+use App\Http\Controllers\Api\Plans\PlanController;
 
 
 
@@ -54,6 +55,10 @@ Route::prefix('v1')->group(function () {
        
         // Policy
         route::get('activePolicy',[PolicyController::class, 'getActivePolicy']);
+
+        // Plans
+        route::get('listPlans',[PlanController::class, 'getPlans']);
+        
 
     });
     
