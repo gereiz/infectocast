@@ -27,10 +27,9 @@ class PlanController extends Controller
     //adiciona ou edita um plano
     public function addOrEditPlan(Request $request)
     {
-        
         $request->validate([
             'name_plan' => 'required',
-            'price_plan' => 'required|numeric',
+            'price_plan' => 'required',
             'description_plan' => 'required',
             'active_plan' => 'required'
         ]);
@@ -39,7 +38,7 @@ class PlanController extends Controller
 
         if ($plan) {
             $plan->name = $request->name_plan;
-            $plan->price = $request->price_plan;
+            $plan->price = str_replace(',', '.', $request->price_plan);
             $plan->description = $request->description_plan;
             $plan->is_active = $request->active_plan;
             $plan->id_user = auth()->user()->id;
@@ -49,7 +48,7 @@ class PlanController extends Controller
         } else {
             $plan = new Plan();
             $plan->name = $request->name_plan;
-            $plan->price = $request->price_plan;
+            $plan->price = str_replace(',', '.', $request->price_plan);
             $plan->description = $request->description_plan;
             $plan->is_active = $request->active_plan;
             $plan->id_user = auth()->user()->id;
