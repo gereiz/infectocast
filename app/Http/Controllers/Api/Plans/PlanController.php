@@ -11,7 +11,14 @@ class PlanController extends Controller
     //retorna todos os planos
     public function getPlans()
     {
+        $plans_formated = [];
+
         $plans = Plan::all();
-        return response()->json($plans);
+        foreach ($plans as $plan) {
+            $plan->price = number_format($plan->price, 2, ',', '.');
+            $plans_formated[] = $plan;
+        }
+        return response()->json($plans_formated);
     }
 }
+ 
