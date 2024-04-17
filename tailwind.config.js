@@ -56,6 +56,14 @@ export default {
                 'body':                                                 colors.slate[800],
                 'body-bg':                                              colors.slate[100],
                 'body-bordered':                                        colors.white,
+
+                'infecto-yellow':                                      '#FCAF23',
+                'infecto-red':                                    '#DC2732',
+                'infecto-green':                                     '#92CB68',
+                'infecto-blue':                                     '#2B5EA6',
+                'infecto-purple':                                     '#796CCF',
+                'infecto-black':                                     '#1D1D1B',
+
                 
                 //sidebar light
                 'vertical-menu':                                        colors.white,

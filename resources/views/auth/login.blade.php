@@ -4,14 +4,14 @@
 @endsection
 @section('content')
 <body
-    class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth-pattern dark:bg-auth-pattern-dark dark:text-zink-100 font-public">
+    class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-infecto-yellow/80 font-public">
     <div class="mb-0 border-none shadow-none xl:w-2/3 card bg-white/70 dark:bg-zink-500/70">
         <div class="grid grid-cols-1 gap-0 lg:grid-cols-12">
             <div class="lg:col-span-5">
                 <div class="!px-12 !py-12 card-body">
 
                     <div class="text-center">
-                        <h4 class="mb-2 text-purple-500 dark:text-purple-500">Bem-vindo de volta !</h4>
+                        <h4 class="mb-2 text-infecto-red">Bem-vindo de volta !</h4>
                         <p class="text-slate-500 dark:text-zink-200">Acesse para continuar.</p>
                     </div>
 
@@ -55,26 +55,11 @@
                         </div>
                          <div class="mt-5">
                             <button type="submit"
-                                class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
+                                class="w-full text-white btn bg-infecto-blue border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
                             Entrar
                             </button>
                         </div>
 
-                        {{--<div
-                            class="relative text-center my-9 before:absolute before:top-3 before:left-0 before:right-0 before:border-t before:border-t-slate-200 dark:before:border-t-zink-500">
-                            <h5
-                                class="inline-block px-2 py-0.5 text-sm bg-white text-slate-500 dark:bg-zink-600 dark:text-zink-200 rounded relative">
-                                Sign In with</h5>
-                        </div>
-
-                        <x-social-login />
-
-                        <div class="mt-10 text-center">
-                            <p class="mb-0 text-slate-500 dark:text-zink-200">Don't have an account ? <a
-                                    href="{{ route('register') }}"
-                                    class="font-semibold underline transition-all duration-150 ease-linear text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500">
-                                    SignUp</a> </p>
-                        </div> --}}
                     </form>
                 </div>
             </div>
@@ -86,13 +71,11 @@
                                 <x-application-logo />
                             </a>
                         </div>
-                        {{-- <div class="shrink-0">
-                            <x-language />
-                        </div> --}}
+
                     </div>
                     <div class="mt-auto">
-                        <img src="{{ URL::asset('build/images/auth/img-01.png') }}" alt=""
-                            class="md:max-w-[32rem] mx-auto">
+                        <img src="{{ URL::asset('build/images/auth/infecto_logo_1.png') }}" alt=""
+                            class="md:max-w-[40rem] mx-auto">
                     </div>
                 </div>
             </div>
