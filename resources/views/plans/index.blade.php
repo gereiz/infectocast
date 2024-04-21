@@ -44,6 +44,11 @@
 
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="titulo">
+                                Icone
+                            </th>
+
+                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
+                                data-sort="titulo">
                                 Preço
                             </th>
 
@@ -51,6 +56,17 @@
                                 data-sort="icone">
                                 Status
                             </th>
+
+                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
+                                data-sort="tipo">
+                                Tipo
+                            </th>
+
+                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
+                                data-sort="recorrente">
+                                Recorrente
+                            </th>
+
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="action">
                                 Ações
@@ -72,14 +88,32 @@
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
                                     {{$plan->name}}
                                 </td>
+                                
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
+                                    <img src="{{URL::asset('storage/imgplan/'.$plan->icon)}}" alt="{{$plan->icon}}" class="w-8">
+                                </td>
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
-                                    R$ {{str_replace('.', ',', $plan->price)}}
+                                    R$ {{formataMoeda($plan->price)}}
                                 </td>
                                     
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
                                     <p>@if ($plan->is_active == 1)
                                         Ativo @else Inativo
+                                        @endif
+                                    </p>
+                                </td>
+
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
+                                    <p>@if ($plan->type == 1)
+                                        Mensal @else Anual
+                                        @endif
+                                    </p>
+                                </td>
+
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
+                                    <p>@if ($plan->recurrence == 1)
+                                        Sim @else Não
                                         @endif
                                     </p>
                                 </td>

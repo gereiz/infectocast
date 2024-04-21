@@ -30,3 +30,14 @@ if (multiSelectOptGroup) {
         enable_search: true
     });
 }
+
+
+//header 
+var multiSelectHeader = document.getElementById("multiselect_topic");
+if (multiSelectHeader) {
+    multi(multiSelectHeader, {
+        non_selected_header: "Planos Disponíveis",
+        selected_header: "Planos Selecionados",
+        enable_search: false
+    });
+}

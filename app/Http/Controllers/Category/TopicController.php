@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\Subcategory;
+use App\Models\Plans;
 
 class TopicController extends Controller
 {
@@ -14,8 +15,9 @@ class TopicController extends Controller
     {
         $topics = Topic::all();
         $subcategories = Subcategory::all();
+        $plans = Plans::all();
 
-        return view('categories.topics', compact('topics', 'subcategories'));
+        return view('categories.topics', compact('topics', 'subcategories', 'plans'));
     }
 
     // retorna a view de adicionar tópico
@@ -23,23 +25,24 @@ class TopicController extends Controller
     {
         $topics = Topic::all();
         $subcategories = Subcategory::all();
+        $plans = Plans::all();
 
         if($id && $id != null){
             $topic = Topic::find($id);
             $subcategories = Subcategory::all();
-            return view('categories.add_topic', compact('topic', 'subcategories'));
+            return view('categories.add_topic', compact('topic', 'subcategories', 'plans'));
         } else {
             $subcategories = Subcategory::all();
-            return view('categories.add_topic', compact('subcategories'));
+            return view('categories.add_topic', compact('subcategories', 'plans'));
         }
     }
         
     // adiciona ou edita um tópico
     public function addOrEditTopic(Request $request)
     {
-        
+        // dd($request->all());
         $request->validate([
-            'title_topic' => 'required|unique:topics,title|min:3',
+            'title_topic' => 'required|min:3',
             'subcategory' => 'required'
         ], [
             'title_topic.required' => 'O campo título é obrigatório',
@@ -48,27 +51,32 @@ class TopicController extends Controller
             'subcategory.required' => 'O campo subcategoria é obrigatório'
         ]);
 
+        // transforma o array em string
+        $access_topic = implode(',', $request->access_topic);
+
 
         if ($request->id_topic && $request->id_topic != null) {
 
             $topic = Topic::find($request->id_topic);
             $topic->title = $request->title_topic;
             $topic->content = $request->content_topic;
+            $topic->plan_id = $access_topic;
             $topic->id_subcategory = $request->subcategory;
             $topic->id_user = auth()->user()->id;
             $topic->save();
 
-            toastr()->success('Tópico Editado!');
+            // toastr()->success('Tópico Editado!');
             return redirect('topics');
         } else {
             $topic = new Topic();
             $topic->title = $request->title_topic;
             $topic->content = $request->content_topic;
+            $topic->plan_id = $access_topic;
             $topic->id_subcategory = $request->subcategory;
             $topic->id_user = auth()->user()->id;
             $topic->save();
 
-            toastr()->success('Tópico Criado!');
+            // toastr()->success('Tópico Criado!');
             return redirect('topics');
         }
     }

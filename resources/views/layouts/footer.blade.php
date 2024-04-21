@@ -6,7 +6,7 @@
             </div>
             <div class="hidden lg:block">
                 <div class="ltr:text-right rtl:text-left">
-                    Design & Develop by Themesdesign
+                    Desenvolvido por IbitWeb soluções Digitais
                 </div>
             </div>
         </div>

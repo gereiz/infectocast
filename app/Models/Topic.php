@@ -16,6 +16,10 @@ class Topic extends Model
         'id_user'
     ];
 
+    protected $casts = [
+        'plan_id' => 'array'
+    ];
+
     public function subcategory()
     {
         return $this->belongsTo(Subcategory::class, 'id_subcategory');

@@ -56,8 +56,9 @@ class RegisterController extends Controller
             'college' => $request->college,
             'id_professional' => $request->id_professional,
             'college_uf' => $request->college_uf,
-            'plan' => $request->plan,
-            'is_admin' => $request->is_admin,
+            'plan' => 1,
+            'plan_exp_date' => null,
+            'is_admin' => 0,
         ]);
 
         return response()->json('Usuário cadastrado com sucesso!');

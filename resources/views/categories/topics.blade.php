@@ -57,6 +57,11 @@
                                 data-sort="icone">
                                 Icone
                             </th>
+
+                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
+                                data-sort="icone">
+                                Acesso
+                            </th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="action">
                                 Ações
@@ -65,7 +70,7 @@
                     </thead>
                     <tbody class="list form-check-all">
                         @foreach ($topics as $topic)
-                            <tr>
+                            <tr class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                 <th class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500" scope="row">
                                     <input
                                         class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
@@ -83,6 +88,23 @@
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
                                     <img src="{{URL::asset('storage/imgcat/'.$topic->subcategory->category->icon)}}" alt="{{$topic->subcategory->category->icon}}" class="w-8">
+                                </td>
+
+                                @php
+                                
+                                // transforma a string em array
+                                $plan_id = explode(',', $topic->plan_id);
+
+                                @endphp
+
+                                <td class="flex ">
+                                    @foreach($plan_id as $plan)
+                                        @foreach($plans as $pl)
+                                            @if($pl->id == $plan)
+                                                <img src="{{URL::asset('storage/imgplan/'.$pl->icon)}}" title="{{$pl->name}}" class="w-8 mr-2">
+                                            @endif
+                                        @endforeach
+                                    @endforeach
                                 </td>
                             
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">

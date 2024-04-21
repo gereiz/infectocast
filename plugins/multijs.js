@@ -6,7 +6,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
             '@apply border-0': {},
         
             '.non-selected-wrapper': {
-                '@apply border border-slate-200 bg-white rounded-tl-md rounded-bl-md dark:border-zink-500 dark:bg-zink-700': {},
+                '@apply border border-slate-100 bg-white font-bold h-9 mb-1 px-2 flex justify-center space-x-4 rounded-tl-md rounded-bl-md dark:border-zink-500 dark:bg-zink-700': {},
             },
 
             '.selected-wrapper, .non-selected-wrapper': {
@@ -36,7 +36,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
             },
 
             '.selected-wrapper': {
-                '@apply border border-slate-200 dark:border-zink-500 bg-white dark:bg-zink-700 rounded-tr-md rounded-br-md': {},
+                '@apply space-x-4 border border-slate-100 font-bold text-red-500 h-9 mb-1 px-2 flex justify-center dark:border-zink-500 bg-white dark:bg-zink-700 rounded-tr-md rounded-br-md': {},
             },
 
             '.search-input': {
@@ -45,7 +45,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
             },
 
             '.header': {
-                '@apply font-semibold text-slate-700 dark:text-zink-100': {},
+                '@apply font-semibold text-red-700 dark:text-red-100': {},
             }
         },
     })
