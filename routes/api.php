@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Policy\PolicyController;
 use App\Http\Controllers\Api\Plans\PlanController;
+use App\Http\Controllers\Api\Payment\PaymentController;
 
 
 
@@ -59,6 +60,8 @@ Route::prefix('v1')->group(function () {
         // Plans
         route::get('listPlans',[PlanController::class, 'getPlans']);
         
+        // Payments
+        route::get('testpayment',[PaymentController::class, 'testpayment']);
 
     });
     
