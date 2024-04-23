@@ -193,7 +193,8 @@
                         </button>
                     </div> --}}
 
-                    <div class="relative flex items-center dropdown h-header">
+                    {{-- Notifications --}}
+                    {{-- <div class="relative flex items-center dropdown h-header">
                         <button type="button"
                             class="inline-flex justify-center relative items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-200 ease-linear bg-topbar rounded-md dropdown-toggle btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:text-topbar-item-dark"
                             id="notificationDropdown" data-bs-toggle="dropdown">
@@ -338,7 +339,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- <div class="relative items-center hidden h-header md:flex">
                         <button data-drawer-target="customizerButton" type="button"
@@ -347,7 +348,9 @@
                                 class="inline-block w-5 h-5 stroke-1 fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand"></i>
                         </button>
                     </div> --}}
-                    @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+
+                    {{-- Teams --}}
+                    {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                         <div class="relative flex items-center dropdown md:flex">
                             <button type="button"
                                 class="inline-block p-0 transition-all duration-200 ease-linear bg-topbar rounded-full text-topbar-item dropdown-toggle btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200"
@@ -394,7 +397,7 @@
                                 </ul>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
                     <div class="relative flex items-center dropdown h-header">
                         <button type="button"
@@ -412,7 +415,7 @@
                         </button>
                         <div class="absolute z-50 hidden p-4 ltr:text-left rtl:text-right bg-white rounded-md shadow-md !top-4 dropdown-menu min-w-[14rem] dark:bg-zink-600"
                             aria-labelledby="dropdownMenuButton">
-                            <h6 class="mb-2 text-sm font-normal text-slate-500 dark:text-zink-300">Welcome to Tailwick
+                            <h6 class="mb-2 text-sm font-normal text-slate-500 dark:text-zink-300">Bem-vindo ao InfectoCast 
                             </h6>
                             <a href="#!" class="flex gap-3 mb-3">
                                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -425,13 +428,13 @@
                                             class="-top-1 ltr:-right-1 rtl:-left-1 absolute w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full dark:border-zink-600"></span>
                                     </div>
                                 @endif
-                                <div>
+                                {{-- <div>
                                     <h6 class="mb-1 text-15">{{ Auth::user()->name }}</h6>
                                     <p class="text-slate-500 dark:text-zink-300">CEO & Founder</p>
-                                </div>
+                                </div> --}}
                             </a>
                             <ul>
-                                <li>
+                                {{-- <li>
                                     <a class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500"
                                         href="{{ route('profile.show') }}"><i data-lucide="user-2"
                                             class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i> Profile</a>
@@ -459,7 +462,7 @@
                                         href="#!"><i data-lucide="gem"
                                             class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i> Upgrade <span
                                             class="inline-flex items-center justify-center w-auto h-5 ltr:ml-2 rtl:mr-2 px-1 text-[12px] font-medium border rounded text-white bg-sky-500 border-sky-500">Pro</span></a>
-                                </li>
+                                </li> --}}
                                 <!-- Logout -->
                                 <li class="pt-2 mt-2 border-t border-slate-200 dark:border-zink-500">
                                     <form method="POST" action="{{ route('logout') }}" x-data>
