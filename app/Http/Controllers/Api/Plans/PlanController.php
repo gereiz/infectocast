@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Plans;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Plans;
+use App\Models\Plan;
 
 class PlanController extends Controller
 {
@@ -13,7 +13,7 @@ class PlanController extends Controller
     {
         $plans_formated = [];
 
-        $plans = Plans::all();
+        $plans = Plan::all();
         foreach ($plans as $plan) {
             $plan->price = number_format($plan->price, 2, ',', '.');
             $plans_formated[] = $plan;

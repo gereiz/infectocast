@@ -4,20 +4,14 @@ namespace App\Http\Controllers\Plan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Plans;
-
-use WandesCardoso\MercadoPago\DTO\Plan;
-use WandesCardoso\MercadoPago\Enums\Currency;
-use WandesCardoso\MercadoPago\Enums\FrequencyType;
-use WandesCardoso\MercadoPago\Enums\PaymentType;
-use WandesCardoso\MercadoPago\Facades\MercadoPago;
+use App\Models\Plan;
 
 class PlanController extends Controller
 {
     //retorna a pagina index dos planos
     public function index()
     {
-        $plans = Plans::all();
+        $plans = Plan::all();
 
         return view('plans.index', compact('plans'));
     }
@@ -25,7 +19,7 @@ class PlanController extends Controller
     //retorna a pagina de adicionar ou editar um plano
     public function addPlan($id = null)
     {
-        $plan = Plans::find($id);
+        $plan = Plan::find($id);
 
         return view('plans.add_plan', compact('plan'));
     }
@@ -78,7 +72,7 @@ class PlanController extends Controller
         
         // dd($response['body']->id);
 
-        $plan = Plans::find($request->id_plan);
+        $plan = Plan::find($request->id_plan);
        
         if ($plan) {
             $plan->name = $request->name_plan;
@@ -94,7 +88,7 @@ class PlanController extends Controller
 
             return redirect('plans')->with('status', 'Plano Editado!', 'plan');
         } else {
-            $plan = new Plans();
+            $plan = new Plan();
             $plan->name = $request->name_plan;
             $plan->icon = $filename;
             $plan->price = $price ? $price : str_replace(',', '.', $plan->price);
@@ -114,7 +108,7 @@ class PlanController extends Controller
     //deleta um plano
     public function deletePlan(Request $request)
     {
-        $plan = Plans::find($request->id_plan);
+        $plan = Plan::find($request->id_plan);
         $plan->delete();
 
         return redirect('plans')->with('status', 'Plano Deletado!', 'plan');

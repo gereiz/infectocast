@@ -12,8 +12,8 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
-        "tinymce/tinymce": "^7.0",
-        "wandesnet/mercadopago-laravel": "^1.3"
+        "mercadopago/dx-php": "3.0.5",
+        "tinymce/tinymce": "^7.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

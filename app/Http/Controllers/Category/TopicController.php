@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\Subcategory;
-use App\Models\Plans;
+use App\Models\Plan;
 
 class TopicController extends Controller
 {
@@ -15,7 +15,7 @@ class TopicController extends Controller
     {
         $topics = Topic::all();
         $subcategories = Subcategory::all();
-        $plans = Plans::all();
+        $plans = Plan::all();
 
         return view('categories.topics', compact('topics', 'subcategories', 'plans'));
     }
@@ -25,7 +25,7 @@ class TopicController extends Controller
     {
         $topics = Topic::all();
         $subcategories = Subcategory::all();
-        $plans = Plans::all();
+        $plans = Plan::all();
 
         if($id && $id != null){
             $topic = Topic::find($id);
