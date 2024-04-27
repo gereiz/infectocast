@@ -11,7 +11,7 @@ class TopicsApiController extends Controller
     // retorna todos os topicos pelo id da subcategoria
     public function getTopics(Request $request) {
 
-        $topics = Topic::where('id_subcategory', $request->id_subcategory)->get();
+        $topics = Topic::where('id_subcategory', $request->id_subcategory)->OrderBy('title', 'asc')->get();
 
         $topics_formated = [];
         foreach ($topics as $topic) {
@@ -23,7 +23,8 @@ class TopicsApiController extends Controller
         return response()->json($topics_formated, 200);
     }
 
-    // retorna um topico específico pelo request
+
+    // retorna um topico específico pelo id do topico
     public function getTopic(Request $request) {
         $topic = Topic::find($request->id_topic);
         if($topic) {

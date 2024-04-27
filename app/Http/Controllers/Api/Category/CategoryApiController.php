@@ -14,5 +14,11 @@ class CategoryApiController extends Controller
         return response(Category::all());
 
     }
+
+
+    public function getCategoryName(Request $request) {
+
+        return response(Category::where('title', 'like', '%'.$request->title.'%')->get());
+    }
     
 }
