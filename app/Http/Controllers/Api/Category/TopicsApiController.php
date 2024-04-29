@@ -24,6 +24,11 @@ class TopicsApiController extends Controller
     }
 
 
+    public function getTopicsTitle(Request $request) {
+        return response()->json(Topic::where([['id_subcategory', $request->id_subcategory], ['title', 'like', '%'.$request->title.'%']])->get(), 200);
+    }
+
+
     // retorna um topico específico pelo id do topico
     public function getTopic(Request $request) {
         $topic = Topic::find($request->id_topic);

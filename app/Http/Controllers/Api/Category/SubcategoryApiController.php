@@ -13,5 +13,9 @@ class SubCategoryApiController extends Controller
         
         return response()->json(SubCategory::where('id_category', $request->id_category)->get(), 200);
     }
+
+    public function getSubcategorisTitle(Request $request) {
+        return response()->json(SubCategory::where([['id_category', $request->id_category], ['title', 'like', '%'.$request->title.'%']])->get(), 200);
+    }
 }
  
