@@ -17,6 +17,6 @@ class CalculatorController extends Controller
     public function clearenceOfCreatine(Request $request) {
         $clearence = $this->calculatorService->clearenceOfCreatine($request->idade, $request->peso, ($request->creatinina * 100), $request->sexo);
         
-        return response()->json(['clearence' => $clearence], 200);
+        return response()->json(['clearence' => $clearence.' mL/min'], 200);
     }
 }
