@@ -42,7 +42,7 @@ Route::prefix('v1')->group(function () {
 
         // Categories
         route::get('listCategories',[CategoryApiController::class, 'getCategories']);
-        route::post('listCategoriesTitle',[CategoryApiController::class, 'getCategoryName']);
+        route::post('listCategoriesTitle',[CategoryApiController::class, 'getCategoryTitle']);
 
         route::post('listSubCategories',[SubCategoryApiController::class, 'getSubCategories']);
         route::post('listSubCategoresTitle',[SubCategoryApiController::class, 'getSubcategorisTitle']);
