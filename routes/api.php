@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Policy\PolicyController;
 use App\Http\Controllers\Api\Plans\PlanController;
 use App\Http\Controllers\Api\Payment\PaymentController;
+use App\Http\Controllers\Api\Calculator\CalculatorController;
 
 
 
@@ -58,6 +59,9 @@ Route::prefix('v1')->group(function () {
         // Podcast
         route::get('listPodcasts',[PodCastApiController::class, 'getPodcasts']);
         route::post('listPodcast',[PodCastApiController::class, 'getPodcast']);
+
+        // Calculator
+        route::post('clearenceOfCreatine',[CalculatorController::class, 'clearenceOfCreatine']);
        
         // Policy
         route::get('activePolicy',[PolicyController::class, 'getActivePolicy']);
