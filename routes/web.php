@@ -11,6 +11,7 @@ use App\Http\Controllers\PodCast\PodCastController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\Plan\PlanController;
 use App\Http\Controllers\Payment\PaymentMpcontroller;
+use App\Http\Controllers\TinyMceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,5 +77,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     route::get('payments', [PaymentMpcontroller::class, 'index']);
     route::get('testPay', [PaymentMpcontroller::class, 'testPay']);
     
+    // TinyMCE
+    Route::post('/upload', [TinyMceController::class, 'upload']);
 
 });
