@@ -17,14 +17,14 @@
         <label for="title_podcast" class="inline-block mb-2 text-base font-medium">Título
             <span class="text-red-500">*</span></label>
         <input type="text" id="title_podcast" name="title_podcast"class="input-text"placeholder="Digite o Título" @if (isset($podcast->title)) value="{{$podcast->title}}"@endif required>
-            
+             
     </div>
 
     {{-- Link --}}
     <div class="mb-3">
         <label for="link_podcast" class="inline-block mb-2 text-base font-medium">Link
             <span class="text-red-500">*</span></label>
-        <input type="text" id="link_podcast" name="link_podcast"class="input-text"placeholder="Insira o link do vídeo" @if (isset($podcast->title)) value="{{$podcast->title}}"@endif required>
+        <input type="text" id="link_podcast" name="link_podcast"class="input-text"placeholder="Insira o link do vídeo" @if (isset($podcast->link)) value="{{$podcast->link}}"@endif required>
             
     </div>
      
@@ -51,7 +51,7 @@
     <div class="flex justify-end gap-2">
         <a href="{{url('podcast')}}" class="btn-cancel" >Cancelar</a>
 
-        <button type="submit" class="btn-submit">Add Post</button>
+        <button type="submit" class="btn-submit">@if(isset($podcast->id)) Editar Podcast @else Add Podcast @endif</button>
     </div>
 </form>
         

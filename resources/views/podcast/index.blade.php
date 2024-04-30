@@ -73,7 +73,7 @@
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
                                     {{$podcast->title}}
-                                </td>
+                                </td> 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
                                     <a href="{{url($podcast->link)}}" target="_blank" class="btn-add">
                                         Vídeo

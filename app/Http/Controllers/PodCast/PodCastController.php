@@ -36,7 +36,7 @@ class PodCastController extends Controller
         ]);
 
         $userId = auth()->user()->id;
-        $podcast = Podcast::find($request->id_podcast);
+        $podcast = Podcast::find($request->id_podcast); 
 
         if($podcast){
             $podcast->title = $request->title_podcast;
