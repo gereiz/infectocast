@@ -39,6 +39,7 @@ Route::prefix('v1')->group(function () {
 
         // Users
         route::get('getUser', [LoginController::class, 'getUser']);
+        route::post('updateProfile', [LoginController::class, 'updateProfile']);
 
 
         // Categories
