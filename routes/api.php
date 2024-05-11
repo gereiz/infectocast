@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Policy\PolicyController;
 use App\Http\Controllers\Api\Plans\PlanController;
 use App\Http\Controllers\Api\Payment\PaymentController;
 use App\Http\Controllers\Api\Calculator\CalculatorController;
+use App\Http\Controllers\Api\User\ApiUserController;
 
 
 
@@ -39,7 +40,6 @@ Route::prefix('v1')->group(function () {
 
         // Users
         route::get('getUser', [LoginController::class, 'getUser']);
-        route::post('updateProfile', [LoginController::class, 'updateProfile']);
 
 
         // Categories
@@ -72,6 +72,10 @@ Route::prefix('v1')->group(function () {
         
         // Payments
         route::get('testpayment',[PaymentController::class, 'testpayment']);
+
+
+        // Api users
+        route::post('updateProfile', [ApiUserController::class, 'updateProfile']);
 
     });
     

@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class UserController extends Controller
+class ApiUserController extends Controller
 {
     // altera o nome do usuário
     public function updateProfile(Request $request)
     {
         
-        $user = User::find($request->id);
+        $user = auth()->user();
 
         if($user->password == bcrypt($request->password)) {
             if($request->photo) {
