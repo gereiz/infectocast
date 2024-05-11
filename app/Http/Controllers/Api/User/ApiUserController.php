@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class ApiUserController extends Controller
 {
@@ -14,15 +15,16 @@ class ApiUserController extends Controller
         
         $user = auth()->user();
 
-        if($user->password == bcrypt($request->password)) {
+        if(Hash::check($request->password, $user->password)) {
             if($request->photo) {
-                $user->profile_photo_path = $request->photo;
+                
 
                 // salva a imagem na pasta storage/app/public
-                $filname = $request->name.'_photo.'->extension();
-                $path = 'profile-photos/';
-
+                $filname = $request->name.'_photo.'.$request->photo->extension();
+                $path = 'profile-photos';
                 $request->photo->storeAs('public/'.$path, $filname);
+
+                $user->profile_photo_path = $path.'/'.$filname;
 
             }
             
