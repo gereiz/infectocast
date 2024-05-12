@@ -12,7 +12,8 @@ class ApiUserController extends Controller
     // altera o nome do usuário
     public function updateProfile(Request $request)
     {
-        $user = User::find($request->idUser);
+        $user = auth()->user() ;
+        // $user = User::find($request->idUser);
 
         if(Hash::check($request->password, $user->password)) {
             if($request->photo) {
@@ -48,7 +49,8 @@ class ApiUserController extends Controller
     // altera a senha do usuário
     public function updatePassword(Request $request)
     {
-        $user = User::find($request->idUser);
+        $user = auth()->user();
+        // $user = User::find($request->idUser);
 
         if(Hash::check($request->password, $user->password) && $request->newPassword == $request->confirmPassword) {
             $user->password = Hash::make($request->newPassword);
