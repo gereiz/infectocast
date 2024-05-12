@@ -40,7 +40,10 @@ class ApiUserController extends Controller
             
             $user->save();
 
-            return response()->json($user);
+            // realiza o logout do usuário
+            auth()->logout();
+
+            return response()->json('Perfil atualizado com sucesso', 200);  
         }
         
         return response()->json('Erro ao atualizar o perfil', 404);
