@@ -52,8 +52,10 @@ class ApiUserController extends Controller
     // altera a senha do usuário
     public function updatePassword(Request $request)
     {
+        
+        dd($request->all());
         $user = auth()->user();
-        // $user = User::find($request->idUser);
+        
 
         if(Hash::check($request->password, $user->password) && $request->newPassword == $request->confirmPassword) {
             $user->password = Hash::make($request->newPassword);
