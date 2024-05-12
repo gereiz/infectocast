@@ -59,9 +59,6 @@ class ApiUserController extends Controller
             $user->password = Hash::make($request->newPassword);
             $user->save();
 
-            // realiza o logout do usuário
-            auth()->logout();
-
             return response()->json('Senha atualizada com sucesso', 200);
         
         } elseif($request->newPassword != $request->confirmPassword) {
