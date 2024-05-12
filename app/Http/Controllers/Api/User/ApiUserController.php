@@ -13,13 +13,12 @@ class ApiUserController extends Controller
     public function updateProfile(Request $request)
     {
     
+        // $user = auth()->user();
         $user = User::find($request->idUser);
-        dd($user->name);
+        // dd($user->password, $request->password, Hash::check($request->password, $user->password));
 
         if(Hash::check($request->password, $user->password)) {
             if($request->photo) {
-                
-
                 // salva a imagem na pasta storage/app/public
                 $filname = $request->name.'_photo.'.$request->photo->extension();
                 $path = 'profile-photos';
@@ -43,8 +42,9 @@ class ApiUserController extends Controller
             
             $user->save();
 
+            return response()->json($user);
         }
         
-        return response()->json($user);
+        return response()->json('Erro ao atualizar o perfil');
     }
 }
