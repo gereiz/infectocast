@@ -45,6 +45,6 @@ class ApiUserController extends Controller
             return response()->json($user);
         }
         
-        return response()->json(['Erro ao atualizar o perfil'], 404);
+        return response()->json('Erro ao atualizar o perfil', 404);
     }
 }
