@@ -40,8 +40,6 @@ class ApiUserController extends Controller
             
             $user->save();
 
-            // realiza o logout do usuário
-            auth()->logout();
 
             return response()->json('Perfil atualizado com sucesso', 200);  
         }
@@ -53,7 +51,6 @@ class ApiUserController extends Controller
     public function updatePassword(Request $request)
     {
         
-        // dd($request->all());
         $user = auth()->user();
         
 
