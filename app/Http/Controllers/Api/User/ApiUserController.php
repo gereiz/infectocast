@@ -12,8 +12,9 @@ class ApiUserController extends Controller
     // altera o nome do usuário
     public function updateProfile(Request $request)
     {
-        // dd($request->all());
+    
         $user = User::find($request->idUser);
+        dd($user->name);
 
         if(Hash::check($request->password, $user->password)) {
             if($request->photo) {
