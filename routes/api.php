@@ -74,13 +74,13 @@ Route::prefix('v1')->group(function () {
         route::get('testpayment',[PaymentController::class, 'testpayment']);
 
 
-        // Api users
-        route::post('updateProfile', [ApiUserController::class, 'updateProfile']);
+        
 
     });
     
     
-
+    // Api users
+    route::post('updateProfile', [ApiUserController::class, 'updateProfile']);
 
 });
 
