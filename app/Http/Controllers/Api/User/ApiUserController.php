@@ -53,7 +53,7 @@ class ApiUserController extends Controller
     public function updatePassword(Request $request)
     {
         
-        dd($request->all());
+        // dd($request->all());
         $user = auth()->user();
         
 
