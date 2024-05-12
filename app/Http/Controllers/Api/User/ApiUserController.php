@@ -12,10 +12,7 @@ class ApiUserController extends Controller
     // altera o nome do usuário
     public function updateProfile(Request $request)
     {
-    
-        // $user = auth()->user();
         $user = User::find($request->idUser);
-        // dd($user->password, $request->password, Hash::check($request->password, $user->password));
 
         if(Hash::check($request->password, $user->password)) {
             if($request->photo) {
@@ -46,5 +43,27 @@ class ApiUserController extends Controller
         }
         
         return response()->json('Erro ao atualizar o perfil', 404);
+    }
+
+    // altera a senha do usuário
+    public function updatePassword(Request $request)
+    {
+        $user = User::find($request->idUser);
+
+        if(Hash::check($request->password, $user->password) && $request->newPassword == $request->confirmPassword) {
+            $user->password = Hash::make($request->newPassword);
+            $user->save();
+
+            return response()->json('Senha atualizada com sucesso', 200);
+        
+        } elseif($request->newPassword != $request->confirmPassword) {
+            return response()->json('As senhas não conferem', 404);
+        
+        } elseif(!Hash::check($request->password, $user->password)) {
+            return response()->json('Senha atual incorreta', 404);
+        } else
+
+
+        return response()->json('Erro ao atualizar a senha', 404);
     }
 }

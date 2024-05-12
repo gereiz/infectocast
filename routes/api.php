@@ -73,7 +73,9 @@ Route::prefix('v1')->group(function () {
         // Payments
         route::get('testpayment',[PaymentController::class, 'testpayment']);
 
-
+        // Api users
+        // route::post('updateProfile', [ApiUserController::class, 'updateProfile']);
+        route::post('updatePassword', [ApiUserController::class, 'updatePassword']);
         
 
     });
