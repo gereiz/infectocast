@@ -56,13 +56,16 @@ class ApiUserController extends Controller
             $user->password = Hash::make($request->newPassword);
             $user->save();
 
+            // realiza o logout do usuário
+            auth()->logout();
+
             return response()->json('Senha atualizada com sucesso', 200);
         
         } elseif($request->newPassword != $request->confirmPassword) {
             return response()->json('As senhas não conferem', 404);
         
         } elseif(!Hash::check($request->password, $user->password)) {
-            return response()->json($request->all(), 404);
+            return response()->json('Senha atual incorreta', 404);
         } else
 
 
