@@ -62,7 +62,7 @@ class ApiUserController extends Controller
             return response()->json('As senhas não conferem', 404);
         
         } elseif(!Hash::check($request->password, $user->password)) {
-            return response()->json(['Senha atual incorreta', $request->all()], 404);
+            return response()->json($request->all(), 404);
         } else
 
 
