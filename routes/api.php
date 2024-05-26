@@ -13,7 +13,7 @@ use App\Http\Controllers\Api\Plans\PlanController;
 use App\Http\Controllers\Api\Payment\PaymentController;
 use App\Http\Controllers\Api\Calculator\CalculatorController;
 use App\Http\Controllers\Api\User\ApiUserController;
-
+use App\Http\Controllers\Api\Busca\BuscaController;
 
 
 /*
@@ -77,6 +77,9 @@ Route::prefix('v1')->group(function () {
         route::post('updateProfile', [ApiUserController::class, 'updateProfile']);
         route::post('updatePassword', [ApiUserController::class, 'updatePassword']);
             
+
+        // Busca
+        route::post('search', [BuscaController::class, 'search']);
 
     });
     
