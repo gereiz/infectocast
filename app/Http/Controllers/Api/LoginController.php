@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Features;
 
 
 class LoginController extends Controller
@@ -20,6 +21,9 @@ class LoginController extends Controller
             return response()->json(['token' => session('token'), 'user' => auth()->user()]);
 
         } elseif(Auth::attempt($request->only('email', 'password')) && Auth::user()->email_verified_at == null) {
+            
+            Features::emailVerification();
+
             return response()->json("Email não verificado!", 403);
 
         } else {
