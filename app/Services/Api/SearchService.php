@@ -11,21 +11,21 @@ class SearchService
         $searchWord = $search_term;
 
         $results = DB::table('categories')
-            ->select('title', 'id', DB::raw("'categoria' as table_name"))
+            ->select('title', 'id', 'icon', DB::raw("'categoria' as table_name"))
             ->where('title', 'LIKE', '%' . $searchWord . '%')
             ->union(
                 DB::table('subcategories')
-                    ->select('title','id', DB::raw("'subcategoria' as table_name"))
+                    ->select('title','id','id_category', DB::raw("'subcategoria' as table_name"))
                     ->where('title', 'LIKE', '%' . $searchWord . '%')
             )
             ->union(
                 DB::table('topics')
-                    ->select('title','id', DB::raw("'tópico' as table_name"))
+                    ->select('title','id', 'id_subcategory', DB::raw("'tópico' as table_name"))
                     ->where('title', 'LIKE', '%' . $searchWord . '%')
             )
             ->union(
                 DB::table('blog_posts')
-                    ->select('title','id', DB::raw("'postagem' as table_name"))
+                    ->select('title','id', 'image', DB::raw("'postagem' as table_name"))
                     ->where('title', 'LIKE', '%' . $searchWord . '%')
             )
             ->get();
