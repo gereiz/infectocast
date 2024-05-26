@@ -1,6 +1,6 @@
 @extends('layouts.master-without-nav')
 @section('title')
-    {{ __('t-verify-email') }}
+    {{ __('Verificar e-mail')}}
 @endsection
 @section('content')
 <body
@@ -18,7 +18,7 @@
                     @if (session('status') == 'verification-link-sent')
                         <div class="font-medium text-sm text-green-600 border border-transparent rounded-md bg-green-50 px-4 py-3 mt-4">
                             {{ __('Um novo link de verificação foi enviado para o email cadastrado.') }}
-                        </div>
+                        </div> 
                     @endif
                     <div class="mt-10">
                         <form method="POST" action="{{ route('verification.send') }}">

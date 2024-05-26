@@ -6,15 +6,14 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('Olá!')
 @endif
 @endif
 
-{{-- Intro Lines --}}
-@foreach ($introLines as $line)
-{{ $line }}
+<p>
+    @lang('Você está recebendo este e-mail porque recebemos uma solicitação de verificação de e-mail para sua conta.')
+</p>
 
-@endforeach
 
 {{-- Action Button --}}
 @isset($actionText)
@@ -25,30 +24,29 @@
     };
 ?>
 <x-mail::button :url="$actionUrl" :color="$color">
-{{ $actionText }}
+    @lang('Verificar e-mail')
 </x-mail::button>
 @endisset
 
 {{-- Outro Lines --}}
 @foreach ($outroLines as $line)
-{{ $line }}
+<p>
+    @lang('Se você não solicitou uma verificação de e-mail, nenhuma ação adicional é necessária.')
+</p>
+
+<p>
+    @lang('Atenciosamente'),<br>
+    {{ config('app.name') }}
+</p>
 
 @endforeach
-
-{{-- Salutation --}}
-@if (! empty($salutation))
-{{ $salutation }}
-@else
-@lang('Regards'),<br>
-{{ config('app.name') }}
-@endif
 
 {{-- Subcopy --}}
 @isset($actionText)
 <x-slot:subcopy>
 @lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
+    "Caso tenha alguma dificuldade em clicar no botão \":actionText\" acima, copie o link a seguir\n".
+    'e cole no seu navegador:',
     [
         'actionText' => $actionText,
     ]
