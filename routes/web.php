@@ -25,9 +25,10 @@ use App\Http\Controllers\TinyMceController;
 */
 
 
+    // Email
+
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     route::get("/", [RouteController::class, 'index'])->name('dashboard');
-    
     
     // User
     route::get('users', [UserController::class, 'index']);
@@ -79,5 +80,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     
     // TinyMCE
     Route::post('/upload', [TinyMceController::class, 'upload']);
+
+
+    
 
 });

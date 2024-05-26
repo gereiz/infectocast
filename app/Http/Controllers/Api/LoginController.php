@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function login(Request $request) {
 
-        if(Auth::attempt($request->only('email', 'password'))) {
+        if(Auth::attempt($request->only('email', 'password')) && Auth::user()->email_verified_at != null){
 
             $token = $request->user()->createToken('login')->plainTextToken;
 
@@ -19,9 +19,14 @@ class LoginController extends Controller
             
             return response()->json(['token' => session('token'), 'user' => auth()->user()]);
 
+        } elseif(Auth::attempt($request->only('email', 'password')) && Auth::user()->email_verified_at == null) {
+            return response()->json("Email não verificado!", 403);
+
+        } else {
+
+            return response()->json("Email ou Senha inválidos!", 403);
         }
 
-        return response()->json("Não Logado", 403);
 
     }
 
