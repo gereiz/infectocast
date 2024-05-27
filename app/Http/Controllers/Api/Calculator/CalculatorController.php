@@ -16,7 +16,7 @@ class CalculatorController extends Controller
 
     public function clearenceOfCreatine(Request $request) {
         // altera a virgula para ponto
-        $request->creatinina = intval(str_replace(',', '.', $request->creatinina);)
+        $request->creatinina = intval(str_replace(',', '.', $request->creatinina));
 
         $clearence = $this->calculatorService->clearenceOfCreatine($request->idade, $request->peso, ($request->creatinina * 100), $request->sexo);
         
