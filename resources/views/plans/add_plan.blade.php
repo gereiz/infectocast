@@ -9,17 +9,20 @@
     <form class="tablelist-form w-full" method="POST" action="{{urL('addOrEditPlan')}}" enctype="multipart/form-data">
         @csrf
     
-        <div class="mb-3" id="modal-id" style="display: none;">
-            <label for="id_plan" class="inline-block mb-2 text-base font-medium">ID</label>
-            <input type="text" id="id_plan" name="id_plan" class="input-text" @if (isset($plan->id)) value="{{$plan->id}}"@endif  readonly="">
-        </div>
+       
     
         {{-- Nome do Plano / Icone do Plano--}}
         <div class="w-full flex mb-3">
+
+            <div class="w-1/12 mb-3 mr-4" id="modal-id" style="">
+                <label for="id_plan" class="inline-block mb-2 text-base font-medium">ID do Plano</label>
+                <input readonly type="text" id="id_plan" name="id_plan" class="input-text" @if ((($plan->getRelativeName())) != null) value="{{substr($plan->getRelativeName(), -20)}}"@endif  readonly="">
+            </div>
+
             <div class="w-4/12 mb-3 mr-4">
                 <label for="name_plan" class="inline-block mb-2 text-base font-medium">Nome do Plano
                     <span class="text-red-500">*</span></label>
-                <input type="text" id="name_plan" name="name_plan"class="input-text"placeholder="Digite o nome do plano" @if (isset($plan->name)) value="{{$plan->name}}"@endif required>
+                <input type="text" id="name_plan" name="name_plan"class="input-text"placeholder="Digite o nome do plano" @if ($plan->get('name') != null) value="{{$plan->get('name')}}"@endif required>
                     
             </div>
 
@@ -42,10 +45,26 @@
                 <label for="price_plan" class="inline-block mb-2 text-base font-medium">Valor do Plano
                     <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="price_plan" name="price_plan"class="input-text"placeholder="Digite o valor do plano" @if (isset($plan->price)) value="{{formataMoeda($plan->price)}}"@endif required>
+                <input type="text" id="price_plan" name="price_plan"class="input-text"placeholder="Digite o valor do plano" @if (($plan->get('price')) != null) value="{{formataMoeda($plan->get('price'))}}"@endif required>
+            </div>
+
+             {{-- Status --}}
+            <div class="w-4/12 mb-3">
+                <label for="active_plan" class="inline-block mb-2 text-base font-medium">
+                    Status <span class="text-red-500">*</span>
+                </label>
+                <div>
+                    <select id="active_plan" name="active_plan" required
+                        class="input-text">
+                        <option value="1" selected>Ativo</option>
+                        <option value="0">Inativo</option>
+                    </select>
+                </div>
             </div>
             
-            <div class="w-3/12 flex flex-col me-4">
+        </div>
+    
+        {{-- <div class="w-3/12 flex flex-col me-4">
                 <label for="type_plan" class="inline-block mb-2 text-base font-medium">Tipo de Plano
                     <span class="text-red-500">*</span>
                 </label>
@@ -67,31 +86,16 @@
                     <option value="1">Sim</option>
                     <option value="0">Não</option>
                 </select>
-            </div>
-        
-        </div>
-    
-        {{-- Status --}}
-        <div class="w-4/12 mb-3">
-            <label for="active_plan" class="inline-block mb-2 text-base font-medium">
-                Status <span class="text-red-500">*</span>
-            </label>
-            <div>
-                <select id="active_plan" name="active_plan" required
-                    class="input-text">
-                    <option value="1" selected>Ativo</option>
-                    <option value="0">Inativo</option>
-                </select>
-            </div>
-        </div>
+            </div> --}}
+       
     
         {{-- Descrição --}}
         <div class="card">
             <div class="card-body">
                 <h6 class="mb-4 text-15">Texto</h6>
                 <textarea class=" text-slate-800 min-h-[400px]" id="description_plan" name="description_plan">
-                   @if (isset($plan->description))
-                       {!! $plan->description !!}
+                   @if (($plan->get('description') != null))
+                       {!! $plan->get('description') !!}
                        
                    @else
                     <h3>Exemplo de Post</h3>

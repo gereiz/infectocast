@@ -10,15 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class FirebaseAuthController extends Controller
 {
-    protected $auth;
-
-    public function __construct()
-    {
-        $this->auth = Firebase::auth();
-    }
 
     public function register(Request $request)
     {
+        $auth = app('firebase.auth');
         $email = $request->email;
         $password = $request->password;
 
@@ -30,18 +25,20 @@ class FirebaseAuthController extends Controller
             'disabled' => false,
         ];
 
-        $createdUser = $this->auth->createUser($userProperties);
+        $createdUser = $auth->createUser($userProperties);
 
         return response()->json($createdUser);
     }
 
-
     public function flogin(Request $request)
     {
+
+        $auth = app('firebase.auth');
+
         $email = $request->email;
         $password = $request->password;
 
-        $signInResult = $this->auth->signInWithEmailAndPassword($email, $password);
+        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
 
         if($signInResult){
             
@@ -66,10 +63,11 @@ class FirebaseAuthController extends Controller
 
     }
 
-
     public function flogout(Request $request)
     {
-        $this->auth->revokeRefreshTokens($request->user()->uid);
+        $auth = app('firebase.auth');
+
+        $auth->revokeRefreshTokens($request->user()->uid);
 
         Auth::logout();
 
@@ -78,8 +76,10 @@ class FirebaseAuthController extends Controller
     }
 
     public function getUser(Request $request)
-    {
-        $user = $this->auth->getUser($request->user()->uid);
+    {   
+        $auth = app('firebase.auth');
+
+        $user = $auth->getUser($request->user()->uid);
 
         return response()->json($user);
     }
