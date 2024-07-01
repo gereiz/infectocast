@@ -6,7 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "bensontrent/firestore-php": "^3.1",
+        "google/cloud-firestore": "^1.43",
+        "grpc/grpc": "1.38",
         "guzzlehttp/guzzle": "^7.2",
+        "kreait/laravel-firebase": "^5.8",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.1",
         "laravel/sanctum": "^3.3",

@@ -47,12 +47,12 @@
                                 data-sort="customer_name">Nome</th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="email">Email</th>
-                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
+                            {{-- <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="phone">Cód País</th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="phone">Telefone</th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
-                                data-sort="date">CPF</th>
+                                data-sort="date">CPF</th> --}}
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="phone">Plano</th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
@@ -75,22 +75,22 @@
                                     style="display:none;"><a href="javascript:void(0);"
                                         class="fw-medium link-primary id">#VZ2101</a></td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
-                                    {{$usuario->name}}
+                                    {{$usuario->get('display_name')}}
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    {{$usuario->email}}
+                                    {{$usuario->get('email')}}
                                 </td>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">
-                                    {{$usuario->country_id}}
-                                </td>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
-                                    {{$usuario->phone}}
+                                {{-- <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">
+                                    {{$usuario->get('country_id')}}
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
-                                    {{$usuario->cpf}}
+                                    {{$usuario->get('phone')}}
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
-                                    {{$usuario->plan}}
+                                    {{$usuario->get('cpf')}}
+                                </td> --}}
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
+                                    {{$usuario->get('plan')}}
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
                                         class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>

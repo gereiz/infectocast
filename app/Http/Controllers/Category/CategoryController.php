@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller; 
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use MrShan0\PHPFirestore\FirestoreClient;
 
 class CategoryController extends Controller
 {
     
     public function index() {
 
-        $categories = Category::all();
+        // $categories = Category::all();
 
+        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
+            'database' => '(default)',
+        ]);
+
+        $categories = $firestoreClient->listDocuments('categories')['documents'];
+
+        // dd($categories);
         return view('categories.categories', compact('categories'));
     }
 

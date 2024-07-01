@@ -21,7 +21,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('login') }}" class="mt-10" id="signInForm">
+                    <form method="POST" action="{{ url('flogin') }}" class="mt-10" id="signInForm">
                         @csrf
                         <div class="mb-3">
                             <x-label for="email" value="Email" />

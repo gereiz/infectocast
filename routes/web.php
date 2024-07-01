@@ -12,6 +12,8 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\Plan\PlanController;
 use App\Http\Controllers\Payment\PaymentMpcontroller;
 use App\Http\Controllers\TinyMceController;
+use App\Http\Controllers\Firebase\FirebaseAuthController;
+use App\Http\Controllers\Firebase\FirebaseFirestoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +26,18 @@ use App\Http\Controllers\TinyMceController;
 |
 */
 
+    // firebase
+    Route::any('fregister', [FirebaseAuthController::class, 'fregister']);
+    Route::any('flogin', [FirebaseAuthController::class, 'flogin']);
+
+    Route::get('firebase', [FirebaseFirestoreController::class, 'index']);
+
 
     // Email
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     route::get("/", [RouteController::class, 'index'])->name('dashboard');
+    
     
     // User
     route::get('users', [UserController::class, 'index']);
