@@ -1,21 +1,6 @@
 import * as T from './types';
 
-export type Options = T.IOptions;
-export type TypesCalendar = T.TypesCalendar;
-export type Dates = T.IDates;
-export type Range = T.IRange;
-export type Selection = T.ISelection;
-export type Selected = T.ISelected;
-export type Visibility = T.IVisibility;
-export type Locale = T.ILocale;
-export type Actions = T.IActions;
-export type Popups = T.IPopups;
-export type CSSClasses = T.CSSClasses;
-export type DOMTemplates = T.IDOMTemplates;
-export type FormatDateString = T.FormatDateString;
-export type Reset = T.IReset;
-
-export default class VanillaCalendar implements T.IVanillaCalendar {
+declare class VanillaCalendar implements T.IVanillaCalendar {
 	constructor(selector: HTMLElement | string, options?: Partial<T.IOptions>);
 
 	input: boolean;
@@ -37,9 +22,11 @@ export default class VanillaCalendar implements T.IVanillaCalendar {
 	CSSClasses: T.CSSClasses;
 	DOMTemplates: T.IDOMTemplates;
 
-	init: () => void;
+	init: () => () => void;
 	update: (reset?: T.IReset) => void;
 	destroy: () => void;
+	show: () => void;
+	hide: () => void;
 
 	readonly HTMLElement: HTMLElement;
 	readonly HTMLOriginalElement: HTMLElement;
@@ -63,3 +50,5 @@ export default class VanillaCalendar implements T.IVanillaCalendar {
 	readonly dateMax: Date;
 	readonly isInit: boolean;
 }
+
+export = VanillaCalendar;

@@ -54,7 +54,7 @@ export interface IVisibility {
 	today: boolean;
 	disabled: boolean;
 	daysOutside: boolean;
-	positionToInput: 'left' | 'center' | 'right';
+	positionToInput: 'left' | 'center' | 'right' | ['bottom', 'left'] | ['bottom', 'center'] | ['bottom', 'right'] | ['top', 'left'] | ['top', 'center'] | ['top', 'right'];
 }
 
 export interface ISettings {
@@ -78,17 +78,15 @@ export interface IActions {
 	clickYear: ((e: MouseEvent, self: IVanillaCalendar) => void) | null;
 	clickArrow: ((e: MouseEvent, self: IVanillaCalendar) => void) | null;
 	changeTime: ((e: Event, self: IVanillaCalendar) => void) | null;
-	changeToInput: ((
-		e: Event,
-		calendar: {
-			hide(): void;
-			show(): void;
-		},
-		self: IVanillaCalendar,
-	) => void) | null;
+	changeToInput: ((e: Event, self: IVanillaCalendar) => void) | null;
 	getDays: ((day: number, date: FormatDateString, HTMLElement: HTMLElement, HTMLButtonElement: HTMLButtonElement, self: IVanillaCalendar) => void) | null;
-	hideCalendar: ((self: IVanillaCalendar) => void) | null;
+	getMonths: ((month: number, HTMLElement: HTMLElement, self: IVanillaCalendar) => void) | null;
+	getYears: ((year: number, HTMLElement: HTMLElement, self: IVanillaCalendar) => void) | null;
+	initCalendar: ((self: IVanillaCalendar) => void) | null;
+	updateCalendar: ((self: IVanillaCalendar) => void) | null;
+	destroyCalendar: ((self: IVanillaCalendar) => void) | null;
 	showCalendar: ((self: IVanillaCalendar) => void) | null;
+	hideCalendar: ((self: IVanillaCalendar) => void) | null;
 }
 
 export type IPopup = {
@@ -156,9 +154,11 @@ export interface IVanillaCalendar {
 	CSSClasses: CSSClasses;
 	DOMTemplates: IDOMTemplates;
 
-	init: () => void;
+	init: () => () => void;
 	update: (reset?: IReset) => void;
 	destroy: () => void;
+	show: () => void;
+	hide: () => void;
 
 	readonly HTMLElement: HTMLElement;
 	readonly HTMLOriginalElement: HTMLElement;

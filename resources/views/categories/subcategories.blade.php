@@ -2,7 +2,7 @@
 @section('title')
     Subcategorias
 @endsection
-@push('css')
+@push('css') 
     <!-- Sweet Alert css-->
     <link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css">
     
@@ -74,28 +74,36 @@
                                 </th>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
                                     style="display:none;"><a href="javascript:void(0);"
-                                        class="fw-medium link-primary id">{{$subcat->id}}</a></td>
+                                        class="fw-medium link-primary id">
+                                        {{-- {{$subcat->id}} --}}
+                                    </a>
+                                </td>
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
-                                    {{$subcat->title}}
+                                    {{$subcat->get('title')}}
                                 </td>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <p>{{$subcat->category->title}}</p>
-                                </td>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <img src="{{URL::asset('storage/imgcat/'.$subcat->category->icon)}}" alt="{{$subcat->category->icon}}" class="w-8">
-                                </td>
+                                @foreach ($categories as $cat)
+                                    @if ($cat->getRelativeName() == "/".$subcat->get('id_category')->getData())
+                                        <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
+                                            {{$cat->get('title')}}
+                                        </td>
+                                        <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
+                                            <img src="{{$cat->get('icon')}}" alt="{{$cat->get('icon')}}" class="w-8">
+                                        </td>
+                                    @endif
+                                @endforeach
+                               
                             
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                     <div class="flex gap-2">
                                         <div class="edit">
-                                            <button data-modal-target="{{'showModal/'.$subcat->id}}"
+                                            <button data-modal-target="{{'showModal/'.substr($subcat->getRelativeName(), -20)}}"
                                                 class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">
                                                 Editar
                                             </button>
                                         </div>
                                         <div class="remove">
-                                            <button data-modal-target="{{'deleteModal/'.$subcat->id}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
+                                            <button data-modal-target="{{'deleteModal/'.substr($subcat->getRelativeName(), -20)}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
                                                 Excluir
                                             </button>
                                         </div>
@@ -104,20 +112,20 @@
                             </tr>
                             
                             {{-- Modal Delete --}}
-                            <div id={{'deleteModal/'.$subcat->id}} modal-center
-                                class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
+                            <div id={{'deleteModal/'.substr($subcat->getRelativeName(), -20)}} modal-center
+                                class="fixed hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
                                 <div class="w-screen md:w-[25rem] bg-white shadow rounded-md dark:bg-zink-600">
                                     <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto px-6 py-8">
                                         <form method="POST" action="{{urL('deleteSubCategory')}}">
                                             @csrf
                                             <div class="mb-3" id="modal-id" style="display: none;">
-                                                <label for="id_field" class="inline-block mb-2 text-base font-medium">ID</label>
-                                                <input type="text" id="id_field" name="id_field" value="{{$subcat->id}}"
+                                                <label for="id_subcat" class="inline-block mb-2 text-base font-medium">ID</label>
+                                                <input type="text" id="id_subcat" name="id_subcat" value="{{substr($subcat->getRelativeName(), -20)}}"
                                                     class="input-text"
                                                     placeholder="ID" readonly="">
                                             </div>
                                             <div class="float-right">
-                                                <button data-modal-close={{'deleteModal/'.$subcat->id}} id="close-removeNotesModal"
+                                                <button data-modal-close={{'deleteModal/'.substr($subcat->getRelativeName(), -20)}} id="close-removeNotesModal"
                                                     class="transition-all duration-200 ease-linear text-slate-500 hover:text-red-500"><i
                                                         data-lucide="x" class="size-5"></i></button>
                                             </div>
@@ -126,7 +134,7 @@
                                                 <h5 class="mb-1">Você tem certeza?</h5>
                                                 <p class="text-slate-500 dark:text-zink-200">Deseja  realmente excluir esse registro?</p>
                                                 <div class="flex justify-center gap-2 mt-6">
-                                                    <button type="button" data-modal-close={{'deleteModal/'.$subcat->id}}
+                                                    <button type="button" data-modal-close={{'deleteModal/'.substr($subcat->getRelativeName(), -20)}}
                                                         class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10">Cancelar</button>
                                                     <button type="submit" id="remove-notes"
                                                         class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20">Sim, Deletar!</button>
@@ -139,12 +147,12 @@
                             </div>
 
                             {{-- Modal Edit Subcategory --}}
-                            <div id="{{'showModal/'.$subcat->id}}" modal-center
-                                class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
+                            <div id="{{'showModal/'.substr($subcat->getRelativeName(), -20)}}" modal-center
+                                class="fixed hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
                                 <div class="w-screen md:w-[30rem] bg-white shadow rounded-md dark:bg-zink-600">
                                     <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
                                         <h5 class="text-16" id="exampleModalLabel">Editar Subategoria</h5>
-                                        <button data-modal-close="{{'showModal/'.$subcat->id}}"
+                                        <button data-modal-close="{{'showModal/'.substr($subcat->getRelativeName(), -20)}}"
                                             class="transition-all duration-200 ease-linear text-slate-400 hover:text-slate-500"><i data-lucide="x"
                                                 class="size-5"></i></button>
                                     </div>
@@ -153,15 +161,15 @@
                                             @csrf
 
                                             <div class="mb-3" id="modal-id" style="display: none;">
-                                                <label for="id_field" class="inline-block mb-2 text-base font-medium">ID</label>
-                                                <input type="text" id="id_field" name="id_field" value="{{$subcat->id}}"
+                                                <label for="id_subcat" class="inline-block mb-2 text-base font-medium">ID</label>
+                                                <input type="text" id="id_subcat" name="id_subcat" value="{{substr($subcat->getRelativeName(), -20)}}"
                                                     class="input-text"
                                                     placeholder="ID" readonly="">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="titulo" class="inline-block mb-2 text-base font-medium">Título
                                                     <span class="text-red-500">*</span></label>
-                                                <input type="text" id="titulo" name="titulo" required value="{{ old('titulo') ?? $subcat->title}}"
+                                                <input type="text" id="titulo" name="titulo" required value="{{ old('titulo') ?? $subcat->get('title')}}"
                                                     class="input-text"
                                                     placeholder="Digite o ítulo" required>
                                             </div>
@@ -170,20 +178,20 @@
                                                     Categoria <span class="text-red-500">*</span>
                                                 </label>
                                                 <div>
-                                                    <select id="categoria" name="categoria" required
+                                                    <select id="categoria" name="categoria"
                                                         class="input-text">
-                                                        <option value="0" disabled selected>Selecione a Categoria</option>
+                                                        <option value="0">Selecione a Categoria</option>
                                                         @foreach ($categories as $cat)
-                                                            <option value="{{$cat->id}}">{{$cat->title}}</option>
+                                                            <option value="{{substr($cat->getRelativeName(), -20)}}">{{$cat->get('title')}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="flex justify-end gap-2">
-                                                <button type="button" data-modal-close="{{'showModal/'.$subcat->id}}"
-                                                    class="btn-cancel
-                                                    data-modal-close="{{'showModal/'.$subcat->id}}">Cancelar</button>
-                                                <button type="submit" data-modal-close="{{'showModal/'.$subcat->id}}"
+                                                <button type="button" data-modal-close="{{'showModal/'.substr($subcat->getRelativeName(), -20)}}"
+                                                    class="btn-cancel"
+                                                    data-modal-close="{{'showModal/'.substr($subcat->getRelativeName(), -20)}}">Cancelar</button>
+                                                <button type="submit" data-modal-close="{{'showModal/'.substr($subcat->getRelativeName(), -20)}}"
                                                     class="btn-submit"
                                                     id="add-btn">Editar Subategoria</button>
                                             </div>
@@ -222,7 +230,7 @@
 
     {{-- Modal Add --}}
     <div id="showModal" modal-center
-        class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
+        class="fixed hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
         <div class="w-screen md:w-[30rem] bg-white shadow rounded-md dark:bg-zink-600">
             <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
                 <h5 class="text-16" id="exampleModalLabel">Add Subcategoria</h5>
@@ -235,8 +243,8 @@
                     @csrf
 
                     <div class="mb-3" id="modal-id" style="display: none;">
-                        <label for="id_field" class="inline-block mb-2 text-base font-medium">ID</label>
-                        <input type="text" id="id_field"
+                        <label for="id_subcat" class="inline-block mb-2 text-base font-medium">ID</label>
+                        <input type="text" id="id_subcat"
                             class="input-text"
                             placeholder="ID" readonly="">
                     </div>
@@ -256,7 +264,7 @@
                                 class="input-text">
                                 <option value="0">Selecione a Categoria</option>
                                 @foreach ($categories as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->title}}</option>
+                                    <option value="{{$cat->getRelativeName()}}">{{$cat->get('title')}}</option>
                                 @endforeach
                             </select>
                         </div>

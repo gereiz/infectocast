@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use MrShan0\PHPFirestore\Fields\FirestoreReference;
 use MrShan0\PHPFirestore\FirestoreClient;
+use MrShan0\PHPFirestore\Fields\FirestoreTimestamp;
 
 class CategoryController extends Controller
 {
     
     public function index() {
-
-        // $categories = Category::all();
 
         $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
             'database' => '(default)',
@@ -21,22 +21,40 @@ class CategoryController extends Controller
 
         $categories = $firestoreClient->listDocuments('categories')['documents'];
 
-        // dd($categories);
         return view('categories.categories', compact('categories'));
     }
 
-    // Adiciona uma nova categoria, ou atualiza uma existente caso o id seja passado
-    public function addOrEditCategory(Request $request) {
-        // Verifica se o id foi passado
-        if ($request->has('id_field')) {
-            return $this->editCategory($request);
-        } else {
-            return $this->addCategory($request);
-        }
-    }
-
-
     public function addCategory(Request $request) {
+
+        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
+            'database' => '(default)',
+        ]);
+
+        $storage = app('firebase.storage');
+
+        $bucket = $storage->getBucket();
+
+        $bucket->upload(
+            file_get_contents($request->icone),
+            [
+                'name' => 'categories/'.$request->icone->getClientOriginalName()
+            ]
+        );
+        
+        // retorna a url da imagem
+        $icon = $bucket->object('categories/'.$request->icone->getClientOriginalName())->signedUrl(new \DateTime('tomorrow'));
+        
+        // Adiciona a categoria no banco de dados Firestore
+        $firestoreClient->addDocument('categories', [
+            'created_time' => new FirestoreTimestamp,
+            'icon' => $icon,
+            'id_user' => new FirestoreReference('/users/y7yky5ABSlWnTPgXfisIvtx1QBI3'),
+            'title' => $request->titulo,
+            'updated_time' => new FirestoreTimestamp
+
+        ]);
+
+        // Adiciona a categoria no banco de dados MySQL
         if($request->hasFile('icone')) {
             $file = $request->file('icone');
             $filename = date('YmdHi').$file->getClientOriginalName();
@@ -53,56 +71,99 @@ class CategoryController extends Controller
         return back()->with('status', 'Categoria Criada!');
     }
 
+    public function addOrEditCategory(Request $request) {
+        // Verifica se o id foi passado
+        if ($request->has('id_cat')) {
+            return $this->editCategory($request);
+        } else {
+            return $this->addCategory($request);
+        }
+    }
 
     public function editCategory(Request $request)
      {
         // dd($request->all());
-        $id = $request->id_field;
+        $id = $request->id_cat;
 
-        // Find the category by id
-        $category = Category::find($id);
+        // $category = Category::find($id);
 
-        // Check if category exists
-        if (!$category) {
-            return back()->with('error', 'Categoria não encontrada!');
-        }
+        
+        // if (!$category) {
+        //     return back()->with('error', 'Categoria não encontrada!');
+        // }
+        
+        $storage = app('firebase.storage');
+        $bucket = $storage->getBucket();
+
 
         // Check if a new file is uploaded
         if($request->hasFile('icone')) {
-            $file = $request->file('icone');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(storage_path('app/public/imgcat'), $filename);
+            // Adiciona a imagem no Firebase
+            
+    
+            $bucket->upload(
+                file_get_contents($request->icone),
+                [
+                    'name' => 'categories/'.$request->icone->getClientOriginalName()
+                ]
+            );    
 
-            // Update the icon
-            $category->icon = $filename;
+            // retorna a url da imagem
+            $icon = $bucket->object('icons/'.$request->icone->getClientOriginalName())->signedUrl(new \DateTime('tomorrow'));
+
+            // // Adiciona a imagem no MySQL
+            // $file = $request->file('icone');
+            // $filename = date('YmdHi').$file->getClientOriginalName();
+            // $file->move(storage_path('app/public/imgcat'), $filename);
+
+            // $category->icon = $filename;
         }
-
+        
         // Update the title if it is set
-        if ($request->has('titulo')) {
-            $category->title = $request->titulo;
-        }
+        // if ($request->has('titulo')) {
+        //     $category->title = $request->titulo;
+        // }
+        // dd($id);
+        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
+            'database' => '(default)',
+        ]);
 
+        $fb_category = $firestoreClient->setDocument('categories/'.$id , [
+            'created_time' => new FirestoreTimestamp,
+            'icon' => $icon,
+            'id_user' => '/users/y7yky5ABSlWnTPgXfisIvtx1QBI3',
+            'title' => $request->titulo,
+            'updated_time' => new FirestoreTimestamp
+
+            
+        ], [
+            'exists' => true, // Indica que o documento deve existir
+        ]);
+        
         // Save the changes
-        $category->save();
+        // $category->save();
 
         return back()->with('status', 'Categoria atualizada!');
     }
 
-
     public function deleteCategory(Request $request) {
-        // Get the id from the request
-        $id = $request->id_field;
+        $id = $request->id_cat;
 
-        // Find the category by id
-        $category = Category::find($id);
+        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
+            'database' => '(default)',
+        ]);
 
-        // Check if category exists
-        if (!$category) {
-            return back()->with('error', 'Categoria não encontrada!');
-        }
+        $firestoreClient->deleteDocument('categories/'.$id);
 
-        // Delete the category
-        $category->delete();
+
+
+        // $category = Category::find($id);
+
+        // if (!$category) {
+        //     return back()->with('error', 'Categoria não encontrada!');
+        // }
+
+        // $category->delete();
 
         return back()->with('status', 'Categoria excluída!');
     }

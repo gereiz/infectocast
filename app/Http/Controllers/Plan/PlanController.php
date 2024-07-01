@@ -32,7 +32,11 @@ class PlanController extends Controller
             'database' => '(default)',
         ]);
 
-        $plan = $firestoreClient->getDocument('plans/'.$id);
+        if($id){
+            $plan = $firestoreClient->getDocument('plans/'.$id);
+        }else{
+            $plan = null;
+        }
 
         return view('plans.add_plan', compact('plan'));
     }
@@ -69,19 +73,33 @@ class PlanController extends Controller
             'database' => '(default)',
         ]);
 
-        $plan = $firestoreClient->setDocument('plans/'.$request->id_plan , [
-            'name' => $request->name_plan,
-            'description' => $request->description_plan,
-            'price' => str_replace(',', '.', $request->price_plan), // troca a virgula por ponto (padrão de preço no firestore
-            'icon' => $icon,
-            'id_user' => '/users/y7yky5ABSlWnTPgXfisIvtx1QBI3',
-            'is_active' => $request->active_plan,
-            'type' => '1',
-            'recurrence' => '1',
-            
-        ], [
-            'exists' => true, // Indicate document must exist
-        ]);
+        if($request->id_plan){
+            $plan = $firestoreClient->setDocument('plans/'.$request->id_plan , [
+                'name' => $request->name_plan,
+                'description' => $request->description_plan,
+                'price' => str_replace(',', '.', $request->price_plan), // troca a virgula por ponto (padrão de preço no firestore
+                'icon' => $icon,
+                'id_user' => '/users/y7yky5ABSlWnTPgXfisIvtx1QBI3',
+                'is_active' => $request->active_plan,
+                'type' => '1',
+                'recurrence' => '1',
+                
+            ], [
+                'exists' => true, // Indica que o documento deve existir
+            ]);
+        }else{
+            $plan = $firestoreClient->addDocument('plans', [
+                'name' => $request->name_plan,
+                'description' => $request->description_plan,
+                'price' => str_replace(',', '.', $request->price_plan), // troca a virgula por ponto (padrão de preço no firestore
+                'icon' => $icon,
+                'id_user' => '/users/y7yky5ABSlWnTPgXfisIvtx1QBI3',
+                'is_active' => $request->active_plan,
+                'type' => '1',
+                'recurrence' => '1',
+                
+            ]);
+        }
 
 
         return redirect('plans')->with('status', 'Plano Adicionado!', 'plan');
@@ -90,8 +108,15 @@ class PlanController extends Controller
     //deleta um plano
     public function deletePlan(Request $request)
     {
-        $plan = Plan::find($request->id_plan);
-        $plan->delete();
+        // $plan = Plan::find($request->id_plan);
+        // $plan->delete();
+
+        // dd($request->id_plan);
+        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
+            'database' => '(default)',
+        ]);
+
+        $firestoreClient->deleteDocument('plans/'.$request->id_plan);
 
         return redirect('plans')->with('status', 'Plano Deletado!', 'plan');
     }
