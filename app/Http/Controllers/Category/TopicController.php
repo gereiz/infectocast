@@ -7,15 +7,26 @@ use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\Subcategory;
 use App\Models\Plan;
+use MrShan0\PHPFirestore\FirestoreClient;
 
 class TopicController extends Controller
 {
     // retorna o index
     public function index()
     {
-        $topics = Topic::all();
-        $subcategories = Subcategory::all();
-        $plans = Plan::all();
+        // $topics = Topic::all();
+        // $subcategories = Subcategory::all();
+        // $plans = Plan::all();
+
+        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
+            'database' => '(default)',
+        ]);
+        
+        $subcategories = $firestoreClient->listDocuments('subcategories')['documents'];
+
+        $topics = $firestoreClient->listDocuments('topics')['documents'];
+
+        $plans = $firestoreClient->listDocuments('plans')['documents'];
 
         return view('categories.topics', compact('topics', 'subcategories', 'plans'));
     }

@@ -37,13 +37,24 @@ class FirebaseAuthController extends Controller
 
         $email = $request->email;
         $password = $request->password;
+        
+        // verifica se o password tem no mínimo 6 caracteres
+        if(strlen($password) < 6){
+            toastr()->error('A senha deve ter no mínimo 6 caracteres!');
+            return redirect()->back();
+        }
 
-        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+        try {
+            $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+        } catch (\Kreait\Firebase\Auth\SignIn\FailedToSignIn $e) {
+            toastr()->error('Email ou Senha inválidos!');
+            return redirect()->back();
+        }
+
+        
 
         if($signInResult){
             
-            // dd($signInResult);
-
             if(Auth::attempt($request->only('email', 'password'))){
 
                 $token = $request->user()->createToken('login')->plainTextToken;
@@ -54,10 +65,12 @@ class FirebaseAuthController extends Controller
     
             } else {
     
-                return response()->json("Email ou Senha inválidos!", 403);
+                toastr()->error('Email ou Senha inválidos!');
+                return redirect()->back();
             }
         } else {
-            return response()->json("Email ou Senha inválidos!", 403);
+            toastr()->error('Email ou Senha inválidos!');
+            return redirect()->back();
         }
 
 

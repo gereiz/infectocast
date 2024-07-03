@@ -9,9 +9,9 @@
 @endpush
 @section('content')
 <!-- page title -->
-    <x-page-title title="Tópicos" pagetitle="Categorias" />
+    <x-page-title title="Tópicos" pagetitle="Categorias" /> 
 
-    {{-- Lista de Catagorias --}}
+    {{-- Lista de Topicos --}}
     <div class="card" id="customerList">
         <div class="card-body">
             <div class="grid grid-cols-1 gap-5 mb-5 xl:grid-cols-2">
@@ -76,28 +76,37 @@
                                         class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
                                         type="checkbox" name="chk_child">
                                 </th>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
-                                    style="display:none;"><a href="javascript:void(0);"
-                                        class="fw-medium link-primary id">{{$topic->id}}</a></td>
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id" style="display:none;">
+                                    <a href="javascript:void(0);" class="fw-medium link-primary id">
+                                        {{$topic->getRelativeName()}}
+                                    </a>
+                                </td>
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
-                                    {{$topic->title}}
+                                    {{$topic->get('title')}}
                                 </td>
+            
+                                @foreach ($subcategories as $subcat)
+                                    @if ($subcat->getRelativeName() == "/".$topic->get('id_subcategory')->getData())
+                                        <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
+                                            {{$subcat->get('title')}}
+                                        </td>
+
+                                    @endif
+                                @endforeach
+
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <p>{{$topic->subcategory->title}}</p>
-                                </td>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <img src="{{URL::asset('storage/imgcat/'.$topic->subcategory->category->icon)}}" alt="{{$topic->subcategory->category->icon}}" class="w-8">
+                                    {{-- <img src="{{URL::asset('storage/imgcat/'.$topic->subcategory->category->icon)}}" alt="{{$topic->subcategory->category->icon}}" class="w-8"> --}}
                                 </td>
 
-                                @php
+                                {{-- @php
                                 
                                 // transforma a string em array
                                 $plan_id = explode(',', $topic->plan_id);
 
-                                @endphp
+                                @endphp --}}
 
-                                <td class="flex ">
+                                {{-- <td class="flex ">
                                     @foreach($plan_id as $plan)
                                         @foreach($plans as $pl)
                                             @if($pl->id == $plan)
@@ -105,27 +114,28 @@
                                             @endif
                                         @endforeach
                                     @endforeach
-                                </td>
+                                </td>--}}
                             
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                     <div class="flex gap-2">
                                         <div class="edit">
-                                            <a href="{{'addTopic/'.$topic->id}}"
+                                            <a href="{{'addTopic/'.$topic->getRelativeName()}}"
                                                 class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">
                                                 Editar
                                             </a>
                                         </div>
                                         <div class="remove">
-                                            <button data-modal-target="{{'deleteModal/'.$topic->id}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
+                                            <button data-modal-target="{{'deleteModal/'.$topic->getRelativeName()}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
                                                 Excluir
                                             </button>
                                         </div>
                                     </div>
-                                </td>
+                                </td> 
                             </tr>
                             
                             {{-- Modal Delete --}}
-                            <div id={{'deleteModal/'.$topic->id}} modal-center
+
+                            {{-- <div id={{'deleteModal/'.$topic->getRelativeName()}} modal-center
                                 class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
                                 <div class="w-screen md:w-[25rem] bg-white shadow rounded-md dark:bg-zink-600">
                                     <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto px-6 py-8">
@@ -133,12 +143,12 @@
                                             @csrf
                                             <div class="mb-3" id="modal-id" style="display: none;">
                                                 <label for="id_field" class="inline-block mb-2 text-base font-medium">ID</label>
-                                                <input type="text" id="id_field" name="id_field" value="{{$topic->id}}"
+                                                <input type="text" id="id_field" name="id_field" value="{{$topic->getRelativeName()}}"
                                                     class="input-text"
                                                     placeholder="ID" readonly="">
                                             </div>
                                             <div class="float-right">
-                                                <button data-modal-close={{'deleteModal/'.$topic->id}} id="close-removeNotesModal"
+                                                <button data-modal-close={{'deleteModal/'.$topic->getRelativeName()}} id="close-removeNotesModal"
                                                     class="transition-all duration-200 ease-linear text-slate-500 hover:text-red-500"><i
                                                         data-lucide="x" class="size-5"></i></button>
                                             </div>
@@ -147,7 +157,7 @@
                                                 <h5 class="mb-1">Você tem certeza?</h5>
                                                 <p class="text-slate-500 dark:text-zink-200">Deseja  realmente excluir esse registro?</p>
                                                 <div class="flex justify-center gap-2 mt-6">
-                                                    <button type="button" data-modal-close={{'deleteModal/'.$topic->id}}
+                                                    <button type="button" data-modal-close={{'deleteModal/'.$topic->getRelativeName()}}
                                                         class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10">Cancelar</button>
                                                     <button type="submit" id="remove-notes"
                                                         class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20">Sim, Deletar!</button>
@@ -157,7 +167,8 @@
                                         
                                     </div>
                                 </div>
-                            </div>    
+                            </div>     --}}
+
                         @endforeach
                     </tbody>
                 </table>

@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "mailersend/laravel-driver": "^2.6",
-        "mercadopago/dx-php": "3.0.5"
+        "mercadopago/dx-php": "3.0.5",
+        "yoeunes/toastr": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

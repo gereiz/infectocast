@@ -21,7 +21,7 @@ if (checkAll) {
     });
 }
 
-var perPage = 5;
+var perPage = 10;
 var editlist = false;
 
 //Table
