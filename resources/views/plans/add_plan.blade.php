@@ -32,8 +32,9 @@
                 </label>
                 <div>
                     <input type="file" id="icon_plan" name="icon_plan"
-                        class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500"
-                        placeholder="Enter your name">
+                        class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                        
+                    <input type="text" id="icon_path" name="icon_path" class="hidden" @if (($plan) != null) value="{{$plan->get('icon')}}" alt="{{$plan->get('icon')}}"@endif>
                 </div>
                     
             </div>
@@ -45,7 +46,7 @@
                 <label for="price_plan" class="inline-block mb-2 text-base font-medium">Valor do Plano
                     <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="price_plan" name="price_plan"class="input-text"placeholder="Digite o valor do plano" @if (($plan) != null) value="{{formataMoeda($plan->get('price'))}}"@endif required>
+                <input type="text" id="price_plan" name="price_plan"class="input-text" placeholder="Digite o valor do plano" @if (($plan) != null) value="{{formataMoeda($plan->get('price'))}}"@endif required>
             </div>
 
              {{-- Status --}}

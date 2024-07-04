@@ -44,29 +44,44 @@ class PlanController extends Controller
     //adiciona ou edita um plano
     public function addOrEditPlan(Request $request)
     {
-        // $request->validate([
-        //     'name_plan' => 'required',
-        //     'icon_plan' => 'required',
-        //     'price_plan' => 'required',
-        //     'type_plan' => 'required',
-        //     'recurrence_plan' => 'required',
-        //     'description_plan' => 'required',
-        //     'active_plan' => 'required'
-        // ]);
+        $request->validate([
+            'name_plan' => 'required',
+            'price_plan' => 'required',
+            'description_plan' => 'required',
+            'active_plan' => 'required'
+        ], [
+            'name_plan.required' => 'O campo nome é obrigatório',
+            'price_plan.required' => 'O campo preço é obrigatório',
+            'description_plan.required' => 'O campo descrição é obrigatório',
+            'active_plan.required' => 'O campo ativo é obrigatório'
+        ]   );
+        
+        
+        
+        
 
         $storage = app('firebase.storage');
         // $storageClient = $storage->getStorageClient();
         $bucket = $storage->getBucket();
 
-        $bucket->upload(
-            file_get_contents($request->icon_plan),
-            [
-                'name' => 'icons/'.$request->icon_plan->getClientOriginalName()
-            ]
-        );
+
+        if($request->icon_plan){
         
-        // retorna a url da imagem
-        $icon = $bucket->object('icons/'.$request->icon_plan->getClientOriginalName())->signedUrl(new \DateTime('tomorrow'));
+            $bucket->upload(
+                file_get_contents($request->icon_plan),
+                [
+                    'name' => 'icons/'.$request->icon_plan->getClientOriginalName()
+                ]
+            );
+
+            // retorna a url da imagem
+            $icon = $bucket->object('icons/'.$request->icon_plan->getClientOriginalName())->signedUrl(new \DateTime('tomorrow'));
+
+        } else  {
+            $icon = $request->icon_path;
+        }
+        
+        
         
 
         $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
@@ -74,7 +89,7 @@ class PlanController extends Controller
         ]);
 
         if($request->id_plan){
-            $plan = $firestoreClient->setDocument('plans/'.$request->id_plan , [
+            $plan = $firestoreClient->updateDocument('plans/'.$request->id_plan , [
                 'name' => $request->name_plan,
                 'description' => $request->description_plan,
                 'price' => str_replace(',', '.', $request->price_plan), // troca a virgula por ponto (padrão de preço no firestore
