@@ -52,7 +52,7 @@
                             </th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="categoria">
-                                Categoria
+                                Categoria 
                             </th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="icone">
@@ -171,7 +171,7 @@
                                                     <span class="text-red-500">*</span></label>
                                                 <input type="text" id="titulo" name="titulo" required value="{{ old('titulo') ?? $subcat->get('title')}}"
                                                     class="input-text"
-                                                    placeholder="Digite o ítulo" required>
+                                                    placeholder="Digite o título" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="categoria" class="inline-block mb-2 text-base font-medium">
@@ -185,6 +185,7 @@
                                                             <option value="{{substr($cat->getRelativeName(), -20)}}">{{$cat->get('title')}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <input type="text" id="oldtitulo" name="oldtitulo" value="{{ old('titulo') ?? $cat->get('title')}}" class="">
                                                 </div>
                                             </div>
                                             <div class="flex justify-end gap-2">
@@ -254,13 +255,14 @@
                         <input type="text" id="titulo" name="titulo"
                             class="input-text"
                             placeholder="Digite o Título" required>
+
                     </div>
                     <div class="mb-3">
-                        <label for="categoria" class="inline-block mb-2 text-base font-medium">
+                        <label for="addcategoria" class="inline-block mb-2 text-base font-medium">
                             Categoria <span class="text-red-500">*</span>
                         </label>
                         <div>
-                            <select id="categoria" name="categoria"
+                            <select id="addcategoria" name="addcategoria"
                                 class="input-text">
                                 <option value="0">Selecione a Categoria</option>
                                 @foreach ($categories as $cat)
@@ -271,7 +273,7 @@
                     </div>
                     <div class="flex justify-end gap-2">
                         <button type="button" data-modal-close="showModal"
-                            class="btn-cancel
+                            class="btn-cancel"
                             data-modal-close="showModal">Cancelar</button>
                         <button type="submit" data-modal-close="showModal"
                             class="btn-submit"
@@ -284,6 +286,19 @@
 
 
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // alert('teste')
+        // preenche o input oldcat com o texto da categoria selecionada
+        // $('#addcategoria').on('change', function() {
+        //     var cat = $('#categoria option:selected').text();
+        //     $('#oldcat').val(cat);
+        // });
+    });
+</script>
 
 @push('scripts')
     <!-- list js-->
@@ -298,10 +313,3 @@
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
 @endpush
-
-
-<script>
-    // $(document).ready(function() {
-    //     // $('#hoverableTable').dataTables()
-    // });
-</script>

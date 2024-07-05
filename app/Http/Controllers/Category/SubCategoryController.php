@@ -7,22 +7,19 @@ use App\Models\Subcategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-use MrShan0\PHPFirestore\FirestoreClient;
-use MrShan0\PHPFirestore\Fields\FirestoreTimestamp;
-use MrShan0\PHPFirestore\Fields\FirestoreReference;
+use App\Services\Categories\CategoryService;
+use App\Services\Categories\SubcategoryService;
 
 class SubCategoryController extends Controller
 {
     // retorna o index
     public function index()
     {
-        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-            'database' => '(default)',
-        ]);
+        $categoryService = new CategoryService();
+        $subcategoryService = new SubcategoryService();
 
-        $categories = $firestoreClient->listDocuments('categories')['documents'];
-        
-        $subcategories = $firestoreClient->listDocuments('subcategories')['documents'];
+        $categories = $categoryService->listCategories();
+        $subcategories = $subcategoryService->listSubcategories();
 
         return view('categories.subcategories', compact('subcategories', 'categories'));
     }
@@ -30,71 +27,49 @@ class SubCategoryController extends Controller
     // adiciona ou edita uma subcategoria
     public function addOrEditSubCategory(Request $request)
     {
-        // dd($request->all());
         $request->validate([ 
             'titulo' => 'required',
-            'categoria' => 'required'
+            'addcategoria' => 'required'
         ]);
 
-        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-            'database' => '(default)',
-        ]);
+        // Adiciona ou edita  a subcategoria no Firestore
+        $subcategoryService = new SubcategoryService();
 
-    
-       if($request->id_subcat) {
-                $firestoreClient->setDocument('subcategories/'.$request->id_subcat , [
-                'created_time' => new FirestoreTimestamp,
-                'id_category' => new FirestoreReference('categories/'.$request->categoria),
-                'id_user' => new FirestoreReference('users/'.auth()->user()->id),
-                'title' => $request->titulo,
-                'updated_time' => new FirestoreTimestamp
+        // try {
+        //     $subcategoryService->addSubcategoryFirebase($request);
+        // } catch (\Exception $e) {
+        //     toastr()->error($e->getMessage());
 
-                
-            ], [
-                'exists' => true, // Indica que o documento deve existir
-            ]);
-        } else {
-            $firestoreClient->addDocument('subcategories', [
-                'created_time' => new FirestoreTimestamp,
-                'id_category' => new FirestoreReference('categories/'.$request->categoria),
-                'id_user' => new FirestoreReference('users/'.auth()->user()->id),
-                'title' => $request->titulo,
-                'updated_time' => new FirestoreTimestamp
-            ]);
+        //     return back();
+        // }
+      
+
+        // Adiciona ou edita a subcategoria no MySQL
+        try {
+            $subcategoryService->addSubcategoryMySQL($request);
+        } catch (\Exception $e) {
+            toastr()->error($e->getMessage());
+
+            return back();
         }
 
-        // if ($request->id_subcat) {
-        //     $subcategory = Subcategory::find($request->id_subcat);
-        //     $subcategory->title = $request->titulo;
-        //     $subcategory->id_category = $request->categoria;
-        //     $subcategory->id_user = auth()->user()->id;
-        //     $subcategory->save();
-
-        //     return back()->with('status', 'Subcategoria Editada!');
-        // } else {
-        //     $subcategory = new Subcategory();
-        //     $subcategory->title = $request->titulo;
-        //     $subcategory->id_category = $request->categoria;
-        //     $subcategory->id_user = auth()->user()->id;
-        //     $subcategory->save();
-        // }
-
-        return back()->with('status', 'Subcategoria Criada!');
+        toastr()->success('Subcategoria Criada!');
+        return back();
     }
 
-    // deleta uma subcategoria
-    public function deleteSubCategory(Request $request)
-    {
-        // dd($request->all());
-        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-            'database' => '(default)',
-        ]);
+    // // deleta uma subcategoria
+    // public function deleteSubCategory(Request $request)
+    // {
+    //     // dd($request->all());
+    //     $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
+    //         'database' => '(default)',
+    //     ]);
 
-        $firestoreClient->deleteDocument('subcategories/'.$request->id_subcat);
+    //     $firestoreClient->deleteDocument('subcategories/'.$request->id_subcat);
 
-        // $subcategory = Subcategory::find($request->id_subcat);
-        // $subcategory->delete();
+    //     // $subcategory = Subcategory::find($request->id_subcat);
+    //     // $subcategory->delete();
 
-        return back()->with('status', 'Subcategoria Deletada!');
-    }
+    //     return back()->with('status', 'Subcategoria Deletada!');
+    // }
 }

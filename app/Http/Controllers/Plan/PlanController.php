@@ -49,24 +49,15 @@ class PlanController extends Controller
             'price_plan' => 'required',
             'description_plan' => 'required',
             'active_plan' => 'required'
-        ], [
-            'name_plan.required' => 'O campo nome é obrigatório',
-            'price_plan.required' => 'O campo preço é obrigatório',
-            'description_plan.required' => 'O campo descrição é obrigatório',
-            'active_plan.required' => 'O campo ativo é obrigatório'
-        ]   );
+        ]);
         
         
-        
-        
-
         $storage = app('firebase.storage');
         // $storageClient = $storage->getStorageClient();
         $bucket = $storage->getBucket();
 
 
         if($request->icon_plan){
-        
             $bucket->upload(
                 file_get_contents($request->icon_plan),
                 [

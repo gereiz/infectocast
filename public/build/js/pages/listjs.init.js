@@ -211,78 +211,78 @@ var count = 11;
 var forms = document.querySelectorAll('.tablelist-form')
 
 // Loop over them and prevent submission
-Array.prototype.slice.call(forms).forEach(function (form) {
-    form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            event.preventDefault();
-            if (
-                customerNameField.value !== "" &&
-                emailField.value !== "" &&
-                dateField.value !== "" &&
-                phoneField.value !== "" && !editlist
-            ) {
-                customerList.add({
-                    id: '<a href="javascript:void(0);" class="fw-medium link-primary id">#VZ' + count + "</a>",
-                    customer_name: customerNameField.value,
-                    email: emailField.value,
-                    date: dateField.value,
-                    phone: phoneField.value,
-                    status: isStatus(statusField.value),
-                });
-                customerList.sort('id', { order: "desc" });
-                refreshCallbacks();
-                clearFields();
-                filterContact("All");
-                count++;
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Customer inserted successfully!',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    showCloseButton: true
-                });
-            } else if (
-                customerNameField.value !== "" &&
-                emailField.value !== "" &&
-                dateField.value !== "" &&
-                phoneField.value !== "" && editlist
-            ) {
-                var editValues = customerList.get({
-                    id: idField.value,
-                });
-                Array.from(editValues).forEach(function (x) {
-                    isid = new DOMParser().parseFromString(x._values.id, "text/html");
-                    var selectedid = isid.body.firstElementChild.innerHTML;
-                    if (selectedid == itemId) {
-                        x.values({
-                            id: '<a href="javascript:void(0);" class="fw-medium link-primary id">' + idField.value + "</a>",
-                            customer_name: customerNameField.value,
-                            email: emailField.value,
-                            date: dateField.value,
-                            phone: phoneField.value,
-                            status: isStatus(statusField.value),
-                        });
-                    }
-                });
-                // document.getElementById("close-modal").click();
-                clearFields();
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Customer updated Successfully!',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    showCloseButton: true
-                });
-            }
-        }
+// Array.prototype.slice.call(forms).forEach(function (form) {
+//     form.addEventListener('submit', function (event) {
+//         if (!form.checkValidity()) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//         } else {
+//             event.preventDefault();
+//             if (
+//                 customerNameField.value !== "" &&
+//                 emailField.value !== "" &&
+//                 dateField.value !== "" &&
+//                 phoneField.value !== "" && !editlist
+//             ) {
+//                 customerList.add({
+//                     id: '<a href="javascript:void(0);" class="fw-medium link-primary id">#VZ' + count + "</a>",
+//                     customer_name: customerNameField.value,
+//                     email: emailField.value,
+//                     date: dateField.value,
+//                     phone: phoneField.value,
+//                     status: isStatus(statusField.value),
+//                 });
+//                 customerList.sort('id', { order: "desc" });
+//                 refreshCallbacks();
+//                 clearFields();
+//                 filterContact("All");
+//                 count++;
+//                 Swal.fire({
+//                     position: 'center',
+//                     icon: 'success',
+//                     title: 'Customer inserted successfully!',
+//                     showConfirmButton: false,
+//                     timer: 2000,
+//                     showCloseButton: true
+//                 });
+//             } else if (
+//                 customerNameField.value !== "" &&
+//                 emailField.value !== "" &&
+//                 dateField.value !== "" &&
+//                 phoneField.value !== "" && editlist
+//             ) {
+//                 var editValues = customerList.get({
+//                     id: idField.value,
+//                 });
+//                 Array.from(editValues).forEach(function (x) {
+//                     isid = new DOMParser().parseFromString(x._values.id, "text/html");
+//                     var selectedid = isid.body.firstElementChild.innerHTML;
+//                     if (selectedid == itemId) {
+//                         x.values({
+//                             id: '<a href="javascript:void(0);" class="fw-medium link-primary id">' + idField.value + "</a>",
+//                             customer_name: customerNameField.value,
+//                             email: emailField.value,
+//                             date: dateField.value,
+//                             phone: phoneField.value,
+//                             status: isStatus(statusField.value),
+//                         });
+//                     }
+//                 });
+//                 // document.getElementById("close-modal").click();
+//                 clearFields();
+//                 Swal.fire({
+//                     position: 'center',
+//                     icon: 'success',
+//                     title: 'Customer updated Successfully!',
+//                     showConfirmButton: false,
+//                     timer: 2000,
+//                     showCloseButton: true
+//                 });
+//             }
+//         }
 
-    }, false)
-})
+//     }, false)
+// })
 
 var statusVal = new Choices(statusField);
 

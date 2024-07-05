@@ -115,6 +115,8 @@
                                                 <input type="text" id="id_cat" name="id_cat" value="{{(substr($cat->getRelativeName(), -20))}}"
                                                     class="input-text"
                                                     placeholder="ID" readonly="">
+
+                                                <input type="text" id="oldtitulo" name="oldtitulo" value="{{ old('titulo') ?? $cat->get('title')}}" class="hidden">
                                             </div>
                                             <div class="float-right">
                                                 <button data-modal-close={{'deleteModal/'.substr($cat->getRelativeName(), -20)}} id="close-removeNotesModal"
@@ -124,7 +126,7 @@
                                             <img src="{{ URL::asset('build/images/delete.png') }}" alt="" class="block h-12 mx-auto">
                                             <div class="mt-5 text-center">
                                                 <h5 class="mb-1">Você tem certeza?</h5>
-                                                <p class="text-slate-500 dark:text-zink-200">Deseja  realmente excluir esse registro?</p>
+                                                <p class="text-slate-500 dark:text-zink-200">Deseja realmente excluir esse registro?</p>
                                                 <div class="flex justify-center gap-2 mt-6">
                                                     <button type="button" data-modal-close={{'deleteModal/'.substr($cat->getRelativeName(), -20)}}
                                                         class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10">Cancelar</button>
@@ -164,6 +166,8 @@
                                                 <input type="text" id="titulo" name="titulo" value="{{ old('titulo') ?? $cat->get('title')}}"
                                                     class="input-text"
                                                     placeholder="Digite o Título" required>
+
+                                                <input type="text" id="oldtitulo" name="oldtitulo" value="{{ old('titulo') ?? $cat->get('title')}}" class="hidden">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="email-field" class="inline-block mb-2 text-base font-medium">
@@ -171,8 +175,9 @@
                                                 </label>
                                                 <div>
                                                     <input type="file" id="icone" name="icone"
-                                                        class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500"
-                                                        placeholder="Enter your name">
+                                                        class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+
+                                                        <input type="text" id="icon_path" name="icon_path" class="" @if (($cat) != null) value="{{$cat->get('icon')}}" alt="{{$cat->get('icon')}}"@endif>
                                                 </div>
                                                     
                                             </div>
@@ -223,7 +228,7 @@
 
     {{-- Modal Add --}}
     <div id="showModal" modal-center
-        class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
+        class="fixed hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
         <div class="w-screen md:w-[30rem] bg-white shadow rounded-md dark:bg-zink-600">
             <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
                 <h5 class="text-16" id="exampleModalLabel">Add Categoria</h5>
