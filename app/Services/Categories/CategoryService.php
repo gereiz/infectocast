@@ -25,6 +25,11 @@ class CategoryService
         return $this->connection->listDocuments('categories')['documents'];
     }
 
+    public function getCategoryFirebase($id)
+    {
+        return $this->connection->getDocument('categories/'.$id);
+    }
+
     public function addCategoryFirebase($request)
     {
         $storage = app('firebase.storage');
@@ -34,12 +39,12 @@ class CategoryService
         $bucket->upload(
             file_get_contents($request->icone),
             [
-                'name' => 'categories/' . $request->icone->getClientOriginalName()
+                'name' => 'cms_uploads/categories/' . $request->icone->getClientOriginalName()
             ]
         );
 
         // retorna a url da imagem
-        $icon = $bucket->object('categories/' . $request->icone->getClientOriginalName())->signedUrl(new \DateTime('tomorrow'));
+        $icon = $bucket->object('cms_uploads/categories/' . $request->icone->getClientOriginalName())->signedUrl(new \DateTime('tomorrow'));
 
         // Adiciona a categoria no banco de dados Firestore
         $this->connection->addDocument('categories', [

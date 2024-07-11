@@ -12,7 +12,7 @@
        
     
         {{-- Nome do Plano / Icone do Plano--}}
-        <div class="w-full flex mb-3">
+        <div class="w-full flex mb-3"> 
 
             <div class="w-1/12 mb-3 mr-4" id="modal-id" style="">
                 <label for="id_plan" class="inline-block mb-2 text-base font-medium">ID do Plano</label>
@@ -22,7 +22,8 @@
             <div class="w-4/12 mb-3 mr-4">
                 <label for="name_plan" class="inline-block mb-2 text-base font-medium">Nome do Plano
                     <span class="text-red-500">*</span></label>
-                <input type="text" id="name_plan" name="name_plan"class="input-text"placeholder="Digite o nome do plano" @if ($plan != null) value="{{$plan->get('name')}}"@endif required>
+                <input type="text" id="name_plan" name="name_plan"class="input-text" placeholder="Digite o nome do plano" @if ($plan != null) value="{{$plan->get('name')}}"@endif required>
+                <input type="text" id="old_name_plan" name="old_name_plan"class="hidden" @if ($plan != null) value="{{$plan->get('name')}}"@endif readonly>
                     
             </div>
 
@@ -34,7 +35,7 @@
                     <input type="file" id="icon_plan" name="icon_plan"
                         class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                         
-                    <input type="text" id="icon_path" name="icon_path" class="hidden" @if (($plan) != null) value="{{$plan->get('icon')}}" alt="{{$plan->get('icon')}}"@endif>
+                    <input type="text" id="icon_plan" name="icon_plan" class="hidden" @if (($plan) != null) value="{{$plan->get('icon')}}" alt="{{$plan->get('icon')}}"@endif>
                 </div>
                     
             </div>

@@ -123,6 +123,7 @@
                                                 <input type="text" id="id_subcat" name="id_subcat" value="{{substr($subcat->getRelativeName(), -20)}}"
                                                     class="input-text"
                                                     placeholder="ID" readonly="">
+                                                    <input type="text" id="oldtitulo" name="oldtitulo" value="{{ old('titulo') ?? $subcat->get('title')}}" class="hidden">
                                             </div>
                                             <div class="float-right">
                                                 <button data-modal-close={{'deleteModal/'.substr($subcat->getRelativeName(), -20)}} id="close-removeNotesModal"
@@ -172,20 +173,20 @@
                                                 <input type="text" id="titulo" name="titulo" required value="{{ old('titulo') ?? $subcat->get('title')}}"
                                                     class="input-text"
                                                     placeholder="Digite o título" required>
+                                                    <input type="text" id="oldtitulo" name="oldtitulo" value="{{ old('titulo') ?? $subcat->get('title')}}" class="hidden">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="categoria" class="inline-block mb-2 text-base font-medium">
+                                                <label for="editCategoria" class="inline-block mb-2 text-base font-medium">
                                                     Categoria <span class="text-red-500">*</span>
                                                 </label>
                                                 <div>
-                                                    <select id="categoria" name="categoria"
+                                                    <select id="editCategoria" name="editCategoria" required
                                                         class="input-text">
-                                                        <option value="0">Selecione a Categoria</option>
+                                                        <option value="0" selected disabled>Selecione a Categoria</option>
                                                         @foreach ($categories as $cat)
-                                                            <option value="{{substr($cat->getRelativeName(), -20)}}">{{$cat->get('title')}}</option>
+                                                            <option value="{{$cat->getRelativeName()}}">{{$cat->get('title')}}</option>
                                                         @endforeach
                                                     </select>
-                                                    <input type="text" id="oldtitulo" name="oldtitulo" value="{{ old('titulo') ?? $cat->get('title')}}" class="">
                                                 </div>
                                             </div>
                                             <div class="flex justify-end gap-2">

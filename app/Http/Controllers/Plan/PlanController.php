@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Plan;
 use MrShan0\PHPFirestore\FirestoreClient;
 use MrShan0\PHPFirestore\Attributes\FirestoreDeleteAttribute;
+use App\Services\Plans\PlanService;
 
 
 class PlanController extends Controller
@@ -14,13 +15,9 @@ class PlanController extends Controller
     //retorna a pagina index dos planos
     public function index()
     {
-        // $plans = Plan::all();
+        $planService = new PlanService();
 
-        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-            'database' => '(default)',
-        ]);
-
-        $plans = $firestoreClient->listDocuments('plans')['documents'];
+        $plans = $planService->listPlans();
 
         return view('plans.index', compact('plans'));
     }
@@ -28,12 +25,11 @@ class PlanController extends Controller
     //retorna a pagina de adicionar ou editar um plano
     public function addPlan($id = null)
     {
-        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-            'database' => '(default)',
-        ]);
+        $planService = new PlanService();
 
+        
         if($id){
-            $plan = $firestoreClient->getDocument('plans/'.$id);
+            $plan = $planService->getPlan($id);
         }else{
             $plan = null;
         }
@@ -44,87 +40,44 @@ class PlanController extends Controller
     //adiciona ou edita um plano
     public function addOrEditPlan(Request $request)
     {
-        $request->validate([
-            'name_plan' => 'required',
-            'price_plan' => 'required',
-            'description_plan' => 'required',
-            'active_plan' => 'required'
-        ]);
-        
-        
-        $storage = app('firebase.storage');
-        // $storageClient = $storage->getStorageClient();
-        $bucket = $storage->getBucket();
+        $planService = new PlanService();
 
+        try {
+            $planService->addOrEditPlanFirebase($request);
+        } catch (\Exception $e) {
+            toastr()->error($e->getMessage());
 
-        if($request->icon_plan){
-            $bucket->upload(
-                file_get_contents($request->icon_plan),
-                [
-                    'name' => 'icons/'.$request->icon_plan->getClientOriginalName()
-                ]
-            );
-
-            // retorna a url da imagem
-            $icon = $bucket->object('icons/'.$request->icon_plan->getClientOriginalName())->signedUrl(new \DateTime('tomorrow'));
-
-        } else  {
-            $icon = $request->icon_path;
-        }
-        
-        
-        
-
-        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-            'database' => '(default)',
-        ]);
-
-        if($request->id_plan){
-            $plan = $firestoreClient->updateDocument('plans/'.$request->id_plan , [
-                'name' => $request->name_plan,
-                'description' => $request->description_plan,
-                'price' => str_replace(',', '.', $request->price_plan), // troca a virgula por ponto (padrão de preço no firestore
-                'icon' => $icon,
-                'id_user' => '/users/y7yky5ABSlWnTPgXfisIvtx1QBI3',
-                'is_active' => $request->active_plan,
-                'type' => '1',
-                'recurrence' => '1',
-                
-            ], [
-                'exists' => true, // Indica que o documento deve existir
-            ]);
-        }else{
-            $plan = $firestoreClient->addDocument('plans', [
-                'name' => $request->name_plan,
-                'description' => $request->description_plan,
-                'price' => str_replace(',', '.', $request->price_plan), // troca a virgula por ponto (padrão de preço no firestore
-                'icon' => $icon,
-                'id_user' => '/users/y7yky5ABSlWnTPgXfisIvtx1QBI3',
-                'is_active' => $request->active_plan,
-                'type' => '1',
-                'recurrence' => '1',
-                
-            ]);
+            return back();
         }
 
+        try {
+            $planService->addOrEditPlanMySQL($request);
+        } catch (\Exception $e) {
+            toastr()->error($e->getMessage());
+            return back();
+        }
+        
 
-        return redirect('plans')->with('status', 'Plano Adicionado!', 'plan');
+        toastr()->success('Plano Criado!');
+        return redirect('plans');
     }
 
     //deleta um plano
     public function deletePlan(Request $request)
     {
-        // $plan = Plan::find($request->id_plan);
-        // $plan->delete();
+        $planService = new PlanService();
 
-        // dd($request->id_plan);
-        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-            'database' => '(default)',
-        ]);
+        try {
+            $planService->deletePlanFirebase($request);
+        } catch (\Exception $e) {
+            toastr()->error($e->getMessage());
 
-        $firestoreClient->deleteDocument('plans/'.$request->id_plan);
+            return back();
+        }
 
-        return redirect('plans')->with('status', 'Plano Deletado!', 'plan');
+        toastr()->success('Plano Deletado!');
+
+        return back();
     }
     
     

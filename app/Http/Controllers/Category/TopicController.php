@@ -9,24 +9,24 @@ use App\Models\Subcategory;
 use App\Models\Plan;
 use MrShan0\PHPFirestore\FirestoreClient;
 
+use App\Services\Categories\CategoryService;
+use App\Services\Categories\SubcategoryService;
+use App\Services\Categories\TopicService;
+use App\Services\Plans\PlanService;
+
+
 class TopicController extends Controller
 {
     // retorna o index
     public function index()
     {
-        // $topics = Topic::all();
-        // $subcategories = Subcategory::all();
-        // $plans = Plan::all();
+        $subcategoryService = new SubcategoryService();
+        $planService = new PlanService();
+        $topicService = new TopicService();
 
-        $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-            'database' => '(default)',
-        ]);
-        
-        $subcategories = $firestoreClient->listDocuments('subcategories')['documents'];
-
-        $topics = $firestoreClient->listDocuments('topics')['documents'];
-
-        $plans = $firestoreClient->listDocuments('plans')['documents'];
+        $subcategories = $subcategoryService->listSubcategories();
+        $plans = $planService->listPlans();
+        $topics = $topicService->listTopics();
 
         return view('categories.topics', compact('topics', 'subcategories', 'plans'));
     }
@@ -34,71 +34,51 @@ class TopicController extends Controller
     // retorna a view de adicionar tópico
     public function addTopic($id=null)
     {
-        $topics = Topic::all();
-        $subcategories = Subcategory::all();
-        $plans = Plan::all();
+        // dd($id);
+        $topicService = new TopicService();
+
+        $subcategoryService = new SubcategoryService();
+        $planService = new PlanService();
+
+        $subcategories = $subcategoryService->listSubcategories();
+        $plans = $planService->listPlans();
 
         if($id && $id != null){
-            $topic = Topic::find($id);
-            $subcategories = Subcategory::all();
+            $topic = $topicService->getTopic($id);
+
             return view('categories.add_topic', compact('topic', 'subcategories', 'plans'));
         } else {
-            $subcategories = Subcategory::all();
-            return view('categories.add_topic', compact('subcategories', 'plans'));
+            $topic = null;
+
+            return view('categories.add_topic', compact('subcategories', 'plans', 'topic'));
         }
+        
     }
         
     // adiciona ou edita um tópico
     public function addOrEditTopic(Request $request)
     {
         // dd($request->all());
-        $request->validate([
-            'title_topic' => 'required|min:3',
-            'subcategory' => 'required'
-        ], [
-            'title_topic.required' => 'O campo título é obrigatório',
-            'title_topic.unique' => 'Título já existente',
-            'title_topic.min' => 'O título deve ter no mínimo 3 caracteres',
-            'subcategory.required' => 'O campo subcategoria é obrigatório'
-        ]);
 
-        // transforma o array em string
-        $access_topic = implode(',', $request->access_topic);
+        $topicService = new TopicService();
 
+        $topicFirebase = $topicService->addTopicFirebase($request);
 
-        if ($request->id_topic && $request->id_topic != null) {
+        $topicMysql = $topicService->addTopicMysql($request, $topicFirebase);
+        
 
-            $topic = Topic::find($request->id_topic);
-            $topic->title = $request->title_topic;
-            $topic->content = $request->content_topic;
-            $topic->plan_id = $access_topic;
-            $topic->id_subcategory = $request->subcategory;
-            $topic->id_user = auth()->user()->id;
-            $topic->save();
-
-            // toastr()->success('Tópico Editado!');
-            return redirect('topics');
-        } else {
-            $topic = new Topic();
-            $topic->title = $request->title_topic;
-            $topic->content = $request->content_topic;
-            $topic->plan_id = $access_topic;
-            $topic->id_subcategory = $request->subcategory;
-            $topic->id_user = auth()->user()->id;
-            $topic->save();
-
-            // toastr()->success('Tópico Criado!');
-            return redirect('topics');
-        }
+        return redirect('topics');
     }
 
     // deleta um tópico
     public function deleteTopic(Request $request)
     {
-        $topic = Topic::find($request->id_field);
-        $topic->delete();
+        $topicService = new TopicService();
 
-        return back()->with('status', 'Tópico Deletado!');
+        $topicService->deleteTopic($request);
+
+        toastr()->success('Tópico deletado com sucesso!');
+        return back();
     }
 
     

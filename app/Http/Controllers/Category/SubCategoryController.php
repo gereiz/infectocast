@@ -27,23 +27,18 @@ class SubCategoryController extends Controller
     // adiciona ou edita uma subcategoria
     public function addOrEditSubCategory(Request $request)
     {
-        $request->validate([ 
-            'titulo' => 'required',
-            'addcategoria' => 'required'
-        ]);
 
         // Adiciona ou edita  a subcategoria no Firestore
         $subcategoryService = new SubcategoryService();
+        
+        try {
+            $subcategoryService->addSubcategoryFirebase($request);
+        } catch (\Exception $e) {
+            toastr()->error($e->getMessage());
 
-        // try {
-        //     $subcategoryService->addSubcategoryFirebase($request);
-        // } catch (\Exception $e) {
-        //     toastr()->error($e->getMessage());
-
-        //     return back();
-        // }
+            return back();
+        }
       
-
         // Adiciona ou edita a subcategoria no MySQL
         try {
             $subcategoryService->addSubcategoryMySQL($request);
@@ -53,23 +48,36 @@ class SubCategoryController extends Controller
             return back();
         }
 
-        toastr()->success('Subcategoria Criada!');
+       if($request->id_subcat) {
+            toastr()->success('Subcategoria Editada!');
+        } else {
+            toastr()->success('Subcategoria Criada!');
+        }
         return back();
     }
 
-    // // deleta uma subcategoria
-    // public function deleteSubCategory(Request $request)
-    // {
-    //     // dd($request->all());
-    //     $firestoreClient = new FirestoreClient(env('FIREBASE_PROJECT_ID'), env('FIRESTORE_API_KEY'), [
-    //         'database' => '(default)',
-    //     ]);
+    // deleta uma subcategoria
+    public function deleteSubCategory(Request $request)
+    {
+        $subcategoryService = new SubcategoryService();
 
-    //     $firestoreClient->deleteDocument('subcategories/'.$request->id_subcat);
+        try {
+            $subcategoryService->deleteSubcategoryFirebase($request);
+        } catch (\Exception $e) {
+            toastr()->error($e->getMessage());
 
-    //     // $subcategory = Subcategory::find($request->id_subcat);
-    //     // $subcategory->delete();
+            return back();
+        }
+       
+        try {
+            $subcategoryService->deleteSubcategoryMySQL($request);
+        } catch (\Exception $e) {
+            toastr()->error($e->getMessage());
 
-    //     return back()->with('status', 'Subcategoria Deletada!');
-    // }
+            return back();
+        }
+
+        toastr()->success('Subcategoria Deletada!');
+        return back();
+    }
 }

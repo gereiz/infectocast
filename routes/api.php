@@ -35,6 +35,8 @@ Route::prefix('v1')->group(function () {
     route::post('login', [LoginController::class, 'login']);
 
     
+    // Busca
+    route::post('search', [BuscaController::class, 'search']);
 
     Route::middleware('auth:sanctum')->group(function () {
 
@@ -78,8 +80,8 @@ Route::prefix('v1')->group(function () {
         route::post('updatePassword', [ApiUserController::class, 'updatePassword']);
             
 
-        // Busca
-        route::post('search', [BuscaController::class, 'search']);
+        // // Busca
+        // route::post('search', [BuscaController::class, 'search']);
 
     });
     

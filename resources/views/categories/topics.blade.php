@@ -53,10 +53,6 @@
                                 data-sort="categoria">
                                 SubCategoria
                             </th>
-                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
-                                data-sort="icone">
-                                Icone
-                            </th>
 
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="icone">
@@ -67,7 +63,7 @@
                                 Ações
                             </th>
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody class="list form-check-all">
                         @foreach ($topics as $topic)
                             <tr class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
@@ -95,31 +91,23 @@
                                     @endif
                                 @endforeach
 
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    {{-- <img src="{{URL::asset('storage/imgcat/'.$topic->subcategory->category->icon)}}" alt="{{$topic->subcategory->category->icon}}" class="w-8"> --}}
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
+                                    @if($topic->get('Free') == 1)
+                                        <span class="badge bg-success">Grátis,</span>
+                                    @endif
+                                    @if($topic->get('Gold') == 1)
+                                        <span class="badge bg-success">Gold,</span>
+                                    @endif
+                                    @if($topic->get('Premium') == 1)
+                                        <span class="badge bg-success">Premium</span>
+                                    @endif
                                 </td>
-
-                                {{-- @php
                                 
-                                // transforma a string em array
-                                $plan_id = explode(',', $topic->plan_id);
-
-                                @endphp --}}
-
-                                {{-- <td class="flex ">
-                                    @foreach($plan_id as $plan)
-                                        @foreach($plans as $pl)
-                                            @if($pl->id == $plan)
-                                                <img src="{{URL::asset('storage/imgplan/'.$pl->icon)}}" title="{{$pl->name}}" class="w-8 mr-2">
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                </td>--}}
                             
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                     <div class="flex gap-2">
                                         <div class="edit">
-                                            <a href="{{'addTopic/'.$topic->getRelativeName()}}"
+                                            <a href="{{'addTopic/'.substr($topic->getRelativeName(), -20)}}"
                                                 class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">
                                                 Editar
                                             </a>
@@ -134,16 +122,15 @@
                             </tr>
                             
                             {{-- Modal Delete --}}
-
-                            {{-- <div id={{'deleteModal/'.$topic->getRelativeName()}} modal-center
-                                class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
+                            <div id={{'deleteModal/'.$topic->getRelativeName()}} modal-center
+                                class="fixed flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
                                 <div class="w-screen md:w-[25rem] bg-white shadow rounded-md dark:bg-zink-600">
                                     <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto px-6 py-8">
                                         <form method="POST" action="{{urL('deleteTopic')}}">
                                             @csrf
                                             <div class="mb-3" id="modal-id" style="display: none;">
-                                                <label for="id_field" class="inline-block mb-2 text-base font-medium">ID</label>
-                                                <input type="text" id="id_field" name="id_field" value="{{$topic->getRelativeName()}}"
+                                                <label for="id_topic" class="inline-block mb-2 text-base font-medium">ID</label>
+                                                <input type="text" id="id_topic" name="id_topic" value="{{substr($topic->getRelativeName(), -20)}}"
                                                     class="input-text"
                                                     placeholder="ID" readonly="">
                                             </div>
@@ -167,7 +154,7 @@
                                         
                                     </div>
                                 </div>
-                            </div>     --}}
+                            </div>    
 
                         @endforeach
                     </tbody>
