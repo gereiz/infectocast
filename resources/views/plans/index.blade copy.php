@@ -83,37 +83,36 @@
                                 </th>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
                                     style="display:none;"><a href="javascript:void(0);"
-                                        class="fw-medium link-primary id">{{$plan->id}}</a></td>
+                                        class="fw-medium link-primary id">{{substr($plan->getRelativeName(), -20)}}</a></td>
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
-                                    {{$plan->name}}
+                                    {{$plan->get('name')}}
                                 </td>
                                 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
-                                    {{-- exibe a imagem na pasta publc/storage --}}
-                                    <img src="{{ URL::asset('storage/imgplan/'.$plan->icon) }}" alt="{{$plan->icon}}" class="w-10 h-10 rounded-full">
+                                    <img src="{{$plan->get('icon')}}" alt="{{$plan->get('icon')}}" class="w-8">
                                 </td>
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
-                                    R$ {{formataMoeda($plan->price)}}
+                                    R$ {{formataMoeda($plan->get('price'))}}
                                 </td>
                                     
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <p>@if ($plan->is_active == 1)
+                                    <p>@if ($plan->get('is_active') == 1)
                                         Ativo @else Inativo
                                         @endif
                                     </p>
                                 </td>
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <p>@if ($plan->type== 1)
+                                    <p>@if ($plan->get('type') == 1)
                                         Mensal @else Anual
                                         @endif
                                     </p>
                                 </td>
 
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                    <p>@if ($plan->recurrence == 1)
+                                    <p>@if ($plan->get('recurrence') == 1)
                                         Sim @else Não
                                         @endif
                                     </p>
@@ -122,13 +121,13 @@
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                     <div class="flex gap-2">
                                         <div class="edit">
-                                            <a href="{{url('addPlan/'.$plan->id)}}"
+                                            <a href="{{url('addPlan/'.substr($plan->getRelativeName(), -20))}}"
                                                 class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">
                                                 Editar
                                             </a>
                                         </div>
                                         <div class="remove">
-                                            <button data-modal-target="{{'deleteModal/'.$plan->id}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
+                                            <button data-modal-target="{{'deleteModal/'.substr($plan->getRelativeName(), -20)}}" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">
                                                 Excluir
                                             </button>
                                         </div>
@@ -137,7 +136,7 @@
                             </tr>
                             
                             {{-- Modal Delete --}}
-                            <div id={{'deleteModal/'.$plan->id}} modal-center
+                            <div id={{'deleteModal/'.substr($plan->getRelativeName(), -20)}} modal-center
                                 class="fixed flex flex-col transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
                                 <div class="w-screen md:w-[25rem] bg-white shadow rounded-md dark:bg-zink-600">
                                     <div class="max-h-[calc(theme('height.screen')_-_180px)] overflow-y-auto px-6 py-8">
@@ -145,12 +144,12 @@
                                             @csrf
                                             <div class="mb-3" id="modal-id" style="display: none;">
                                                 <label for="id_plan" class="inline-block mb-2 text-base font-medium">ID</label>
-                                                <input type="text" id="id_plan" name="id_plan" value="{{$plan->id}}"
+                                                <input type="text" id="id_plan" name="id_plan" value="{{substr($plan->getRelativeName(), -20)}}"
                                                     class="input-text"
                                                     placeholder="ID" readonly="">
                                             </div>
                                             <div class="float-right">
-                                                <button data-modal-close={{'deleteModal/'.$plan->id}} id="close-removeNotesModal"
+                                                <button data-modal-close={{'deleteModal/'.substr($plan->getRelativeName(), -20)}} id="close-removeNotesModal"
                                                     class="transition-all duration-200 ease-linear text-slate-500 hover:text-red-500"><i
                                                         data-lucide="x" class="size-5"></i></button>
                                             </div>
@@ -159,7 +158,7 @@
                                                 <h5 class="mb-1">Você tem certeza?</h5>
                                                 <p class="text-slate-500 dark:text-zink-200">Deseja realmente excluir esse registro?</p>
                                                 <div class="flex justify-center gap-2 mt-6">
-                                                    <button type="button" data-modal-close={{'deleteModal/'.$plan->id}}
+                                                    <button type="button" data-modal-close={{'deleteModal/'.substr($plan->getRelativeName(), -20)}}
                                                         class="bg-white text-slate-500 btn hover:text-slate-500 hover:bg-slate-100 focus:text-slate-500 focus:bg-slate-100 active:text-slate-500 active:bg-slate-100 dark:bg-zink-600 dark:hover:bg-slate-500/10 dark:focus:bg-slate-500/10 dark:active:bg-slate-500/10">Cancelar</button>
                                                     <button type="submit" id="remove-notes"
                                                         class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20">Sim, Deletar!</button>

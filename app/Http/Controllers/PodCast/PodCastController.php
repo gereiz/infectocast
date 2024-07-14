@@ -44,7 +44,8 @@ class PodCastController extends Controller
             $podcast->id_user = $userId;
             $podcast->save();
 
-            return redirect('podcast')->with('status', 'Podcast Editado!', 'podcast');
+            toastr()->success('Podcast editado com sucesso!');
+            return redirect('podcast');
         }else{
             $podcast = new Podcast();
             $podcast->title = $request->title_podcast;
@@ -52,7 +53,8 @@ class PodCastController extends Controller
             $podcast->id_user = $userId;
             $podcast->save();
 
-            return redirect('podcast')->with('status', 'Podcast Adicionado!', 'podcast');
+            toastr()->success('Podcast adicionado com sucesso!');
+            return redirect('podcast');
         }
     }
 
@@ -63,7 +65,8 @@ class PodCastController extends Controller
         $podcast = Podcast::find($request->id_podcast);
         $podcast->delete();
 
-        return redirect('podcast')->with('status', 'Podcast Deletado!', 'podcast');
+        toastr()->success('Podcast excluido com sucesso!');
+        return back();
     }
 
 }

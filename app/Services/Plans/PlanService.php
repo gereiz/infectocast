@@ -85,7 +85,7 @@ class PlanService {
         // dd($request->all());
 
         if($request->id_plan){
-            $plan = Plan::where('name', $request->old_name_plan)->first();
+            $plan = Plan::find($request->id_plan);
 
             // dd($request->all());
             $plan->name = $request->name_plan;
@@ -95,14 +95,15 @@ class PlanService {
             // Adiciona a imagem no MySQL
             if($request->hasFile('icon_plan')) {
                 $file = $request->file('icon_plan');
-                $filename = date('YmdHi').$file->getClientOriginalName();
-                $file->move(storage_path('app/public/imgcat'), $filename);
+                $filename = $file->getClientOriginalName();
+                $file->move(storage_path('app/public/imgplan'), $filename);
                 $plan->icon = $filename;
             }
 
             $plan->is_active = $request->active_plan;
             $plan->type = 1;
             $plan->recurrence = 1;
+            $plan->price_id = $request->price_id;
             $plan->id_user = auth()->user()->id;
 
             $plan->save();
@@ -128,11 +129,11 @@ class PlanService {
             $plan->is_active = $request->active_plan;
             $plan->type = 1;
             $plan->recurrence = 1;
+            $plan->price_id = $request->price_id;
             $plan->id_user = auth()->user()->id;
 
             $plan->save();
 
-            // toastr()->success('Plano Criado!');
             return $plan;
         }        
     
@@ -141,5 +142,11 @@ class PlanService {
     public function deletePlanFirebase($request)
     {
         $this->connection->deleteDocument('plans/'.$request->id_plan);
+    }
+
+    public function deletePlanMysql($request)
+    {
+        $plan = Plan::find($request->id_plan);
+        $plan->delete();
     }
 }

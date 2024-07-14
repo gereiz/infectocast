@@ -16,14 +16,14 @@
 
             <div class="w-1/12 mb-3 mr-4" id="modal-id" style="">
                 <label for="id_plan" class="inline-block mb-2 text-base font-medium">ID do Plano</label>
-                <input readonly type="text" id="id_plan" name="id_plan" class="input-text" @if ((($plan)) != null) value="{{$plan->id}}"@endif  readonly="">
+                <input readonly type="text" id="id_plan" name="id_plan" class="input-text" @if ((($plan)) != null) value="{{substr($plan->getRelativeName(), -20)}}"@endif  readonly="">
             </div>
 
             <div class="w-4/12 mb-3 mr-4">
                 <label for="name_plan" class="inline-block mb-2 text-base font-medium">Nome do Plano
                     <span class="text-red-500">*</span></label>
-                <input type="text" id="name_plan" name="name_plan"class="input-text" placeholder="Digite o nome do plano" @if ($plan != null) value="{{$plan->name}}"@endif required>
-                {{-- <input type="text" id="old_name_plan" name="old_name_plan"class="hidden" @if ($plan != null) value="{{$plan->get('name')}}"@endif readonly> --}}
+                <input type="text" id="name_plan" name="name_plan"class="input-text" placeholder="Digite o nome do plano" @if ($plan != null) value="{{$plan->get('name')}}"@endif required>
+                <input type="text" id="old_name_plan" name="old_name_plan"class="hidden" @if ($plan != null) value="{{$plan->get('name')}}"@endif readonly>
                     
             </div>
 
@@ -35,7 +35,7 @@
                     <input type="file" id="icon_plan" name="icon_plan"
                         class="cursor-pointer form-file form-file-sm border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
                         
-                    <input type="text" id="icon_plan" name="icon_plan" class="hidden" @if (($plan) != null) value="{{$plan->icon}}" alt="{{$plan->icon}}"@endif>
+                    <input type="text" id="icon_plan" name="icon_plan" class="hidden" @if (($plan) != null) value="{{$plan->get('icon')}}" alt="{{$plan->get('icon')}}"@endif>
                 </div>
                     
             </div>
@@ -47,11 +47,11 @@
                 <label for="price_plan" class="inline-block mb-2 text-base font-medium">Valor do Plano
                     <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="price_plan" name="price_plan"class="input-text" placeholder="Digite o valor do plano" @if (($plan) != null) value="{{formataMoeda($plan->price)}}"@endif required>
+                <input type="text" id="price_plan" name="price_plan"class="input-text" placeholder="Digite o valor do plano" @if (($plan) != null) value="{{formataMoeda($plan->get('price'))}}"@endif required>
             </div>
 
              {{-- Status --}}
-            <div class="w-3/12 mb-3 mr-4">
+            <div class="w-4/12 mb-3">
                 <label for="active_plan" class="inline-block mb-2 text-base font-medium">
                     Status <span class="text-red-500">*</span>
                 </label>
@@ -62,13 +62,6 @@
                         <option value="0">Inativo</option>
                     </select>
                 </div>
-            </div>
-
-            <div class="w-3/12 flex flex-col mr-4">
-                <label for="price_id" class="inline-block mb-2 text-base font-medium">Id do preço no Stripe
-                    <span class="text-red-500">*</span>
-                </label>
-                <input type="text" id="price_id" name="price_id"class="input-text" placeholder="Digite o valor do plano" @if (($plan) != null) value="{{$plan->price_id}}"@endif required>
             </div>
             
         </div>
@@ -104,7 +97,7 @@
                 <h6 class="mb-4 text-15">Texto</h6>
                 <textarea class=" text-slate-800 min-h-[400px]" id="description_plan" name="description_plan">
                    @if (($plan) != null)
-                       {!! $plan->description !!}
+                       {!! $plan->get('description') !!}
                        
                    @else
                     <h3>Exemplo de Post</h3>

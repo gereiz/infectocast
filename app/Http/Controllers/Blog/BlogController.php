@@ -50,7 +50,8 @@ class BlogController extends Controller
             $post->status = 1;
             $post->save();
 
-            return redirect('blog')->with('status', 'Post Editado!', 'post');
+            toastr()->success('Post editado com sucesso!');
+            return back();
             
         }else{
             $post = new Blog();
@@ -62,7 +63,8 @@ class BlogController extends Controller
             $post->status = 1;
             $post->save();
 
-            return back()->with('status', 'Post Criado!');
+            toastr()->success('Post criado com sucesso!');
+            return back();
         }
 
        
@@ -74,6 +76,7 @@ class BlogController extends Controller
         $post = Blog::find($request->id_post);
         $post->delete();
 
-        return redirect('blog')->with('status', 'Post Deletado!');
+        toastr()->success('Post excluido com sucesso!');
+            return back();
     }
 }

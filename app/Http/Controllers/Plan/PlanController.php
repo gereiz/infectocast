@@ -15,24 +15,31 @@ class PlanController extends Controller
     //retorna a pagina index dos planos
     public function index()
     {
-        $planService = new PlanService();
+        // $planService = new PlanService();
 
-        $plans = $planService->listPlans();
+        // $plans = $planService->listPlans();
+
+        $plans = Plan::all();
 
         return view('plans.index', compact('plans'));
     }
 
     //retorna a pagina de adicionar ou editar um plano
     public function addPlan($id = null)
-    {
-        $planService = new PlanService();
+    { 
+        //   dd($id);
 
-        
+        // $planService = new PlanService();
+
+
         if($id){
-            $plan = $planService->getPlan($id);
+            $plan = Plan::find($id);
         }else{
             $plan = null;
+        
         }
+
+       
 
         return view('plans.add_plan', compact('plan'));
     }
@@ -42,13 +49,13 @@ class PlanController extends Controller
     {
         $planService = new PlanService();
 
-        try {
-            $planService->addOrEditPlanFirebase($request);
-        } catch (\Exception $e) {
-            toastr()->error($e->getMessage());
+        // try {
+        //     $planService->addOrEditPlanFirebase($request);
+        // } catch (\Exception $e) {
+        //     toastr()->error($e->getMessage());
 
-            return back();
-        }
+        //     return back();
+        // }
 
         try {
             $planService->addOrEditPlanMySQL($request);
@@ -65,10 +72,19 @@ class PlanController extends Controller
     //deleta um plano
     public function deletePlan(Request $request)
     {
-        $planService = new PlanService();
+        // $planService = new PlanService();
+
+        // try {
+        //     $planService->deletePlanFirebase($request);
+        // } catch (\Exception $e) {
+        //     toastr()->error($e->getMessage());
+
+        //     return back();
+        // }
 
         try {
-            $planService->deletePlanFirebase($request);
+            $plan = Plan::find($request->id_plan);
+            $plan->delete();
         } catch (\Exception $e) {
             toastr()->error($e->getMessage());
 
