@@ -4,7 +4,7 @@ namespace App\Services\Plans;
 
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
-use App\Models\PLan;
+use App\Models\Plan;
 
 
 use MrShan0\PHPFirestore\Fields\FirestoreReference;
