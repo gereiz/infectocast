@@ -31,7 +31,7 @@ class RegisterController extends Controller
 
         // retorna a mensagem de usuário já cadastrado
         if(User::where('email', $request->email)->exists()) {
-            return response()->json('Usuário já cadastrado!', 403);
+            return response()->json('Email cadastrado em outra conta!', 403);
         }
 
         // converte o campo birthday para o formato de data xx/xx/xxxx para xxx-xx-xx
@@ -61,6 +61,6 @@ class RegisterController extends Controller
             'is_admin' => 0,
         ]);
 
-        return response()->json('Usuário cadastrado com sucesso!');
+        return response()->json('Conta criada com sucesso!');
     }
 }

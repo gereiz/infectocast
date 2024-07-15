@@ -8,7 +8,7 @@ use App\Models\Subcategory;
 
 
 use MrShan0\PHPFirestore\Fields\FirestoreReference;
-use MrShan0\PHPFirestore\FirestoreClient;
+use MrShan0\PHPFirestore\FirestoreClient; 
 use MrShan0\PHPFirestore\Fields\FirestoreTimestamp;
 
 class SubcategoryService {

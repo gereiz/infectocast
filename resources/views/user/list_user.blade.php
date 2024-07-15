@@ -90,7 +90,15 @@
                                     {{$usuario->get('cpf')}}
                                 </td> --}}
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
-                                    {{$usuario->get('plan')}}
+                                    @if($usuario->get('Premium') == 1)
+                                        Premium
+                                    @endif
+                                    @if($usuario->get('Gold') == 1)
+                                        Gold
+                                    @endif
+                                    @if($usuario->get('Premium') == 0 && $usuario->get('Gold') == 0)
+                                        Free
+                                    @endif
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
                                         class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
@@ -109,158 +117,6 @@
                             </tr>
                         @endforeach
 
-
-                        {{-- <tr>
-                            <th class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500" scope="row">
-                                <input
-                                    class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
-                                    type="checkbox" name="chk_child">
-                            </th>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
-                                style="display:none;"><a href="javascript:void(0);"
-                                    class="fw-medium link-primary id">#VZ2101</a></td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">Mary
-                                Cousar</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                marycousar@tailwick.com</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">580-464-4694</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">06 Apr, 2021</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
-                                    class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
-                            </td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
-                                <div class="flex gap-2">
-                                    <div class="edit">
-                                        <button data-modal-target="showModal"
-                                            class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">Edit</button>
-                                    </div>
-                                    <div class="remove">
-                                        <button data-modal-target="deleteRecordModal" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">Remove</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500" scope="row">
-                                <input
-                                    class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
-                                    type="checkbox" name="chk_child">
-                            </th>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
-                                style="display:none;"><a href="javascript:void(0);"
-                                    class="fw-medium link-primary id">#VZ2101</a></td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">Mary
-                                Cousar</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                marycousar@tailwick.com</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">580-464-4694</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">06 Apr, 2021</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
-                                    class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
-                            </td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
-                                <div class="flex gap-2">
-                                    <div class="edit">
-                                        <button data-modal-target="showModal"
-                                            class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">Edit</button>
-                                    </div>
-                                    <div class="remove">
-                                        <button data-modal-target="deleteRecordModal" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">Remove</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500" scope="row">
-                                <input
-                                    class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
-                                    type="checkbox" name="chk_child">
-                            </th>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
-                                style="display:none;"><a href="javascript:void(0);"
-                                    class="fw-medium link-primary id">#VZ2101</a></td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">Mary
-                                Cousar</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                marycousar@tailwick.com</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">580-464-4694</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">06 Apr, 2021</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
-                                    class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
-                            </td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
-                                <div class="flex gap-2">
-                                    <div class="edit">
-                                        <button data-modal-target="showModal"
-                                            class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">Edit</button>
-                                    </div>
-                                    <div class="remove">
-                                        <button data-modal-target="deleteRecordModal" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">Remove</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500" scope="row">
-                                <input
-                                    class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
-                                    type="checkbox" name="chk_child">
-                            </th>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
-                                style="display:none;"><a href="javascript:void(0);"
-                                    class="fw-medium link-primary id">#VZ2101</a></td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">Mary
-                                Cousar</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                marycousar@tailwick.com</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">580-464-4694</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">06 Apr, 2021</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
-                                    class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
-                            </td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
-                                <div class="flex gap-2">
-                                    <div class="edit">
-                                        <button data-modal-target="showModal"
-                                            class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">Edit</button>
-                                    </div>
-                                    <div class="remove">
-                                        <button data-modal-target="deleteRecordModal" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">Remove</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500" scope="row">
-                                <input
-                                    class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
-                                    type="checkbox" name="chk_child">
-                            </th>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 id"
-                                style="display:none;"><a href="javascript:void(0);"
-                                    class="fw-medium link-primary id">#VZ2101</a></td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">Mary
-                                Cousar</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
-                                marycousar@tailwick.com</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">580-464-4694</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">06 Apr, 2021</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
-                                    class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
-                            </td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
-                                <div class="flex gap-2">
-                                    <div class="edit">
-                                        <button data-modal-target="showModal"
-                                            class="py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">Edit</button>
-                                    </div>
-                                    <div class="remove">
-                                        <button data-modal-target="deleteRecordModal" id="delete-record" class="py-1 text-xs text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20 remove-item-btn">Remove</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr> --}}
 
                     </tbody>
                 </table>
@@ -294,7 +150,7 @@
 
     {{-- Modal Add usuário --}}
     <div id="showModal" modal-center
-        class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
+        class="fixed hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
         <div class="w-screen md:w-[30rem] bg-white shadow rounded-md dark:bg-zink-600">
             <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-zink-500">
                 <h5 class="text-16" id="exampleModalLabel">Add Usuário</h5>
@@ -421,16 +277,16 @@
     <script src="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
     <!-- listjs init -->
-    <script src="{{ URL::asset('build/js/pages/listjs.init.js') }}"></script>
+    {{-- <script src="{{ URL::asset('build/js/pages/listjs.init.js') }}"></script> --}}
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
 @endpush
     
-<script>
+{{-- <script>
 $( document ).ready(function() {
     
 });
-</script>
+</script> --}}
 
 
 

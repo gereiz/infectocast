@@ -87,7 +87,9 @@ class TopicService {
     }
 
     public function addTopicMySQL($request)
-    {
+    {   
+        // dd($request->all());
+
         if($request->id_topic) {
 
             $subcategoryService = new SubcategoryService();

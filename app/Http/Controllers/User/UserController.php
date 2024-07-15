@@ -9,7 +9,7 @@ use App\Models\User;
 use MrShan0\PHPFirestore\FirestoreClient;
 
 class UserController extends Controller
-{
+{ 
    
     public function index() {
 
