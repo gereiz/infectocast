@@ -48,15 +48,15 @@
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="email">Email</th>
                             {{-- <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
-                                data-sort="phone">Cód País</th>
+                                data-sort="phone">Cód País</th> --}}
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="phone">Telefone</th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
-                                data-sort="date">CPF</th> --}}
+                                data-sort="date">Plano</th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
-                                data-sort="phone">Plano</th>
+                                data-sort="phone">Suporte</th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
-                                data-sort="status">Status</th>
+                                data-sort="status">Admin</th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="action">Ações</th>
                         </tr>
@@ -82,26 +82,37 @@
                                 </td>
                                 {{-- <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 phone">
                                     {{$usuario->get('country_id')}}
-                                </td>
+                                </td> --}}
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
-                                    {{$usuario->get('phone')}}
+                                    {{$usuario->get('phone_number')}}
                                 </td>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
+                                {{-- <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
                                     {{$usuario->get('cpf')}}
                                 </td> --}}
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
-                                    @if($usuario->get('Premium') == 1)
+                                    @if($usuario->get('Premium') == 1 )
                                         Premium
                                     @endif
                                     @if($usuario->get('Gold') == 1)
                                         Gold
                                     @endif
-                                    @if($usuario->get('Premium') == 0 && $usuario->get('Gold') == 0)
+                                    @if($usuario->get('Free') == 1 && $usuario->get('Gold') == 0 && $usuario->get('Premium') == 0)
                                         Free
                                     @endif
                                 </td>
-                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
-                                        class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
+                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 date">
+                                    @if($usuario->get('is_support') == 1)
+                                        Sim
+                                    @else
+                                        Não
+                                    @endif
+                                </td>
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status">
+                                    @if($usuario->get('is_admin') == 1)
+                                        Sim
+                                    @else
+                                        Não
+                                    @endif
                                 </td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                     <div class="flex gap-2">
