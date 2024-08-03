@@ -11,9 +11,9 @@
   <script>
     tinymce.init({
       selector: 'textarea',
-      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
-      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-      menubar: false,
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker backcolor forecolor fullscreen code visualblocks', 
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | accordion | codesample | forecolor backcolor | searchreplace | fullscreen code | linkchecker | wordcount | visualblocks | anchor | ltr rtl | hr | subscript superscript',
+      menubar: true,
       entity_encoding: 'raw',
       image_title: true,
             automatic_uploads: true,
