@@ -32,11 +32,18 @@
                     Subcategoria <span class="text-red-500">*</span>
                 </label>
                 <div>
+                    {{-- @dd($topic->get('id_subcategory')->getData()) --}}
                     <select id="subcategory" name="subcategory" required
                         class="input-text">
                         <option value="0" selected disabled>Selecione a Subcategoria</option>
                         @foreach ($subcategories as $subcat)
-                            <option value="{{substr($subcat->getRelativeName(), -20)}}">{{$subcat->get('title')}}</option>
+                            {{-- marca a subcategoria que está no banco com selected --}}
+                            <option value="{{substr($subcat->getRelativeName(), -20)}}" @if ($topic != null && $topic->get('id_subcategory')->getData() == substr($subcat->getRelativeName(), 1)) selected @endif >
+                                {{$subcat->get('title')}}
+                            </option>
+                            {{-- <option value="{{substr($subcat->getRelativeName(), -20)}}">{{$subcat->get('title')}}</option> --}}
+                                
+                           
                         @endforeach
                     </select>
                 </div>

@@ -146,9 +146,7 @@ class CategoryService
 
     public function deleteCategoryMySQL($request)
     {   
-        // dd($request->all());
         $category = Category::where('title', $request->oldtitulo)->first();
-        // dd($category);
         $category->delete();
     }
 

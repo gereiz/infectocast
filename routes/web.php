@@ -14,6 +14,7 @@ use App\Http\Controllers\Payment\PaymentMpcontroller;
 use App\Http\Controllers\TinyMceController;
 use App\Http\Controllers\Firebase\FirebaseAuthController;
 use App\Http\Controllers\Firebase\FirebaseFirestoreController;
+use App\Http\Controllers\Notifications\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     // Payment
     route::get('payments', [PaymentMpcontroller::class, 'index']);
     route::get('testPay', [PaymentMpcontroller::class, 'testPay']);
+
+    // Push Notification
+    route::get('pushNotification', [NotificationController::class, 'index']);
     
     // TinyMCE
     Route::post('/upload', [TinyMceController::class, 'upload']);
