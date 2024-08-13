@@ -37,6 +37,7 @@ Route::prefix('v1')->group(function () {
     
     // Busca
     route::post('search', [BuscaController::class, 'search']);
+    route::get('topicPage/{id}' ,[TopicsApiController::class, 'getTopicPage']);
 
     Route::middleware('auth:sanctum')->group(function () {
 
@@ -54,6 +55,7 @@ Route::prefix('v1')->group(function () {
         route::post('listTopics',[TopicsApiController::class, 'getTopics']);
         route::post('listTopicsTitle',[TopicsApiController::class, 'getTopicsTitle']);
         route::post('listTopic',[TopicsApiController::class, 'getTopic']);
+        
 
         // Blog
         route::get('listPosts',[BlogApiController::class, 'getPosts']);

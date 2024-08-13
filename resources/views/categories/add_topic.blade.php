@@ -41,7 +41,7 @@
                             <option value="{{substr($subcat->getRelativeName(), -20)}}" @if ($topic != null && $topic->get('id_subcategory')->getData() == substr($subcat->getRelativeName(), 1)) selected @endif >
                                 {{$subcat->get('title')}}
                             </option>
-                            {{-- <option value="{{substr($subcat->getRelativeName(), -20)}}">{{$subcat->get('title')}}</option> --}}
+                            
                                 
                            
                         @endforeach
@@ -72,7 +72,7 @@
             <div class="card-body">
                 <h6 class="mb-4 text-15">Texto</h6>
                 <textarea class=" text-slate-800 min-h-[400px]" id="content_topic" name="content_topic">
-                   @if ($topic->get('content') != null)
+                   @if ($topic != null)
                        {!! $topic->get('content') !!}
                        
                    @else
