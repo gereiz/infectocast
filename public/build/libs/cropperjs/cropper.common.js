@@ -1,11 +1,11 @@
 /*!
- * Cropper.js v1.6.2
+ * Cropper.js v1.6.1
  * https://fengyuanchen.github.io/cropperjs
  *
  * Copyright 2015-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2024-04-21T07:43:05.335Z
+ * Date: 2023-09-17T03:44:19.860Z
  */
 
 'use strict';
@@ -30,20 +30,6 @@ function _objectSpread2(e) {
     });
   }
   return e;
-}
-function _toPrimitive(t, r) {
-  if ("object" != typeof t || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != typeof i) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r ? String : Number)(t);
-}
-function _toPropertyKey(t) {
-  var i = _toPrimitive(t, "string");
-  return "symbol" == typeof i ? i : i + "";
 }
 function _typeof(o) {
   "@babel/helpers - typeof";
@@ -114,6 +100,20 @@ function _arrayLikeToArray(arr, len) {
 }
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _toPrimitive(input, hint) {
+  if (typeof input !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (typeof res !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return typeof key === "symbol" ? key : String(key);
 }
 
 var IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
@@ -2914,7 +2914,7 @@ var Cropper = /*#__PURE__*/function () {
     this.sizing = false;
     this.init();
   }
-  return _createClass(Cropper, [{
+  _createClass(Cropper, [{
     key: "init",
     value: function init() {
       var element = this.element;
@@ -3261,6 +3261,7 @@ var Cropper = /*#__PURE__*/function () {
       assign(DEFAULTS, isPlainObject(options) && options);
     }
   }]);
+  return Cropper;
 }();
 assign(Cropper.prototype, render, preview, events, handlers, change, methods);
 

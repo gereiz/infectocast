@@ -2,7 +2,6 @@ import { h } from 'preact';
 import { Comparator, TCell, TColumnSort } from '../../../types';
 export interface SortConfig {
     compare?: Comparator<TCell>;
-    direction?: 1 | -1;
 }
 export interface GenericSortConfig {
     multiColumn?: boolean;

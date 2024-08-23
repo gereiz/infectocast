@@ -1,5 +1,5 @@
 /**
- * simplebar - v6.2.6
+ * simplebar - v6.2.5
  * Scrollbars, simpler.
  * https://grsmto.github.io/simplebar/
  *
@@ -168,17 +168,17 @@ var SimpleBar = /** @class */ (function (_super) {
                 }
             });
             mutation.removedNodes.forEach(function (removedNode) {
-                var _a;
                 if (removedNode.nodeType === 1) {
                     if (removedNode.getAttribute('data-simplebar') === 'init') {
-                        !document.documentElement.contains(removedNode) &&
-                            ((_a = SimpleBar.instances.get(removedNode)) === null || _a === void 0 ? void 0 : _a.unMount());
+                        SimpleBar.instances.has(removedNode) &&
+                            !document.documentElement.contains(removedNode) &&
+                            SimpleBar.instances.get(removedNode).unMount();
                     }
                     else {
                         Array.prototype.forEach.call(removedNode.querySelectorAll('[data-simplebar="init"]'), function (el) {
-                            var _a;
-                            !document.documentElement.contains(el) &&
-                                ((_a = SimpleBar.instances.get(el)) === null || _a === void 0 ? void 0 : _a.unMount());
+                            SimpleBar.instances.has(el) &&
+                                !document.documentElement.contains(el) &&
+                                SimpleBar.instances.get(el).unMount();
                         });
                     }
                 }

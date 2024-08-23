@@ -1,5 +1,5 @@
 /**
- * simplebar - v6.2.6
+ * simplebar - v6.2.5
  * Scrollbars, simpler.
  * https://grsmto.github.io/simplebar/
  *
@@ -604,7 +604,7 @@ var SimpleBar = (function () {
     }
 
     /**
-     * simplebar-core - v1.2.5
+     * simplebar-core - v1.2.4
      * Scrollbars, simpler.
      * https://grsmto.github.io/simplebar/
      *
@@ -723,12 +723,12 @@ var SimpleBar = (function () {
 
     var helpers = /*#__PURE__*/Object.freeze({
         __proto__: null,
-        addClasses: addClasses$1,
-        classNamesToQuery: classNamesToQuery$1,
-        getElementDocument: getElementDocument$1,
         getElementWindow: getElementWindow$1,
+        getElementDocument: getElementDocument$1,
         getOptions: getOptions$1,
-        removeClasses: removeClasses$1
+        addClasses: addClasses$1,
+        removeClasses: removeClasses$1,
+        classNamesToQuery: classNamesToQuery$1
     });
 
     var getElementWindow = getElementWindow$1, getElementDocument = getElementDocument$1, getOptions$2 = getOptions$1, addClasses$2 = addClasses$1, removeClasses = removeClasses$1, classNamesToQuery = classNamesToQuery$1;
@@ -741,7 +741,6 @@ var SimpleBar = (function () {
             this.stopScrollDelay = 175;
             this.isScrolling = false;
             this.isMouseEntering = false;
-            this.isDragging = false;
             this.scrollXTicking = false;
             this.scrollYTicking = false;
             this.wrapperEl = null;
@@ -938,13 +937,11 @@ var SimpleBar = (function () {
              * End scroll handle drag
              */
             this.onEndDrag = function (e) {
-                _this.isDragging = false;
                 var elDocument = getElementDocument(_this.el);
                 var elWindow = getElementWindow(_this.el);
                 e.preventDefault();
                 e.stopPropagation();
                 removeClasses(_this.el, _this.classNames.dragging);
-                _this.onStopScrolling();
                 elDocument.removeEventListener('mousemove', _this.drag, true);
                 elDocument.removeEventListener('mouseup', _this.onEndDrag, true);
                 _this.removePreventClickId = elWindow.setTimeout(function () {
@@ -1298,8 +1295,6 @@ var SimpleBar = (function () {
         };
         SimpleBarCore.prototype.hideScrollbar = function (axis) {
             if (axis === void 0) { axis = 'y'; }
-            if (this.isDragging)
-                return;
             if (this.axis[axis].isOverflowing && this.axis[axis].scrollbar.isVisible) {
                 removeClasses(this.axis[axis].scrollbar.el, this.classNames.visible);
                 this.axis[axis].scrollbar.isVisible = false;
@@ -1356,7 +1351,6 @@ var SimpleBar = (function () {
         SimpleBarCore.prototype.onDragStart = function (e, axis) {
             var _a;
             if (axis === void 0) { axis = 'y'; }
-            this.isDragging = true;
             var elDocument = getElementDocument(this.el);
             var elWindow = getElementWindow(this.el);
             var scrollbar = this.axis[axis].scrollbar;
@@ -1649,17 +1643,17 @@ var SimpleBar = (function () {
                     }
                 });
                 mutation.removedNodes.forEach(function (removedNode) {
-                    var _a;
                     if (removedNode.nodeType === 1) {
                         if (removedNode.getAttribute('data-simplebar') === 'init') {
-                            !document.documentElement.contains(removedNode) &&
-                                ((_a = SimpleBar.instances.get(removedNode)) === null || _a === void 0 ? void 0 : _a.unMount());
+                            SimpleBar.instances.has(removedNode) &&
+                                !document.documentElement.contains(removedNode) &&
+                                SimpleBar.instances.get(removedNode).unMount();
                         }
                         else {
                             Array.prototype.forEach.call(removedNode.querySelectorAll('[data-simplebar="init"]'), function (el) {
-                                var _a;
-                                !document.documentElement.contains(el) &&
-                                    ((_a = SimpleBar.instances.get(el)) === null || _a === void 0 ? void 0 : _a.unMount());
+                                SimpleBar.instances.has(el) &&
+                                    !document.documentElement.contains(el) &&
+                                    SimpleBar.instances.get(el).unMount();
                             });
                         }
                     }

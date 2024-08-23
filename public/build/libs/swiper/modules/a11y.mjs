@@ -1,6 +1,5 @@
-import { g as getDocument } from '../shared/ssr-window.esm.mjs';
 import { c as classesToSelector } from '../shared/classes-to-selector.mjs';
-import { c as createElement, h as elementIndex, m as makeElementsArray } from '../shared/utils.mjs';
+import { c as createElement, g as elementIndex } from '../shared/utils.mjs';
 
 function A11y(_ref) {
   let {
@@ -29,15 +28,13 @@ function A11y(_ref) {
     clicked: false
   };
   let liveRegion = null;
-  let preventFocusHandler;
-  let focusTargetSlideEl;
-  let visibilityChangedTimestamp = new Date().getTime();
   function notify(message) {
     const notification = liveRegion;
     if (notification.length === 0) return;
     notification.innerHTML = '';
     notification.innerHTML = message;
   }
+  const makeElementsArray = el => (Array.isArray(el) ? el : [el]).filter(e => !!e);
   function getRandomNumber(size) {
     if (size === void 0) {
       size = 16;
@@ -112,28 +109,24 @@ function A11y(_ref) {
     if (swiper.pagination && swiper.pagination.el && (targetEl === swiper.pagination.el || swiper.pagination.el.contains(e.target))) {
       if (!e.target.matches(classesToSelector(swiper.params.pagination.bulletClass))) return;
     }
-    if (swiper.navigation && swiper.navigation.prevEl && swiper.navigation.nextEl) {
-      const prevEls = makeElementsArray(swiper.navigation.prevEl);
-      const nextEls = makeElementsArray(swiper.navigation.nextEl);
-      if (nextEls.includes(targetEl)) {
-        if (!(swiper.isEnd && !swiper.params.loop)) {
-          swiper.slideNext();
-        }
-        if (swiper.isEnd) {
-          notify(params.lastSlideMessage);
-        } else {
-          notify(params.nextSlideMessage);
-        }
+    if (swiper.navigation && swiper.navigation.nextEl && targetEl === swiper.navigation.nextEl) {
+      if (!(swiper.isEnd && !swiper.params.loop)) {
+        swiper.slideNext();
       }
-      if (prevEls.includes(targetEl)) {
-        if (!(swiper.isBeginning && !swiper.params.loop)) {
-          swiper.slidePrev();
-        }
-        if (swiper.isBeginning) {
-          notify(params.firstSlideMessage);
-        } else {
-          notify(params.prevSlideMessage);
-        }
+      if (swiper.isEnd) {
+        notify(params.lastSlideMessage);
+      } else {
+        notify(params.nextSlideMessage);
+      }
+    }
+    if (swiper.navigation && swiper.navigation.prevEl && targetEl === swiper.navigation.prevEl) {
+      if (!(swiper.isBeginning && !swiper.params.loop)) {
+        swiper.slidePrev();
+      }
+      if (swiper.isBeginning) {
+        notify(params.firstSlideMessage);
+      } else {
+        notify(params.prevSlideMessage);
       }
     }
     if (swiper.pagination && targetEl.matches(classesToSelector(swiper.params.pagination.bulletClass))) {
@@ -198,14 +191,10 @@ function A11y(_ref) {
     addElLabel(el, message);
     addElControls(el, wrapperId);
   };
-  const handlePointerDown = e => {
-    if (focusTargetSlideEl && focusTargetSlideEl !== e.target && !focusTargetSlideEl.contains(e.target)) {
-      preventFocusHandler = true;
-    }
+  const handlePointerDown = () => {
     swiper.a11y.clicked = true;
   };
   const handlePointerUp = () => {
-    preventFocusHandler = false;
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         if (!swiper.destroyed) {
@@ -214,15 +203,10 @@ function A11y(_ref) {
       });
     });
   };
-  const onVisibilityChange = e => {
-    visibilityChangedTimestamp = new Date().getTime();
-  };
   const handleFocus = e => {
     if (swiper.a11y.clicked) return;
-    if (new Date().getTime() - visibilityChangedTimestamp < 100) return;
     const slideEl = e.target.closest(`.${swiper.params.slideClass}, swiper-slide`);
     if (!slideEl || !swiper.slides.includes(slideEl)) return;
-    focusTargetSlideEl = slideEl;
     const isActive = swiper.slides.indexOf(slideEl) === swiper.activeIndex;
     const isVisible = swiper.params.watchSlidesProgress && swiper.visibleSlides && swiper.visibleSlides.includes(slideEl);
     if (isActive || isVisible) return;
@@ -232,15 +216,7 @@ function A11y(_ref) {
     } else {
       swiper.el.scrollTop = 0;
     }
-    requestAnimationFrame(() => {
-      if (preventFocusHandler) return;
-      if (swiper.params.loop) {
-        swiper.slideToLoop(parseInt(slideEl.getAttribute('data-swiper-slide-index')), 0);
-      } else {
-        swiper.slideTo(swiper.slides.indexOf(slideEl), 0);
-      }
-      preventFocusHandler = false;
-    });
+    swiper.slideTo(swiper.slides.indexOf(slideEl), 0);
   };
   const initSlides = () => {
     const params = swiper.params.a11y;
@@ -305,9 +281,6 @@ function A11y(_ref) {
     }
 
     // Tab focus
-    const document = getDocument();
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    swiper.el.addEventListener('focus', handleFocus, true);
     swiper.el.addEventListener('focus', handleFocus, true);
     swiper.el.addEventListener('pointerdown', handlePointerDown, true);
     swiper.el.addEventListener('pointerup', handlePointerUp, true);
@@ -334,14 +307,11 @@ function A11y(_ref) {
         el.removeEventListener('keydown', onEnterOrSpaceKey);
       });
     }
-    const document = getDocument();
-    document.removeEventListener('visibilitychange', onVisibilityChange);
+
     // Tab focus
-    if (swiper.el && typeof swiper.el !== 'string') {
-      swiper.el.removeEventListener('focus', handleFocus, true);
-      swiper.el.removeEventListener('pointerdown', handlePointerDown, true);
-      swiper.el.removeEventListener('pointerup', handlePointerUp, true);
-    }
+    swiper.el.removeEventListener('focus', handleFocus, true);
+    swiper.el.removeEventListener('pointerdown', handlePointerDown, true);
+    swiper.el.removeEventListener('pointerup', handlePointerUp, true);
   }
   on('beforeInit', () => {
     liveRegion = createElement('span', swiper.params.a11y.notificationClass);

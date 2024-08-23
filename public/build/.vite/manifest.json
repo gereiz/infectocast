@@ -49,12 +49,12 @@
   },
   "resources/scss/icons.scss": {
     "file": "css/icons.min.css",
-    "src": "resources/scss/icons.scss",
-    "isEntry": true
+    "isEntry": true,
+    "src": "resources/scss/icons.scss"
   },
   "resources/scss/tailwind.scss": {
     "file": "css/tailwind.min.css",
-    "src": "resources/scss/tailwind.scss",
-    "isEntry": true
+    "isEntry": true,
+    "src": "resources/scss/tailwind.scss"
   }
 }

@@ -1,13 +1,13 @@
 /**
- * Swiper Vue 11.1.4
+ * Swiper Vue 11.0.5
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
- * Copyright 2014-2024 Vladimir Kharlampidi
+ * Copyright 2014-2023 Vladimir Kharlampidi
  *
  * Released under the MIT License
  *
- * Released on: May 30, 2024
+ * Released on: November 22, 2023
  */
 
 import { h, ref, onUpdated, provide, watch, nextTick, onMounted, onBeforeUnmount, onBeforeUpdate, computed, inject } from 'vue';
@@ -35,7 +35,7 @@ function getChildren(originalSlots, slidesRef, oldSlidesRef) {
       if (slotName === 'default') slotName = 'container-end';
       if (isFragment && vnode.children) {
         getSlidesFromElements(vnode.children, slotName);
-      } else if (vnode.type && (vnode.type.name === 'SwiperSlide' || vnode.type.name === 'AsyncComponentWrapper') || vnode.componentOptions && vnode.componentOptions.tag === 'SwiperSlide') {
+      } else if (vnode.type && (vnode.type.name === 'SwiperSlide' || vnode.type.name === 'AsyncComponentWrapper')) {
         slides.push(vnode);
       } else if (slots[slotName]) {
         slots[slotName].push(vnode);
@@ -80,7 +80,7 @@ function renderVirtual(swiperRef, slides, virtualData) {
   const loopTo = swiperRef.value.params.loop ? slides.length * 2 : slides.length;
   const slidesToRender = [];
   for (let i = loopFrom; i < loopTo; i += 1) {
-    if (i >= from && i <= to && slidesToRender.length < slides.length) {
+    if (i >= from && i <= to) {
       slidesToRender.push(slides[getSlideIndex(i)]);
     }
   }
@@ -89,15 +89,9 @@ function renderVirtual(swiperRef, slides, virtualData) {
     if (!slide.props.style) slide.props.style = {};
     slide.props.swiperRef = swiperRef;
     slide.props.style = style;
-    if (slide.type) {
-      return h(slide.type, {
-        ...slide.props
-      }, slide.children);
-    } else if (slide.componentOptions) {
-      return h(slide.componentOptions.Ctor, {
-        ...slide.props
-      }, slide.componentOptions.children);
-    }
+    return h(slide.type, {
+      ...slide.props
+    }, slide.children);
   });
 }
 
@@ -127,10 +121,6 @@ const Swiper = {
     oneWayMovement: {
       type: Boolean,
       default: undefined
-    },
-    swiperElementNodeName: {
-      type: String,
-      default: 'SWIPER-CONTAINER'
     },
     touchEventsTarget: {
       type: String,
