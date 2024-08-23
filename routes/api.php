@@ -37,6 +37,7 @@ Route::prefix('v1')->group(function () {
     
     // Busca
     route::post('search', [BuscaController::class, 'search']);
+
     route::get('topicPage/{id}' ,[TopicsApiController::class, 'getTopicPage']);
 
     Route::middleware('auth:sanctum')->group(function () {
