@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Notifications;
 
 use App\Http\Controllers\Controller;
+// use Google\Cloud\Storage\Connection\Rest;
 use Illuminate\Http\Request;
 use MrShan0\PHPFirestore\FirestoreClient;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
+
+use Kreait\Firebase\Messaging\AndroidConfig;
 
 class NotificationController extends Controller
 {
@@ -23,5 +28,23 @@ class NotificationController extends Controller
         
         return view('notifications.index', compact('notificacoes'));
     }
+
+    public function sendNotification(Request $request)
+    {
+        $messaging = app('firebase.messaging');
+       
+        $data = [
+            'title' => $request->title,
+            'body' => $request->content_notif,
+            // 'image' => $request->image,
+            'url' => $request->url,
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+
+
+        return redirect()->back();
+    }
+
 
 }
