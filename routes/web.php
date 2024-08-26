@@ -90,7 +90,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     // Push Notification
     route::get('pushNotification', [NotificationController::class, 'index']);
-    route::post('sendNotification', [NotificationController::class, 'sendNotification']);
     
     // TinyMCE
     Route::post('/upload', [TinyMceController::class, 'upload']);
