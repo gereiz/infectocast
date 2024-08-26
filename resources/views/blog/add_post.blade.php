@@ -33,7 +33,7 @@
     <div class="card">
         <div class="card-body">
             <h6 class="mb-4 text-15">Texto</h6>
-            <textarea class=" text-slate-800 min-h-[400px]" id="content_post" name="content_post">
+            <textarea class="text-slate-800 min-h-[400px]" id="content_post" name="content_post">
                @if (isset($post->content))
                    {!! $post->content !!}
                    
