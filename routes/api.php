@@ -40,7 +40,7 @@ Route::prefix('v1')->group(function () {
 
     route::get('topicPage/{id}' ,[TopicsApiController::class, 'getTopicPage']);
 
-    Route::middleware('auth:sanctum')->group(function () {
+    // Route::middleware('auth:sanctum')->group(function () {
 
         // Users
         route::get('getUser', [LoginController::class, 'getUser']);
@@ -86,7 +86,7 @@ Route::prefix('v1')->group(function () {
         // // Busca
         // route::post('search', [BuscaController::class, 'search']);
 
-    });
+    // });
     
     
     
