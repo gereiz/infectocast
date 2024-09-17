@@ -48,9 +48,11 @@ class TopicsApiController extends Controller
     // retorna um topico específico pelo id do topico
     public function getTopicPage($title) {
         $topic = Topic::where('title', $title)->first();
-
-        dd($topic);
-        return view('categories.single_topic', ['topic' => $topic]);
+        if($topic) {
+            return view('categories.single_topic', ['topic' => $topic]);
+        } else {
+            return response()->json(['message' => 'Tópico não encontrado'], 404);
+        }
 
     }
 
