@@ -59,13 +59,13 @@ class TopicController extends Controller
     // adiciona ou edita um tópico
     public function addOrEditTopic(Request $request)
     {
-        // dd($request->all());
+
 
         $topicService = new TopicService();
 
         $topicFirebase = $topicService->addTopicFirebase($request);
 
-        // $topicMysql = $topicService->addTopicMysql($request, $topicFirebase);
+        $topicMysql = $topicService->addTopicMysql($request, $topicFirebase);
 
 
         return redirect('topics');

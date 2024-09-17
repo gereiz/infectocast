@@ -40,13 +40,13 @@ class SubCategoryController extends Controller
         }
 
         // Adiciona ou edita a subcategoria no MySQL
-        // try {
-        //     $subcategoryService->addSubcategoryMySQL($request);
-        // } catch (\Exception $e) {
-        //     toastr()->error($e->getMessage());
+        try {
+            $subcategoryService->addSubcategoryMySQL($request);
+        } catch (\Exception $e) {
+            toastr()->error($e->getMessage());
 
-        //     return back();
-        // }
+            return back();
+        }
 
        if($request->id_subcat) {
             toastr()->success('Subcategoria Editada!');
