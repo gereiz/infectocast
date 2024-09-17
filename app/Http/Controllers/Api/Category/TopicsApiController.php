@@ -46,9 +46,10 @@ class TopicsApiController extends Controller
     }
 
     // retorna um topico específico pelo id do topico
-    public function getTopicPage(Request $request) {
-        $topic = Topic::where('title', $request->title)->first();
+    public function getTopicPage($title) {
+        $topic = Topic::where('title', $title)->first();
 
+        dd($topic);
         return view('categories.single_topic', ['topic' => $topic]);
 
     }

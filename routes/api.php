@@ -34,11 +34,11 @@ Route::prefix('v1')->group(function () {
     route::post('register', [RegisterController::class, 'register']);
     route::post('login', [LoginController::class, 'login']);
 
-    
+
     // Busca
     route::post('search', [BuscaController::class, 'search']);
 
-    route::get('topicPage/{id}' ,[TopicsApiController::class, 'getTopicPage']);
+    route::get('topicPage/{title}' ,[TopicsApiController::class, 'getTopicPage']);
 
     // Route::middleware('auth:sanctum')->group(function () {
 
@@ -56,40 +56,40 @@ Route::prefix('v1')->group(function () {
         route::post('listTopics',[TopicsApiController::class, 'getTopics']);
         route::post('listTopicsTitle',[TopicsApiController::class, 'getTopicsTitle']);
         route::post('listTopic',[TopicsApiController::class, 'getTopic']);
-        
+
 
         // Blog
         route::get('listPosts',[BlogApiController::class, 'getPosts']);
         route::post('listPost',[BlogApiController::class, 'getPost']);
-        
+
         // Podcast
         route::get('listPodcasts',[PodCastApiController::class, 'getPodcasts']);
         route::post('listPodcast',[PodCastApiController::class, 'getPodcast']);
 
         // Calculator
         route::post('clearenceOfCreatine',[CalculatorController::class, 'clearenceOfCreatine']);
-       
+
         // Policy
         route::get('activePolicy',[PolicyController::class, 'getActivePolicy']);
 
         // Plans
         route::get('listPlans',[PlanController::class, 'getPlans']);
-        
+
         // Payments
         route::get('testpayment',[PaymentController::class, 'testpayment']);
-    
+
         // Api users
         route::post('updateProfile', [ApiUserController::class, 'updateProfile']);
         route::post('updatePassword', [ApiUserController::class, 'updatePassword']);
-            
+
 
         // // Busca
         // route::post('search', [BuscaController::class, 'search']);
 
     // });
-    
-    
-    
+
+
+
 });
 
 
