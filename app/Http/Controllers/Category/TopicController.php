@@ -28,6 +28,7 @@ class TopicController extends Controller
         $plans = $planService->listPlans();
         $topics = $topicService->listTopics();
 
+        // dd($topics);
         return view('categories.topics', compact('topics', 'subcategories', 'plans'));
     }
 
@@ -52,9 +53,9 @@ class TopicController extends Controller
 
             return view('categories.add_topic', compact('subcategories', 'plans', 'topic'));
         }
-        
+
     }
-        
+
     // adiciona ou edita um tópico
     public function addOrEditTopic(Request $request)
     {
@@ -64,8 +65,8 @@ class TopicController extends Controller
 
         $topicFirebase = $topicService->addTopicFirebase($request);
 
-        $topicMysql = $topicService->addTopicMysql($request, $topicFirebase);
-        
+        // $topicMysql = $topicService->addTopicMysql($request, $topicFirebase);
+
 
         return redirect('topics');
     }
@@ -81,6 +82,5 @@ class TopicController extends Controller
         return back();
     }
 
-    
+
 }
- 

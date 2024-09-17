@@ -31,13 +31,14 @@ class TopicsApiController extends Controller
 
     // retorna um topico específico pelo id do topico
     public function getTopic(Request $request) {
-        $topic = Topic::find($request->id_topic);
+        // $topic = Topic::find($request->id_topic);
+        $topic = Topic::where('title', $request->title)->first();
         if($topic) {
             $topic_formated = [];
             // converte a string em array
             $topic->plan_id = explode(',', $topic->plan_id);
             $topic_formated[] = $topic;
-            
+
             return response()->json($topic_formated, 200);
         } else {
             return response()->json(['message' => 'Tópico não encontrado'], 404);
@@ -49,7 +50,7 @@ class TopicsApiController extends Controller
         $topic = Topic::where('id', $request->id)->first();
 
         return view('categories.single_topic', ['topic' => $topic]);
-       
+
     }
 
 }

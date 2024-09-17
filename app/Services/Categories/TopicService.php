@@ -27,10 +27,10 @@ class TopicService {
         ]);
     }
 
-     
+
     public function listTopics()
     {
-        $topics = $this->connection->listDocuments('topics')['documents'];
+        $topics = $this->connection->listDocuments('topics', ['pageSize' => 9999])['documents'];
 
         return $topics;
     }
@@ -48,7 +48,7 @@ class TopicService {
             toastr()->error('Selecione uma subcategoria!');
             return redirect()->back();
         }
-        
+
         $data = [
             // Se gold ou premium estiverem marcados, o valor de Free é 0
             'Free' => in_array('Gold', $request->access_topic) || in_array('Premium', $request->access_topic) ? 0 : 1,
@@ -67,7 +67,7 @@ class TopicService {
         ];
 
         if($request->id_topic) {
-            $topic = $this->connection->setDocument('topics/'.$request->id_topic , $data, 
+            $topic = $this->connection->setDocument('topics/'.$request->id_topic , $data,
                 [
                     'exists' => true, // Indica que o documento deve existir
                 ]);
@@ -81,53 +81,53 @@ class TopicService {
         }
 
 
-       
+
 
         return $topic;
     }
 
-    public function addTopicMySQL($request)
-    {   
-        // dd($request->all());
+    // public function addTopicMySQL($request)
+    // {
+    //     // dd($request->all());
 
-        if($request->id_topic) {
+    //     if($request->id_topic) {
 
-            $subcategoryService = new SubcategoryService();
+    //         $subcategoryService = new SubcategoryService();
 
-            $subcategory = $subcategoryService->getSubcategory($request->subcategory);
+    //         $subcategory = $subcategoryService->getSubcategory($request->subcategory);
 
-            $topic = Topic::where('title', $request->old_title_topic)->first();
+    //         $topic = Topic::where('title', $request->old_title_topic)->first();
 
-            $topic->title = $request->title_topic;
-            $topic->content = $request->content_topic;
-            $topic->id_subcategory = Subcategory::where('title', $subcategory->get('title'))->first()->id;
-            $topic->id_user = auth()->user()->id;
-            $topic->Free = 1;
-            $topic->Gold = in_array('Gold', $request->access_topic) ? 1 : 0;
-            $topic->Premium = in_array('Premium', $request->access_topic) ? 1 : 0;
-            $topic->save();
+    //         $topic->title = $request->title_topic;
+    //         $topic->content = $request->content_topic;
+    //         $topic->id_subcategory = Subcategory::where('title', $subcategory->get('title'))->first()->id;
+    //         $topic->id_user = auth()->user()->id;
+    //         $topic->Free = 1;
+    //         $topic->Gold = in_array('Gold', $request->access_topic) ? 1 : 0;
+    //         $topic->Premium = in_array('Premium', $request->access_topic) ? 1 : 0;
+    //         $topic->save();
 
-            return $topic;
+    //         return $topic;
 
-        } else {
-            $subcategoryService = new SubcategoryService();
+    //     } else {
+    //         $subcategoryService = new SubcategoryService();
 
-            $subcategory = $subcategoryService->getSubcategory($request->subcategory);
+    //         $subcategory = $subcategoryService->getSubcategory($request->subcategory);
 
-            $topic = new Topic();
+    //         $topic = new Topic();
 
-            $topic->title = $request->title_topic;
-            $topic->content = $request->content_topic;
-            $topic->id_subcategory = Subcategory::where('title', $subcategory->get('title'))->first()->id;
-            $topic->id_user = auth()->user()->id;
-            $topic->Free = 1;
-            $topic->Gold = in_array('Gold', $request->access_topic) ? 1 : 0;
-            $topic->Premium = in_array('Premium', $request->access_topic) ? 1 : 0;
-            $topic->save();
+    //         $topic->title = $request->title_topic;
+    //         $topic->content = $request->content_topic;
+    //         $topic->id_subcategory = Subcategory::where('title', $subcategory->get('title'))->first()->id;
+    //         $topic->id_user = auth()->user()->id;
+    //         $topic->Free = 1;
+    //         $topic->Gold = in_array('Gold', $request->access_topic) ? 1 : 0;
+    //         $topic->Premium = in_array('Premium', $request->access_topic) ? 1 : 0;
+    //         $topic->save();
 
-            return $topic;
-        }
-    }
+    //         return $topic;
+    //     }
+    // }
 
 
     public function deleteTopic($request)

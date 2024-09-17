@@ -25,7 +25,7 @@ class PlanService {
 
     public function listPlans()
     {
-        $plans = $this->connection->listDocuments('plans')['documents'];
+        $plans = $this->connection->listDocuments('plans', ['pageSize' => 9999])['documents'];
 
         return $plans;
     }
@@ -91,7 +91,7 @@ class PlanService {
             $plan->name = $request->name_plan;
             $plan->description = $request->description_plan;
             $plan->price = str_replace(',', '.', $request->price_plan);
-            
+
             // Adiciona a imagem no MySQL
             if($request->hasFile('icon_plan')) {
                 $file = $request->file('icon_plan');
@@ -111,13 +111,13 @@ class PlanService {
             return $plan;
         } else {
             $plan = new Plan();
-            
-          
+
+
 
             $plan->name = $request->name_plan;
             $plan->description = $request->description_plan;
             $plan->price = str_replace(',', '.', $request->price_plan);
-            
+
             // Adiciona a imagem no MySQL
             if($request->hasFile('icon_plan')) {
                 $file = $request->file('icon_plan');
@@ -135,8 +135,8 @@ class PlanService {
             $plan->save();
 
             return $plan;
-        }        
-    
+        }
+
     }
 
     public function deletePlanFirebase($request)

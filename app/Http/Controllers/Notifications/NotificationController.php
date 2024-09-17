@@ -24,15 +24,15 @@ class NotificationController extends Controller
     public function index()
     {
 
-        $notificacoes = $this->connection->listDocuments('ff_push_notifications')['documents'];
-        
+        $notificacoes = $this->connection->listDocuments('ff_push_notifications', ['pageSize' => 9999])['documents'];
+
         return view('notifications.index', compact('notificacoes'));
     }
 
     public function sendNotification(Request $request)
     {
         $messaging = app('firebase.messaging');
-       
+
         $data = [
             'title' => $request->title,
             'body' => $request->content_notif,

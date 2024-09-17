@@ -5,11 +5,11 @@
 @push('css')
     <!-- Sweet Alert css-->
     <link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css">
-    
+
 @endpush
 @section('content')
 <!-- page title -->
-    <x-page-title title="Tópicos" pagetitle="Categorias" /> 
+    <x-page-title title="Tópicos" pagetitle="Categorias" />
 
     {{-- Lista de Topicos --}}
     <div class="card" id="customerList">
@@ -63,7 +63,7 @@
                                 Ações
                             </th>
                         </tr>
-                    </thead> 
+                    </thead>
                     <tbody class="list form-check-all">
                         @foreach ($topics as $topic)
                             <tr class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
@@ -81,7 +81,7 @@
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
                                     {{$topic->get('title')}}
                                 </td>
-            
+
                                 @foreach ($subcategories as $subcat)
                                     @if ($subcat->getRelativeName() == "/".$topic->get('id_subcategory')->getData())
                                         <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">
@@ -102,8 +102,8 @@
                                         <span class="badge bg-success">Premium</span>
                                     @endif
                                 </td>
-                                
-                            
+
+
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                     <div class="flex gap-2">
                                         <div class="edit">
@@ -118,9 +118,9 @@
                                             </button>
                                         </div>
                                     </div>
-                                </td> 
+                                </td>
                             </tr>
-                            
+
                             {{-- Modal Delete --}}
                             <div id={{'deleteModal/'.$topic->getRelativeName()}} modal-center
                                 class="fixed flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
@@ -151,14 +151,15 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        
+
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
 
                         @endforeach
                     </tbody>
                 </table>
+                
                 <div class="noresult" style="display: none">
                     <div class="text-center p-7">
                         <h5 class="mb-2">Sorry! No Result Found</h5>

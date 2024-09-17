@@ -30,7 +30,7 @@ class SubCategoryController extends Controller
 
         // Adiciona ou edita  a subcategoria no Firestore
         $subcategoryService = new SubcategoryService();
-        
+
         try {
             $subcategoryService->addSubcategoryFirebase($request);
         } catch (\Exception $e) {
@@ -38,15 +38,15 @@ class SubCategoryController extends Controller
 
             return back();
         }
-      
-        // Adiciona ou edita a subcategoria no MySQL
-        try {
-            $subcategoryService->addSubcategoryMySQL($request);
-        } catch (\Exception $e) {
-            toastr()->error($e->getMessage());
 
-            return back();
-        }
+        // Adiciona ou edita a subcategoria no MySQL
+        // try {
+        //     $subcategoryService->addSubcategoryMySQL($request);
+        // } catch (\Exception $e) {
+        //     toastr()->error($e->getMessage());
+
+        //     return back();
+        // }
 
        if($request->id_subcat) {
             toastr()->success('Subcategoria Editada!');
@@ -68,7 +68,7 @@ class SubCategoryController extends Controller
 
             return back();
         }
-       
+
         try {
             $subcategoryService->deleteSubcategoryMySQL($request);
         } catch (\Exception $e) {

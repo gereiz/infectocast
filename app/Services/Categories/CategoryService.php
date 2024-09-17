@@ -22,7 +22,7 @@ class CategoryService
 
     public function listCategories()
     {
-        return $this->connection->listDocuments('categories')['documents'];
+        return $this->connection->listDocuments('categories', ['pageSize' => 9999])['documents'];
     }
 
     public function getCategoryFirebase($id)
@@ -133,7 +133,7 @@ class CategoryService
             $file->move(storage_path('app/public/imgcat'), $filename);
             $category->icon = $filename;
         }
-        
+
 
         $category->save();
     }
@@ -145,7 +145,7 @@ class CategoryService
     }
 
     public function deleteCategoryMySQL($request)
-    {   
+    {
         $category = Category::where('title', $request->oldtitulo)->first();
         $category->delete();
     }

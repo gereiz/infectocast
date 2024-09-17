@@ -8,7 +8,7 @@ use App\Models\Subcategory;
 
 
 use MrShan0\PHPFirestore\Fields\FirestoreReference;
-use MrShan0\PHPFirestore\FirestoreClient; 
+use MrShan0\PHPFirestore\FirestoreClient;
 use MrShan0\PHPFirestore\Fields\FirestoreTimestamp;
 
 class SubcategoryService {
@@ -25,7 +25,7 @@ class SubcategoryService {
 
     public function listSubcategories()
     {
-        $subcategories = $this->connection->listDocuments('subcategories')['documents'];
+        $subcategories = $this->connection->listDocuments('subcategories', ['pageSize' => 9999])['documents'];
 
         return $subcategories;
     }
@@ -48,8 +48,8 @@ class SubcategoryService {
                 'id_user' => new FirestoreReference('/users/y7yky5ABSlWnTPgXfisIvtx1QBI3'),
                 'title' => $request->titulo,
                 'updated_time' => new FirestoreTimestamp
- 
-                
+
+
             ], [
                 'exists' => true, // Indica que o documento deve existir
             ]);
@@ -65,40 +65,40 @@ class SubcategoryService {
     }
 
 
-    public function addSubcategoryMySQL($request)
-    {
+    // public function addSubcategoryMySQL($request)
+    // {
 
-        $categoryService = new CategoryService();
+    //     $categoryService = new CategoryService();
 
 
-        $categories = Category::all();
-        
+    //     $categories = Category::all();
 
-        if ($request->id_subcat) {
-            $categoria = substr($request->editCategoria, -20);
 
-            $category = $categoryService->getCategoryFirebase($categoria);
+    //     if ($request->id_subcat) {
+    //         $categoria = substr($request->editCategoria, -20);
 
-            $subcategory = Subcategory::where('title', $request->oldtitulo)->first();
+    //         $category = $categoryService->getCategoryFirebase($categoria);
 
-            $subcategory->title = $request->titulo;
-            $subcategory->id_category = $categories->where('title', $category->get('title'))->first()->id;
-            $subcategory->id_user = auth()->user()->id;
-            $subcategory->save();
+    //         $subcategory = Subcategory::where('title', $request->oldtitulo)->first();
 
-        } else {
-            $categoria = substr($request->addcategoria, -20);
+    //         $subcategory->title = $request->titulo;
+    //         $subcategory->id_category = $categories->where('title', $category->get('title'))->first()->id;
+    //         $subcategory->id_user = auth()->user()->id;
+    //         $subcategory->save();
 
-            $category = $categoryService->getCategoryFirebase($categoria);
+    //     } else {
+    //         $categoria = substr($request->addcategoria, -20);
 
-            $subcategory = new Subcategory();
+    //         $category = $categoryService->getCategoryFirebase($categoria);
 
-            $subcategory->title = $request->titulo;
-            $subcategory->id_category = $categories->where('title', $category->get('title'))->first()->id;
-            $subcategory->id_user = auth()->user()->id;
-            $subcategory->save();
-        }
-    }
+    //         $subcategory = new Subcategory();
+
+    //         $subcategory->title = $request->titulo;
+    //         $subcategory->id_category = $categories->where('title', $category->get('title'))->first()->id;
+    //         $subcategory->id_user = auth()->user()->id;
+    //         $subcategory->save();
+    //     }
+    // }
 
 
     public function deleteSubcategoryFirebase($request)
@@ -106,10 +106,10 @@ class SubcategoryService {
         $this->connection->deleteDocument('subcategories/'.$request->id_subcat);
     }
 
-    public function deleteSubcategoryMySQL($request)
-    {
-        $subcategory = Subcategory::where('title', $request->oldtitulo)->first();
-        $subcategory->delete();
-    }
+    // public function deleteSubcategoryMySQL($request)
+    // {
+    //     $subcategory = Subcategory::where('title', $request->oldtitulo)->first();
+    //     $subcategory->delete();
+    // }
 
 }
